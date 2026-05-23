@@ -1,0 +1,10 @@
+.hero {
+  padding: 2rem 0 4rem;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-top: 1.8rem;
+}

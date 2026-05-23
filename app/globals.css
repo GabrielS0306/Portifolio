@@ -1,15 +1,43 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+:root {
+  /* Backgrounds */
+  --bg: #0b0f14;
+  --bg-secondary: #121821;
+  --card: #151c26;
+
+  /* Text */
+  --text: #e6edf3;
+  --muted: #9aa6b2;
+
+  /* Brand */
+  --brand: #3b82f6;
+  --brand-strong: #2563eb;
+  --brand-soft: #60a5fa;
+
+  /* Accent */
+  --accent: #22c55e;
+  --accent-soft: #4ade80;
+
+  /* Borders / Effects */
+  --line: #1f2933;
+
+  /* Gradients */
+  --brand-gradient-1: #60a5fa;
+  --brand-gradient-2: #2563eb;
+
+  /* Shadows */
+  --shadow-brand: rgba(59, 130, 246, 0.25);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -20,7 +48,47 @@
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Space Grotesk", -apple-system, sans-serif;
+  line-height: 1.6;
+}
+
+section {
+  padding: 2.4rem 0;
+}
+
+.container {
+  width: min(1120px, 92vw);
+  margin: 0 auto;
+}
+
+h1, h2, h3 {
+  line-height: 1.1;
+}
+
+h1 {
+  max-width: 18ch;
+  margin-bottom: 1rem;
+  font-family: "DM Serif Display", serif;
+  font-size: clamp(2.1rem, 7vw, 4.4rem);
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.lead {
+  max-width: 56ch;
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+
+.eyebrow {
+  color: var(--brand);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }

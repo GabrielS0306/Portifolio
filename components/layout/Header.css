@@ -36,4 +36,9 @@
 .nav nav a {
     color: var(--text);
     font-weight: 500;
+    transform: color .3s ease;
+}
+
+.nav nav a:hover {
+    color: var(--muted)
 }

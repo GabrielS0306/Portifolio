@@ -1,5 +1,6 @@
 import { FaArrowUpRightFromSquare } from "react-icons/fa6";
 import { FaCode } from "react-icons/fa";
+import "./Card.css"
 
 interface Cardprops {
     titulo: string;
@@ -12,7 +13,8 @@ interface Cardprops {
 export default function Card({titulo, paragrafo, tecone, tectwo, tectree} : Cardprops) {
     return (
         <article className="card">
-            {/* <img src="" alt="Não tem imagem no momento" /> */}
+            {/* importar o Next/Image dps quando foir colorcar a imagem */}
+            {/* <Image src="" alt="Não tem imagem no momento" />  */}
 
             <h3>{titulo}</h3>
             <p>{paragrafo}</p>

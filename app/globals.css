@@ -79,16 +79,44 @@ a {
   text-decoration: none;
 }
 
-.lead {
-  max-width: 56ch;
-  color: var(--muted);
-  font-size: 1.05rem;
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.65rem 1rem;
+  border-radius: 999px;
+  font-weight: 600;
+  border: 1px solid transparent;
+  transition: 0.2s;
 }
 
-.eyebrow {
-  color: var(--brand);
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn.primary {
+  color: var(--text);
+  background: linear-gradient(135deg, var(--brand), var(--brand-gradient-1));
+  box-shadow: 0 10px 20px var(--shadow-brand);
+}
+
+.btn.ghost {
+  color: var(--text);
+  border-color: var(--line);
+  background: color-mix(in srgb, white, var(--bg) 35%);
+}
+
+.email-btn {
+  border-color: color-mix(in srgb, var(--brand) 35%, var(--line));
+}
+
+.email-btn:hover {
+  background: color-mix(in srgb, var(--brand) 18%, var(--bg));
+  border-color: var(--brand);
+}
+
+.site-footer {
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  padding: 1.2rem 0 2rem;
 }

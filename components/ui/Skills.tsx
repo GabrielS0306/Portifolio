@@ -3,6 +3,7 @@ import { FaPlus } from "react-icons/fa6";
 import { FaServer } from "react-icons/fa6";
 import { FaDatabase } from "react-icons/fa6";
 import { FaCodeBranch } from "react-icons/fa6";
+import "./Skills.css"
 
 export default function Skills() {
     return (

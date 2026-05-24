@@ -1,10 +1,11 @@
 import { FaLinkedin } from "react-icons/fa6";
 import { FaGithub } from "react-icons/fa6";
 import { FaEnvelope } from "react-icons/fa6";
+import "./Contact.css";
 
 export default function Contact() {
     return (
-        <section id="contato" className="container contato reveal">
+        <section id="contato" className="container contact">
             <h2>Vamos trabalhar juntos?</h2>
             <p>Me chama no LinkedIn, GitHub ou por e-mail para conversarmos sobre projetos e oportunidades.</p>
 

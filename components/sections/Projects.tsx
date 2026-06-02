@@ -1,5 +1,4 @@
 import Card from "../ui/Card"
-import "./Projects.css"
 
 export default function Projects() {
     return (

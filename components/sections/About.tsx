@@ -1,5 +1,4 @@
 import Skills from "../ui/Skills"
-import "./About.css"
 
 export default function About() {
     return (

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
 
@@ -9,8 +9,12 @@ const spaceGrotesk = Space_Grotesk({
 
 export const metadata: Metadata = {
   title: "Gabriel dev",
-  description:
-    "Portfolio profissional com foco em desenvolvimento full-stack, projetos e contato.",
+  description: "Portfolio profissional com foco em desenvolvimento full-stack, projetos e contato.",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({

@@ -1,7 +1,6 @@
 import { FaLinkedin } from "react-icons/fa6";
 import { FaGithub } from "react-icons/fa6";
 import { FaEnvelope } from "react-icons/fa6";
-import "./Contact.css";
 
 export default function Contact() {
     return (

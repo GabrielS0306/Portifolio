@@ -10,27 +10,33 @@ export default function Projects() {
 
             <div className="grid">
                 <Card 
-                    titulo="Sistema de Gestão de Vendas"
-                    paragrafo="Sistema completo com dashboard intuitivo, autenticação segura de usuários e API robusta para geração de relatórios em tempo real."
-                    tecone="React"
-                    tectwo="Node.js"
-                    tectree="Postgress SQL"
+                    titulo="Sistema de Barbearia"
+                    description="Sistema completo para barbearias com painel de controle intuitivo, agendamento online, gestão de barbeiros e relatórios financeiros em tempo real."
+                    tecone="PHP"
+                    tectwo="MySQL"
+                    tectree="TailwindCSS"
+                    linkdemo="https://barb-system.rf.gd/barbearia/login"
+                    linkcode="https://github.com/GabrielS0306/sistema_barbearia"
                 />
 
                 <Card 
                     titulo="Plataforma de Agendamentos"
-                    paragrafo="Plataforma completa com interface responsiva, sistema de agendamentos em tempo real e painel administrativo para gestão de horários, serviços e clientes."
+                    description="Plataforma completa com interface responsiva, sistema de agendamentos em tempo real e painel administrativo para gestão de horários, serviços e clientes."
                     tecone="Next.JS"
                     tectwo="Prisma"
                     tectree="MySQL"
+                    linkdemo="#"
+                    linkcode="#"
                 />
 
                 <Card 
                     titulo="App de Tarefas Colaborativo"
-                    paragrafo="Aplicação completa com controle de permissões por usuário, sincronização em tempo real e armazenamento seguro de dados na nuvem."
+                    description="Aplicação completa com controle de permissões por usuário, sincronização em tempo real e armazenamento seguro de dados na nuvem."
                     tecone="TypeScript"
                     tectwo="Express"
                     tectree="MongoDB"
+                    linkdemo="#"
+                    linkcode="#"
                 />
             </div>
         </section>

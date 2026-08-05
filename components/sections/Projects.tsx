@@ -1,4 +1,4 @@
-import Card from "../ui/Card"
+import Card from "../ui/Card";
 
 export default function Projects() {
     return (
@@ -11,12 +11,13 @@ export default function Projects() {
             <div className="grid">
                 <Card 
                     titulo="Sistema de Barbearia"
-                    description="Sistema completo para barbearias com painel de controle intuitivo, agendamento online, gestão de barbeiros e relatórios financeiros em tempo real."
+                    description="Sistema completo para barbearias com painel de controle intuitivo, agendamento online, gestão de barbeiros e relatórios financeiros em tempo real, proporcionando mais organização, praticidade e controle para otimizar a rotina do negócio."
                     tecone="PHP"
                     tectwo="MySQL"
                     tectree="TailwindCSS"
                     linkdemo="https://barb-system.rf.gd/barbearia/login"
                     linkcode="https://github.com/GabrielS0306/sistema_barbearia"
+                    src="/images/sistema_barbearia.png" // Caminho relativo a partir da pasta public
                 />
 
                 <Card 
@@ -27,6 +28,7 @@ export default function Projects() {
                     tectree="MySQL"
                     linkdemo="#"
                     linkcode="#"
+                    src="" 
                 />
 
                 <Card 
@@ -37,8 +39,9 @@ export default function Projects() {
                     tectree="MongoDB"
                     linkdemo="#"
                     linkcode="#"
+                    src=""
                 />
             </div>
         </section>
-    )
+    );
 }

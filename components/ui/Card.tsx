@@ -28,7 +28,7 @@ export default function Card({titulo, description, tecone, tectwo, tectree, link
         />
       ) : (
         /* Placeholder visual para projetos sem imagem */
-        <div className="flex h-[200px] w-full items-center justify-center bg-gray-800 text-gray-400">
+        <div className="flex h-[200px] w-full items-center justify-center bg-gray-800 text-gray-400 object-cover">
           <span>Sem imagem disponível</span>
         </div>
       )}

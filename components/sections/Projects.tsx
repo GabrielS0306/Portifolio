@@ -21,14 +21,14 @@ export default function Projects() {
                 />
 
                 <Card 
-                    titulo="Plataforma de Agendamentos"
-                    description="Plataforma completa com interface responsiva, sistema de agendamentos em tempo real e painel administrativo para gestão de horários, serviços e clientes."
-                    tecone="Next.JS"
-                    tectwo="Prisma"
-                    tectree="MySQL"
-                    linkdemo="#"
-                    linkcode="#"
-                    src="" 
+                    titulo="SkillFlow"
+                    description="Plataforma pessoal de aprendizado que permite organizar estudos em trilhas, acompanhar o progresso, registrar anotações, salvar recursos e monitorar sessões de estudo."
+                    tecone="Laravel"
+                    tectwo="React"
+                    tectree="Tailwind CSS"
+                    linkdemo="https://skillflow-8ixd.onrender.com/login"
+                    linkcode="https://github.com/GabrielS0306/skillflow"
+                    src="/images/SkillFlow_dashboard.png" 
                 />
 
                 <Card 

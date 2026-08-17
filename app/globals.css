@@ -252,7 +252,9 @@ section {
 }
 
 .tags span {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
   border: 1px solid var(--line);
   border-radius: 999px;
   padding: 0.18rem 0.6rem;
@@ -261,9 +263,15 @@ section {
   transition: background 0.2s, color 0.2s;
 }
 
+
 .tags span:hover {
   background: var(--line);
   color: var(--text);
+}
+
+.tags span svg {
+  flex-shrink: 0;
+  transition: color 0.2s;
 }
 
 .links {

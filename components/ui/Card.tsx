@@ -1,5 +1,16 @@
 import { FaArrowUpRightFromSquare } from "react-icons/fa6";
 import { FaCode } from "react-icons/fa";
+import {
+  SiPhp,
+  SiMysql,
+  SiTailwindcss,
+  SiReact,
+  SiTypescript,
+  SiExpress,
+  SiMongodb,
+  SiLaravel,
+} from "react-icons/si";
+import { IconType } from "react-icons";
 import Image from "next/image";
 
 interface Cardprops {
@@ -8,12 +19,24 @@ interface Cardprops {
   tech: string[];
   linkdemo?: string;
   linkcode?: string;
-  src?: string; // Tornou-se opcional
+  src?: string;
   status?: "concluido" | "em-desenvolvimento";
 }
 
+// Mapa de tech → ícone. Cobre as techs que você usa hoje nos 3 projetos.
+const techIcons: Record<string, IconType> = {
+  PHP: SiPhp,
+  MySQL: SiMysql,
+  TailwindCSS: SiTailwindcss,
+  "Tailwind CSS": SiTailwindcss,
+  React: SiReact,
+  TypeScript: SiTypescript,
+  Express: SiExpress,
+  MongoDB: SiMongodb,
+  Laravel: SiLaravel,
+};
+
 export default function Card({ titulo, description, tech, linkdemo, linkcode, src, status = "concluido" }: Cardprops) {
-  // Verifica se o src é válido (não está vazio e não é "#")
   const hasValidImage = Boolean(src && src !== "#" && src.trim() !== "");
 
   return (
@@ -28,7 +51,6 @@ export default function Card({ titulo, description, tech, linkdemo, linkcode, sr
             style={{ objectFit: "cover" }}
           />
         ) : (
-          /* Placeholder visual para projetos sem imagem */
           <div className="card-placeholder">
             <span>Preview em construção</span>
           </div>
@@ -43,31 +65,27 @@ export default function Card({ titulo, description, tech, linkdemo, linkcode, sr
       <p>{description}</p>
 
       <div className="tags">
-        {tech.map((t) => (
-          <span key={t}>{t}</span>
-        ))}
+        {tech.map((t) => {
+          const Icon = techIcons[t];
+          return (
+            <span key={t}>
+              {Icon && <Icon size={12} />}
+              {t}
+            </span>
+          );
+        })}
       </div>
 
       <div className="links">
         {linkdemo && linkdemo !== "#" && (
-          <a
-            href={linkdemo}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`Demo ${titulo}`}
-          >
+          <a href={linkdemo} target="_blank" rel="noopener noreferrer" aria-label={`Demo ${titulo}`}>
             <FaArrowUpRightFromSquare size={15} />
             Demo
           </a>
         )}
 
         {linkcode && linkcode !== "#" && (
-          <a
-            href={linkcode}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`Código ${titulo}`}
-          >
+          <a href={linkcode} target="_blank" rel="noopener noreferrer" aria-label={`Código ${titulo}`}>
             <FaCode size={18} />
             Código
           </a>

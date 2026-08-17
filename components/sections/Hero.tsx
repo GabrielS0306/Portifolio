@@ -1,8 +1,17 @@
+import AnimatedTagline from "./AnimatedTagline";
+
 export default function Hero() {
     return (
         <section className="hero container reveal">
+            <span className="status-badge">
+                <span className="status-dot" />
+                Disponível para novos projetos
+            </span>
+
             <p className="eyebrow">Desenvolvedor Full-Stack</p>
-            <h1>Eu desenvolvo aplicações completas, do front-end ao back-end.</h1>
+            <h1>
+                Eu desenvolvo <AnimatedTagline />, do front-end ao back-end.
+            </h1>
 
             <p className="lead">
                 Olá, eu sou Gabriel. Estudante de programação e amante de tecnologia, focado em construir

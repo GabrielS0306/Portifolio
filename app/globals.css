@@ -385,9 +385,50 @@ section {
   padding: 1.5rem 0 2rem;
 }
 
-/* ══════════════════════════════════════
-   RESPONSIVIDADE
-   ══════════════════════════════════════ */
+/* Wrapper da mídia — necessário pro badge de status se posicionar */
+.card-media {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  margin: -1.25rem -1.25rem 0; /* estica até a borda do padding do .card */
+}
+
+.card-media img {
+  transition: transform 0.5s ease;
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.card:hover .card-media img {
+  transform: scale(1.05);
+}
+
+/* Placeholder para projetos sem imagem */
+.card-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  width: 100%;
+  background: linear-gradient(135deg, var(--bg-secondary), var(--bg));
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+/* Badge "Em Desenvolvimento" */
+.badge-status {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 0.7rem;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: color-mix(in srgb, #f59e0b 15%, transparent);
+  color: #fbbf24;
+  border: 1px solid color-mix(in srgb, #f59e0b 30%, transparent);
+  font-weight: 600;
+}
 
 /* ─── NOTEBOOK (até 1024px) ─── */
 @media (max-width: 1024px) {

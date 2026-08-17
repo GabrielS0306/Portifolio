@@ -5,41 +5,47 @@ import Image from "next/image";
 interface Cardprops {
   titulo: string;
   description: string;
-  tecone: string;
-  tectwo: string;
-  tectree: string;
+  tech: string[];
   linkdemo?: string;
   linkcode?: string;
   src?: string; // Tornou-se opcional
+  status?: "concluido" | "em-desenvolvimento";
 }
 
-export default function Card({titulo, description, tecone, tectwo, tectree, linkdemo, linkcode, src}: Cardprops) {
+export default function Card({ titulo, description, tech, linkdemo, linkcode, src, status = "concluido" }: Cardprops) {
   // Verifica se o src é válido (não está vazio e não é "#")
   const hasValidImage = Boolean(src && src !== "#" && src.trim() !== "");
 
   return (
     <article className="card">
-      {hasValidImage ? (
-        <Image
-          src={src as string}
-          alt={`Imagem do projeto ${titulo}`}
-          width={400}
-          height={350}
-        />
-      ) : (
-        /* Placeholder visual para projetos sem imagem */
-        <div className="flex h-[200px] w-full items-center justify-center bg-gray-800 text-gray-400 object-cover">
-          <span>Sem imagem disponível</span>
-        </div>
-      )}
+      <div className="card-media">
+        {hasValidImage ? (
+          <Image
+            src={src as string}
+            alt={`Imagem do projeto ${titulo}`}
+            width={400}
+            height={350}
+            style={{ objectFit: "cover" }}
+          />
+        ) : (
+          /* Placeholder visual para projetos sem imagem */
+          <div className="card-placeholder">
+            <span>Preview em construção</span>
+          </div>
+        )}
+
+        {status === "em-desenvolvimento" && (
+          <span className="badge-status">Em Desenvolvimento</span>
+        )}
+      </div>
 
       <h3>{titulo}</h3>
       <p>{description}</p>
 
       <div className="tags">
-        <span>{tecone}</span>
-        <span>{tectwo}</span>
-        <span>{tectree}</span>
+        {tech.map((t) => (
+          <span key={t}>{t}</span>
+        ))}
       </div>
 
       <div className="links">

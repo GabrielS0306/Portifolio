@@ -12,9 +12,7 @@ export default function Projects() {
                 <Card 
                     titulo="Sistema de Barbearia"
                     description="Sistema completo para barbearias com painel de controle intuitivo, agendamento online, gestão de barbeiros e relatórios financeiros em tempo real, proporcionando mais organização, praticidade e controle para otimizar a rotina do negócio."
-                    tecone="PHP"
-                    tectwo="MySQL"
-                    tectree="TailwindCSS"
+                    tech={["PHP", "MySQL", "TailwindCSS"]}
                     linkdemo="https://barb-system.rf.gd/barbearia/login"
                     linkcode="https://github.com/GabrielS0306/sistema_barbearia"
                     src="/images/sistema_barbearia.png" // Caminho relativo a partir da pasta public
@@ -23,22 +21,17 @@ export default function Projects() {
                 <Card 
                     titulo="SkillFlow"
                     description="Plataforma pessoal de aprendizado que permite organizar estudos em trilhas, acompanhar o progresso, registrar anotações, salvar recursos e monitorar sessões de estudo."
-                    tecone="Laravel"
-                    tectwo="React"
-                    tectree="Tailwind CSS"
+                    tech={["Laravel", "React", "TailwindCSS"]}
                     linkdemo="https://skillflow-8ixd.onrender.com/login"
                     linkcode="https://github.com/GabrielS0306/skillflow"
                     src="/images/SkillFlow_dashboard.png" 
                 />
 
-                <Card 
+                <Card
                     titulo="App de Tarefas Colaborativo"
                     description="Aplicação completa com controle de permissões por usuário, sincronização em tempo real e armazenamento seguro de dados na nuvem."
-                    tecone="TypeScript"
-                    tectwo="Express"
-                    tectree="MongoDB"
-                    linkdemo="#"
-                    linkcode="#"
+                    tech={["TypeScript", "Express", "MongoDB"]}
+                    status="em-desenvolvimento"
                     src=""
                 />
             </div>

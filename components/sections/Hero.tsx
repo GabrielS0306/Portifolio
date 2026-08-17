@@ -1,27 +1,30 @@
 import AnimatedTagline from "./AnimatedTagline";
+import Reveal from "../ui/Reveal"; 
 
 export default function Hero() {
     return (
-        <section className="hero container reveal">
-            <span className="status-badge">
-                <span className="status-dot" />
-                Disponível para novos projetos
-            </span>
+        <section className="hero container">
+            <Reveal>
+                <span className="status-badge">
+                    <span className="status-dot" />
+                    Disponível para novos projetos
+                </span>
 
-            <p className="eyebrow">Desenvolvedor Full-Stack</p>
-            <h1>
-                Eu desenvolvo <AnimatedTagline />, do front-end ao back-end.
-            </h1>
+                <p className="eyebrow">Desenvolvedor Full-Stack</p>
+                <h1>
+                    Eu desenvolvo <AnimatedTagline />, do front-end ao back-end.
+                </h1>
 
-            <p className="lead">
-                Olá, eu sou Gabriel. Estudante de programação e amante de tecnologia, focado em construir
-                soluções web com interfaces modernas, APIs robustas e bancos de dados bem estruturados.
-            </p>
+                <p className="lead">
+                    Olá, eu sou Gabriel. Estudante de programação e amante de tecnologia, focado em construir
+                    soluções web com interfaces modernas, APIs robustas e bancos de dados bem estruturados.
+                </p>
 
-            <div className="hero-actions">
-                <a className="btn primary" href="#projetos">Ver projetos</a>
-                <a className="btn ghost" href="#contato">Falar comigo</a>
-            </div>
+                <div className="hero-actions">
+                    <a className="btn primary" href="#projetos">Ver projetos</a>
+                    <a className="btn ghost" href="#contato">Falar comigo</a>
+                </div>
+            </Reveal>
         </section>
     )
 }

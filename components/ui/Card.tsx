@@ -49,6 +49,7 @@ export default function Card({ titulo, description, tech, linkdemo, linkcode, sr
             width={400}
             height={350}
             style={{ objectFit: "cover" }}
+            priority
           />
         ) : (
           <div className="card-placeholder">

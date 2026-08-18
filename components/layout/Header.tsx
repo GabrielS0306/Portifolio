@@ -1,3 +1,5 @@
+import ThemeToggle from "../ui/ThemeToggle";
+
 export default function Header() {
     return (
         <header className="site-header">
@@ -7,6 +9,7 @@ export default function Header() {
                     <a href="#projetos">Projetos</a>
                     <a href="#sobre">Sobre</a>
                     <a href="#contato">Contato</a>
+                    <ThemeToggle />
                 </nav>
             </div>
         </header>

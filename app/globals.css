@@ -24,6 +24,35 @@
   --shadow-brand:  rgba(59, 130, 246, 0.25);
 }
 
+.light {
+  --bg: #f8fafc;
+  --bg-secondary: #eef2f6;
+  --card: #ffffff;
+  --text: #0f172a;
+  --muted: #5b6b7c;
+  --line: #e2e8f0;
+  --shadow-brand: rgba(59, 130, 246, 0.18);
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--text);
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s, border-color 0.2s;
+}
+
+.theme-toggle:hover {
+  border-color: var(--brand);
+  transform: translateY(-1px);
+}
+
 /* --- BASE --- */
 html { scroll-behavior: smooth; }
 

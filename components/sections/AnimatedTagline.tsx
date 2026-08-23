@@ -3,7 +3,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
-const words = ["aplicações completas", "APIs escaláveis", "interfaces intuitivas"];
+const words = ["soluções completas  ", "APIs escaláveis", "interfaces intuitivas"];
 
 export default function AnimatedTagline() {
     const [index, setIndex] = useState(0);

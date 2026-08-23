@@ -12,7 +12,7 @@ export default function Hero() {
 
                 <p className="eyebrow">Desenvolvedor Full-Stack</p>
                 <h1>
-                    Eu desenvolvo <AnimatedTagline />, do front-end ao back-end.
+                    Eu desenvolvo <AnimatedTagline />, do front{"\u2011"}end ao back{"\u2011"}end.
                 </h1>
 
                 <p className="lead">

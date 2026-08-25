@@ -9,6 +9,7 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://portifolio-theta-eight-99.vercel.app"),
   title: "Gabriel dev",
   description: "Portfolio profissional com foco em desenvolvimento full-stack, projetos e contato.",
   openGraph: {

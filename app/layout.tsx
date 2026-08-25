@@ -11,6 +11,19 @@ const spaceGrotesk = Space_Grotesk({
 export const metadata: Metadata = {
   title: "Gabriel dev",
   description: "Portfolio profissional com foco em desenvolvimento full-stack, projetos e contato.",
+  openGraph: {
+    title: "Gabriel — Desenvolvedor Full-Stack",
+    description: "Portfólio com projetos em PHP, Laravel, React e Next.js. Confira meus trabalhos e entre em contato.",
+    url: "https://portifolio-theta-eight-99.vercel.app",
+    siteName: "Gabriel dev",
+    locale: "pt_BR",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Gabriel — Desenvolvedor Full-Stack",
+    description: "Portfólio com projetos em PHP, Laravel, React e Next.js.",
+  },
 };
 
 export const viewport: Viewport = {

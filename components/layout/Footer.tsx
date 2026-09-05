@@ -1,5 +1,6 @@
-import { FaLinkedin, FaGithub, FaEnvelope, FaInstagram } from "react-icons/fa6";
+import { FaLinkedin, FaGithub, FaInstagram } from "react-icons/fa6";
 import BackToTop from "../ui/BackToTop";
+import CopyEmailButton from "../ui/CopyEmailButton";
 
 const footerLinks = [
     {
@@ -19,12 +20,6 @@ const footerLinks = [
         href: "https://instagram.com/biel_.0834",
         icon: FaInstagram,
         external: true,
-    },
-    {
-        label: "E-mail",
-        href: "mailto:gabrieldossantosnunes91@gmail.com",
-        icon: FaEnvelope,
-        external: false,
     },
 ];
 
@@ -48,6 +43,8 @@ export default function Footer() {
                             <Icon size={16} />
                         </a>
                     ))}
+
+                    <CopyEmailButton email="gabrieldossantosnunes91@gmail.com" className="footer-icon" />
                 </div>
 
                 <div className="footer-bottom">

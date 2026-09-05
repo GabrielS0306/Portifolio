@@ -1,5 +1,6 @@
-import { FaLinkedin, FaGithub, FaEnvelope, FaInstagram } from "react-icons/fa6";
+import { FaLinkedin, FaGithub, FaInstagram } from "react-icons/fa6";
 import Reveal from "../ui/Reveal";
+import CopyEmailButton from "../ui/CopyEmailButton";
 
 const contactLinks = [
     {
@@ -19,12 +20,6 @@ const contactLinks = [
         href: "https://instagram.com/biel_.0834",
         icon: FaInstagram,
         external: true,
-    },
-    {
-        label: "E-mail",
-        href: "mailto:gabrieldossantosnunes91@gmail.com",
-        icon: FaEnvelope,
-        external: false,
     },
 ];
 
@@ -50,6 +45,13 @@ export default function Contact() {
                             <span className="contact-pill-label">{label}</span>
                         </a>
                     ))}
+
+                    <CopyEmailButton
+                        email="gabrieldossantosnunes91@gmail.com"
+                        className="contact-pill"
+                        labelClassName="contact-pill-label"
+                        iconClassName="contact-pill-icon"
+                    />
                 </div>
             </Reveal>
         </section>

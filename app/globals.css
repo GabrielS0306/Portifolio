@@ -537,6 +537,18 @@ section {
   border-color: var(--brand);
 }
 
+.footer-icon,
+.contact-pill {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.footer-icon.is-copied,
+.contact-pill.is-copied {
+  color: var(--accent-soft);
+  border-color: var(--accent);
+}
+
 .footer-bottom {
   display: flex;
   flex-direction: column;

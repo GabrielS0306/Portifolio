@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import { FaArrowUpRightFromSquare } from "react-icons/fa6";
 import { FaCode } from "react-icons/fa";
 import {
@@ -23,7 +26,6 @@ interface Cardprops {
   status?: "concluido" | "em-desenvolvimento";
 }
 
-// Mapa de tech → ícone. Cobre as techs que você usa hoje nos 3 projetos.
 const techIcons: Record<string, IconType> = {
   PHP: SiPhp,
   MySQL: SiMysql,
@@ -38,19 +40,25 @@ const techIcons: Record<string, IconType> = {
 
 export default function Card({ titulo, description, tech, linkdemo, linkcode, src, status = "concluido" }: Cardprops) {
   const hasValidImage = Boolean(src && src !== "#" && src.trim() !== "");
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   return (
     <article className="card">
       <div className="card-media">
         {hasValidImage ? (
-          <Image
-            src={src as string}
-            alt={`Imagem do projeto ${titulo}`}
-            width={400}
-            height={350}
-            style={{ objectFit: "cover" }}
-            priority
-          />
+          <>
+            {!imageLoaded && <div className="card-skeleton" />}
+            <Image
+              src={src as string}
+              alt={`Imagem do projeto ${titulo}`}
+              width={400}
+              height={350}
+              style={{ objectFit: "cover" }}
+              priority
+              onLoad={() => setImageLoaded(true)}
+              className={`card-image ${imageLoaded ? "loaded" : ""}`}
+            />
+          </>
         ) : (
           <div className="card-placeholder">
             <span>Preview em construção</span>

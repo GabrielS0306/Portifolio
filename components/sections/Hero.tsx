@@ -1,7 +1,17 @@
+import fs from "fs";
+import path from "path";
+import { FaDownload } from "react-icons/fa6";
 import AnimatedTagline from "./AnimatedTagline";
-import Reveal from "../ui/Reveal"; 
+import Reveal from "../ui/Reveal";
+
+function hasResume() {
+    const resumePath = path.join(process.cwd(), "public", "curriculo.pdf");
+    return fs.existsSync(resumePath);
+}
 
 export default function Hero() {
+    const showResumeButton = hasResume();
+
     return (
         <section className="hero container">
             <Reveal>
@@ -23,6 +33,12 @@ export default function Hero() {
                 <div className="hero-actions">
                     <a className="btn primary" href="#projetos">Ver projetos</a>
                     <a className="btn ghost" href="#contato">Falar comigo</a>
+                    {showResumeButton && (
+                        <a className="btn ghost" href="/curriculo.pdf" download>
+                            <FaDownload size={14} />
+                            Baixar CV
+                        </a>
+                    )}
                 </div>
             </Reveal>
         </section>

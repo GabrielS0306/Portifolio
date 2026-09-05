@@ -653,6 +653,33 @@ section {
   transform: scale(1.05);
 }
 
+.card-skeleton {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    var(--bg-secondary) 0%,
+    var(--line) 50%,
+    var(--bg-secondary) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.card-image {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.card-image.loaded {
+  opacity: 1;
+}
+
 /* Placeholder para projetos sem imagem */
 .card-placeholder {
   display: flex;

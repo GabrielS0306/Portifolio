@@ -1,0 +1,198 @@
+.github {
+    display: flex;
+    flex-direction: column;
+}
+
+.head h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.35rem;
+}
+
+.head p {
+    color: var(--muted);
+    font-size: 1rem;
+}
+
+/* --- VISAO GERAL --- */
+.overview {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 1.5rem;
+    padding: 1.25rem;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+}
+
+.stats {
+    display: flex;
+    gap: 1.75rem;
+    flex-shrink: 0;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 0.15rem;
+}
+
+.stat dt {
+    font-size: 0.8rem;
+    color: var(--muted);
+}
+
+.stat dd {
+    font-family: "DM Serif Display", serif;
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--brand-soft);
+    line-height: 1.1;
+}
+
+.languages {
+    flex: 1;
+    min-width: 0;
+}
+
+.bar {
+    display: flex;
+    height: 8px;
+    border-radius: 999px;
+    overflow: hidden;
+    background: var(--line);
+}
+
+.bar span {
+    height: 100%;
+}
+
+.bar span + span {
+    border-left: 2px solid var(--card);
+}
+
+.legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1rem;
+    margin-top: 0.75rem;
+}
+
+.legend li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.82rem;
+    color: var(--text);
+}
+
+.percent {
+    color: var(--muted);
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+/* --- REPOSITORIOS --- */
+.repos {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.revealFill {
+    height: 100%;
+}
+
+.repo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    height: 100%;
+    padding: 1rem;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    color: var(--text);
+    transition:
+        transform 0.2s,
+        border-color 0.2s;
+}
+
+.repo:hover {
+    transform: translateY(-3px);
+    border-color: color-mix(in srgb, var(--brand) 40%, var(--line));
+}
+
+.repoName {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-weight: 600;
+    font-size: 0.92rem;
+    color: var(--brand-soft);
+    word-break: break-word;
+}
+
+.repoName svg {
+    flex-shrink: 0;
+}
+
+.repoDescription {
+    flex: 1;
+    color: var(--muted);
+    font-size: 0.84rem;
+    line-height: 1.5;
+}
+
+.repoMeta {
+    margin-top: auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35rem 0.9rem;
+    color: var(--muted);
+    font-size: 0.76rem;
+}
+
+.repoLanguage {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.profileLink {
+    align-self: flex-start;
+    margin-top: 1.25rem;
+}
+
+@media (max-width: 1024px) {
+    .repos {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .overview {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1.25rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .head h2 {
+        font-size: 1.4rem;
+    }
+
+    .repos {
+        grid-template-columns: 1fr;
+    }
+}

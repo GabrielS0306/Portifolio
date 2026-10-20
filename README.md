@@ -56,7 +56,8 @@ Principais recursos:
 │   └── useActiveSection.ts   # Destaca no menu a seção visível
 │
 ├── lib/
-│   ├── site.ts               # URL, e-mail, redes sociais e itens do menu
+│   ├── github.ts             # Busca e resume os repositórios da API do GitHub
+│   ├── site.ts               # URL, e-mail, usuário do GitHub, redes sociais e menu
 │   └── techIcons.ts          # Mapa de tecnologia → ícone
 │
 ├── public/
@@ -72,6 +73,7 @@ Cada componente com estilo próprio tem um arquivo `.module.css` ao lado (ex.: `
 - **Adicionar um projeto:** inclua um objeto no array de [`data/projects.ts`](data/projects.ts). A imagem deve ficar em `public/images/`.
 - **Alterar e-mail, redes sociais ou URL do site:** edite [`lib/site.ts`](lib/site.ts).
 - **Nova tecnologia com ícone:** adicione ao mapa em [`lib/techIcons.ts`](lib/techIcons.ts).
+- **Seção "Atividade no GitHub":** é gerada automaticamente a partir dos repositórios públicos do usuário definido em `siteConfig.githubUser`, atualizando no máximo a cada hora. Descrições e linguagens vêm do próprio GitHub, então mantenha-as preenchidas por lá. Se a API estiver indisponível, a seção simplesmente não aparece.
 - **Currículo para download:** coloque o PDF em `public/` e defina `RESUME_PATH` em [`components/sections/Hero.tsx`](components/sections/Hero.tsx).
 
 ## ⚙️ Como executar o projeto
@@ -91,6 +93,10 @@ npm run dev
 ```
 
 Depois, acesse http://localhost:3000.
+
+### Variáveis de ambiente (opcional)
+
+Copie `.env.example` para `.env.local`. O `GITHUB_TOKEN` é opcional: sem ele a API do GitHub permite 60 requisições por hora, o que já basta para o site.
 
 ## 📦 Scripts disponíveis
 

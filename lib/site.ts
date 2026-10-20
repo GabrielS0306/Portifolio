@@ -5,6 +5,7 @@ export const siteConfig = {
     url: "https://portifolio-theta-eight-99.vercel.app",
     name: "Gabriel dev",
     email: "gabrieldossantosnunes91@gmail.com",
+    githubUser: "GabrielS0306",
 };
 
 interface SocialLink {
@@ -21,7 +22,7 @@ export const socialLinks: SocialLink[] = [
     },
     {
         label: "GitHub",
-        href: "https://github.com/GabrielS0306",
+        href: `https://github.com/${siteConfig.githubUser}`,
         icon: FaGithub,
     },
     {

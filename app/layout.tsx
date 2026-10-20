@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Space_Grotesk } from "next/font/google";
 import Providers from "@/components/Providers";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
 import { siteConfig } from "@/lib/site";
 import "./globals.css";
 
@@ -43,9 +45,18 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="pt-BR" className={spaceGrotesk.variable} suppressHydrationWarning>
+        <html
+            lang="pt-BR"
+            className={spaceGrotesk.variable}
+            data-scroll-behavior="smooth"
+            suppressHydrationWarning
+        >
             <body id="top">
-                <Providers>{children}</Providers>
+                <Providers>
+                    <Header />
+                    {children}
+                    <Footer />
+                </Providers>
             </body>
         </html>
     );

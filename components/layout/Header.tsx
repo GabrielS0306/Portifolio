@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { FaBars, FaXmark } from "react-icons/fa6";
 import ThemeToggle from "../ui/ThemeToggle";
 import { useActiveSection } from "@/hooks/useActiveSection";
@@ -61,22 +62,22 @@ export default function Header() {
     return (
         <header className={styles.siteHeader}>
             <div className={`container ${styles.nav}`}>
-                <a href="#top" className={styles.logo}>
+                <Link href="/#top" className={styles.logo}>
                     gabriel<span>.</span>
-                </a>
+                </Link>
 
                 <nav ref={navRef} className={styles.navDesktop}>
                     {navItems.map(({ id, label }) => (
-                        <a
+                        <Link
                             key={id}
-                            href={`#${id}`}
+                            href={`/#${id}`}
                             ref={(el) => {
                                 linkRefs.current[id] = el;
                             }}
                             className={activeSection === id ? styles.active : ""}
                         >
                             {label}
-                        </a>
+                        </Link>
                     ))}
                     <span
                         className={styles.navIndicator}
@@ -109,14 +110,14 @@ export default function Header() {
                 inert={!menuOpen}
             >
                 {navItems.map(({ id, label }) => (
-                    <a
+                    <Link
                         key={id}
-                        href={`#${id}`}
+                        href={`/#${id}`}
                         onClick={closeMenu}
                         className={activeSection === id ? styles.active : ""}
                     >
                         {label}
-                    </a>
+                    </Link>
                 ))}
             </nav>
         </header>

@@ -3,15 +3,21 @@ import Projects from "../sections/Projects";
 import About from "../sections/About";
 import Contact from "../sections/Contact";
 import GitHubActivity from "../sections/GitHubActivity";
+import type { Dictionary, Locale } from "@/lib/i18n";
 
-export default function Container() {
+interface ContainerProps {
+    lang: Locale;
+    dict: Dictionary;
+}
+
+export default function Container({ lang, dict }: ContainerProps) {
     return (
         <main>
-            <Hero />
-            <Projects />
-            <GitHubActivity />
-            <About />
-            <Contact />
+            <Hero dict={dict} />
+            <Projects lang={lang} dict={dict} />
+            <GitHubActivity lang={lang} dict={dict} />
+            <About dict={dict} />
+            <Contact dict={dict} />
         </main>
     );
 }

@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { FaBars, FaXmark } from "react-icons/fa6";
 import ThemeToggle from "../ui/ThemeToggle";
+import LanguageToggle from "../ui/LanguageToggle";
+import { useLocale } from "../LocaleProvider";
 import { useActiveSection } from "@/hooks/useActiveSection";
 import { navItems } from "@/lib/site";
 import styles from "./Header.module.css";
@@ -11,6 +13,7 @@ import styles from "./Header.module.css";
 const sections = navItems.map((item) => item.id);
 
 export default function Header() {
+    const { lang, dict } = useLocale();
     const activeSection = useActiveSection(sections);
     const navRef = useRef<HTMLElement>(null);
     const linkRefs = useRef<Record<string, HTMLAnchorElement | null>>({});
@@ -62,38 +65,42 @@ export default function Header() {
     return (
         <header className={styles.siteHeader}>
             <div className={`container ${styles.nav}`}>
-                <Link href="/#top" className={styles.logo}>
+                <Link href={`/${lang}#top`} className={styles.logo}>
                     gabriel<span>.</span>
                 </Link>
 
                 <nav ref={navRef} className={styles.navDesktop}>
-                    {navItems.map(({ id, label }) => (
+                    {navItems.map(({ id, key }) => (
                         <Link
                             key={id}
-                            href={`/#${id}`}
+                            href={`/${lang}#${id}`}
                             ref={(el) => {
                                 linkRefs.current[id] = el;
                             }}
                             className={activeSection === id ? styles.active : ""}
                         >
-                            {label}
+                            {dict.nav[key]}
                         </Link>
                     ))}
                     <span
                         className={styles.navIndicator}
                         style={{ left: indicator.left, width: indicator.width, opacity: indicator.opacity }}
                     />
-                    <ThemeToggle />
+                    <div className={styles.toggles}>
+                        <ThemeToggle />
+                        <LanguageToggle />
+                    </div>
                 </nav>
 
                 <div className={styles.navMobileControls}>
                     <ThemeToggle />
+                    <LanguageToggle />
                     <button
                         ref={menuButtonRef}
                         type="button"
                         className={styles.menuToggle}
                         onClick={() => setMenuOpen((prev) => !prev)}
-                        aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
+                        aria-label={menuOpen ? dict.nav.closeMenu : dict.nav.openMenu}
                         aria-expanded={menuOpen}
                         aria-controls="mobile-menu"
                     >
@@ -105,18 +112,18 @@ export default function Header() {
             {/* inert impede que os links do menu fechado recebam foco pelo teclado */}
             <nav
                 id="mobile-menu"
-                aria-label="Menu principal"
+                aria-label={dict.nav.mainMenu}
                 className={`${styles.mobileMenu} ${menuOpen ? styles.open : ""}`}
                 inert={!menuOpen}
             >
-                {navItems.map(({ id, label }) => (
+                {navItems.map(({ id, key }) => (
                     <Link
                         key={id}
-                        href={`/#${id}`}
+                        href={`/${lang}#${id}`}
                         onClick={closeMenu}
                         className={activeSection === id ? styles.active : ""}
                     >
-                        {label}
+                        {dict.nav[key]}
                     </Link>
                 ))}
             </nav>

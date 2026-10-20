@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { FaEnvelope, FaCheck } from "react-icons/fa6";
+import { useLocale } from "../LocaleProvider";
 
 interface CopyEmailButtonProps {
     email: string;
@@ -17,6 +18,7 @@ export default function CopyEmailButton({
     iconClassName,
 }: CopyEmailButtonProps) {
     const [copied, setCopied] = useState(false);
+    const t = useLocale().dict.contact;
 
     const handleCopy = async () => {
         try {
@@ -36,10 +38,10 @@ export default function CopyEmailButton({
             className={className}
             data-copied={copied}
             onClick={handleCopy}
-            aria-label={copied ? "E-mail copiado" : "Copiar e-mail"}
+            aria-label={copied ? t.emailCopied : t.copyEmail}
         >
             <span className={iconClassName}>{copied ? <FaCheck size={16} /> : <FaEnvelope size={16} />}</span>
-            {labelClassName && <span className={labelClassName}>{copied ? "Copiado!" : "E-mail"}</span>}
+            {labelClassName && <span className={labelClassName}>{copied ? t.copied : t.email}</span>}
         </button>
     );
 }

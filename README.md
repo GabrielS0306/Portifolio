@@ -11,6 +11,7 @@ O foco do projeto é proporcionar uma boa experiência tanto em **desktop quanto
 Principais recursos:
 
 - Seções de apresentação, projetos, sobre e contato em uma página única;
+- Versões em português (`/pt`) e inglês (`/en`), com detecção do idioma do navegador e botão para alternar;
 - Tema claro e escuro;
 - Animações de entrada que respeitam a preferência de "reduzir movimento" do sistema;
 - Navegação por teclado (foco visível, menu mobile acessível);
@@ -35,19 +36,23 @@ Principais recursos:
 ```text
 ./
 ├── app/
+│   ├── [lang]/               # Tudo que é página fica dentro do idioma (/pt, /en)
+│   │   ├── layout.tsx        # Layout raiz e metadados (por idioma)
+│   │   ├── page.tsx          # Página principal
+│   │   ├── not-found.tsx     # Página 404 traduzida
+│   │   ├── opengraph-image.tsx # Imagem de compartilhamento por idioma
+│   │   └── [...rest]/        # Captura caminhos inexistentes e mostra a 404
 │   ├── globals.css           # Reset, tokens de tema e estilos base
-│   ├── layout.tsx            # Layout raiz e metadados
-│   ├── page.tsx              # Página principal
-│   ├── opengraph-image.tsx   # Imagem de compartilhamento (gerada no build)
 │   ├── robots.ts             # robots.txt
-│   ├── sitemap.ts            # sitemap.xml
+│   ├── sitemap.ts            # sitemap.xml (com as versões em cada idioma)
 │   └── icon.svg              # Favicon
 │
 ├── components/
 │   ├── layout/               # Header, Footer e Container
-│   ├── sections/             # Seções da página (Hero, Projects, About, Contact)
-│   ├── ui/                   # Componentes reutilizáveis (Card, Skills, ThemeToggle...)
-│   └── Providers.tsx         # Providers de tema e animação
+│   ├── sections/             # Seções da página (Hero, Projects, About, Contact...)
+│   ├── ui/                   # Componentes reutilizáveis (Card, ThemeToggle, LanguageToggle...)
+│   ├── LocaleProvider.tsx    # Disponibiliza idioma e traduções aos Client Components
+│   └── Providers.tsx         # Providers de idioma, tema e animação
 │
 ├── data/
 │   └── projects.ts           # Lista de projetos exibidos
@@ -56,12 +61,15 @@ Principais recursos:
 │   └── useActiveSection.ts   # Destaca no menu a seção visível
 │
 ├── lib/
+│   ├── i18n/                 # Idiomas: configuração, dicionários (pt/en) e detecção
 │   ├── github.ts             # Busca e resume os repositórios da API do GitHub
 │   ├── site.ts               # URL, e-mail, usuário do GitHub, redes sociais e menu
 │   └── techIcons.ts          # Mapa de tecnologia → ícone
 │
 ├── public/
 │   └── images/               # Screenshots dos projetos
+│
+├── proxy.ts                  # Redireciona "/" para /pt ou /en conforme o idioma
 │
 └── .github/workflows/ci.yml  # Pipeline de CI
 ```
@@ -70,7 +78,8 @@ Cada componente com estilo próprio tem um arquivo `.module.css` ao lado (ex.: `
 
 ## ✏️ Como atualizar o conteúdo
 
-- **Adicionar um projeto:** inclua um objeto no array de [`data/projects.ts`](data/projects.ts). A imagem deve ficar em `public/images/`.
+- **Textos do site:** ficam em [`lib/i18n/dictionaries/pt.ts`](lib/i18n/dictionaries/pt.ts) e [`en.ts`](lib/i18n/dictionaries/en.ts). O dicionário em inglês é tipado a partir do português, então o TypeScript avisa se faltar alguma tradução.
+- **Adicionar um projeto:** inclua um objeto no array de [`data/projects.ts`](data/projects.ts), com `slug` único e título e descrição em `pt` e `en`. A imagem deve ficar em `public/images/`. Os testes verificam se nenhuma tradução ficou faltando.
 - **Alterar e-mail, redes sociais ou URL do site:** edite [`lib/site.ts`](lib/site.ts).
 - **Nova tecnologia com ícone:** adicione ao mapa em [`lib/techIcons.ts`](lib/techIcons.ts).
 - **Seção "Atividade no GitHub":** é gerada automaticamente a partir dos repositórios públicos do usuário definido em `siteConfig.githubUser`, atualizando no máximo a cada hora. Descrições e linguagens vêm do próprio GitHub, então mantenha-as preenchidas por lá. Se a API estiver indisponível, a seção simplesmente não aparece.

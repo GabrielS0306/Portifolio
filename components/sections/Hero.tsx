@@ -3,40 +3,40 @@ import AnimatedTagline from "../ui/AnimatedTagline";
 import Reveal from "../ui/Reveal";
 import styles from "./Hero.module.css";
 import button from "../ui/Button.module.css";
+import type { Dictionary } from "@/lib/i18n";
 
 // Caminho do currículo em /public. Defina como "/curriculo.pdf" ao adicionar o arquivo.
 const RESUME_PATH: string | null = null;
 
-export default function Hero() {
+export default function Hero({ dict }: { dict: Dictionary }) {
+    const t = dict.hero;
+
     return (
         <section className={`container ${styles.hero}`}>
             <Reveal>
                 <span className={styles.statusBadge}>
                     <span className={styles.statusDot} />
-                    Disponível para novos projetos
+                    {t.status}
                 </span>
 
-                <p className={styles.eyebrow}>Desenvolvedor Full-Stack</p>
+                <p className={styles.eyebrow}>{t.eyebrow}</p>
                 <h1>
-                    Eu desenvolvo <AnimatedTagline suffix="," /> do front{"\u2011"}end ao back{"\u2011"}end.
+                    {t.titleStart} <AnimatedTagline words={t.taglineWords} suffix="," /> {t.titleEnd}
                 </h1>
 
-                <p className={styles.lead}>
-                    Olá, eu sou Gabriel. Estudante de programação e amante de tecnologia, focado em construir
-                    soluções web com interfaces modernas, APIs robustas e bancos de dados bem estruturados.
-                </p>
+                <p className={styles.lead}>{t.lead}</p>
 
                 <div className={styles.heroActions}>
                     <a className={`${button.btn} ${button.primary}`} href="#projetos">
-                        Ver projetos
+                        {t.viewProjects}
                     </a>
                     <a className={`${button.btn} ${button.ghost}`} href="#contato">
-                        Falar comigo
+                        {t.contactMe}
                     </a>
                     {RESUME_PATH && (
                         <a className={`${button.btn} ${button.ghost}`} href={RESUME_PATH} download>
                             <FaDownload size={14} />
-                            Baixar CV
+                            {t.downloadCv}
                         </a>
                     )}
                 </div>

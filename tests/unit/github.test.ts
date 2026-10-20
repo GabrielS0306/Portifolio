@@ -86,6 +86,14 @@ describe("formatRelativeDate", () => {
         ["2026-09-20T12:00:00Z", "mês passado"],
         ["2024-10-20T12:00:00Z", "há 2 anos"],
     ])("%s -> %s", (date, expected) => {
-        expect(formatRelativeDate(date, now)).toBe(expected);
+        expect(formatRelativeDate(date, "pt", now)).toBe(expected);
+    });
+
+    it.each([
+        ["2026-10-20T11:59:30Z", "just now"],
+        ["2026-10-19T12:00:00Z", "yesterday"],
+        ["2026-10-15T12:00:00Z", "5 days ago"],
+    ])("em ingles: %s -> %s", (date, expected) => {
+        expect(formatRelativeDate(date, "en", now)).toBe(expected);
     });
 });

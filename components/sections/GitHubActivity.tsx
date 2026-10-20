@@ -4,8 +4,15 @@ import button from "../ui/Button.module.css";
 import styles from "./GitHubActivity.module.css";
 import { formatRelativeDate, getGitHubSummary, getLanguageColor } from "@/lib/github";
 import { siteConfig } from "@/lib/site";
+import type { Dictionary, Locale } from "@/lib/i18n";
 
-export default async function GitHubActivity() {
+interface GitHubActivityProps {
+    lang: Locale;
+    dict: Dictionary;
+}
+
+export default async function GitHubActivity({ lang, dict }: GitHubActivityProps) {
+    const t = dict.github;
     const summary = await getGitHubSummary();
 
     if (!summary || summary.recent.length === 0) return null;
@@ -15,26 +22,26 @@ export default async function GitHubActivity() {
     return (
         <section id="github" className={`container ${styles.github}`} aria-labelledby="github-title">
             <div className={styles.head}>
-                <h2 id="github-title">Atividade no GitHub</h2>
-                <p>Repositórios atualizados recentemente, direto da API do GitHub.</p>
+                <h2 id="github-title">{t.title}</h2>
+                <p>{t.subtitle}</p>
             </div>
 
             <Reveal>
                 <div className={styles.overview}>
                     <dl className={styles.stats}>
                         <div className={styles.stat}>
-                            <dt>Repositórios públicos</dt>
+                            <dt>{t.publicRepos}</dt>
                             <dd>{summary.totalRepos}</dd>
                         </div>
                         <div className={styles.stat}>
-                            <dt>Linguagens</dt>
+                            <dt>{t.languages}</dt>
                             <dd>{summary.languages.length}</dd>
                         </div>
                     </dl>
 
                     {summary.languages.length > 0 && (
                         <div className={styles.languages}>
-                            <div className={styles.bar} role="img" aria-label="Distribuição de linguagens">
+                            <div className={styles.bar} role="img" aria-label={t.languagesChart}>
                                 {summary.languages.map((lang) => (
                                     // flex pela contagem (e nao pelo percentual arredondado) para a barra fechar 100%
                                     <span
@@ -84,7 +91,9 @@ export default async function GitHubActivity() {
                                             {repo.language}
                                         </span>
                                     )}
-                                    <span>atualizado {formatRelativeDate(repo.pushed_at)}</span>
+                                    <span>
+                                        {t.updated} {formatRelativeDate(repo.pushed_at, lang)}
+                                    </span>
                                 </span>
                             </a>
                         </Reveal>
@@ -99,7 +108,7 @@ export default async function GitHubActivity() {
                 rel="noopener noreferrer"
             >
                 <FaGithub size={16} />
-                Ver perfil completo
+                {t.viewProfile}
             </a>
         </section>
     );

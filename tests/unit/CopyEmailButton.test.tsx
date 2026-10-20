@@ -1,7 +1,8 @@
 import { describe, expect, it, vi } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import CopyEmailButton from "@/components/ui/CopyEmailButton";
+import { renderWithLocale } from "../utils";
 
 const EMAIL = "teste@exemplo.com";
 
@@ -10,7 +11,7 @@ describe("<CopyEmailButton />", () => {
         const user = userEvent.setup();
         const writeText = vi.spyOn(navigator.clipboard, "writeText");
 
-        render(<CopyEmailButton email={EMAIL} className="btn" labelClassName="label" />);
+        renderWithLocale(<CopyEmailButton email={EMAIL} className="btn" labelClassName="label" />);
         const button = screen.getByRole("button", { name: "Copiar e-mail" });
         expect(button).toHaveAttribute("data-copied", "false");
 
@@ -22,7 +23,7 @@ describe("<CopyEmailButton />", () => {
     });
 
     it("so mostra o rotulo quando labelClassName e informado", () => {
-        render(<CopyEmailButton email={EMAIL} className="btn" />);
+        renderWithLocale(<CopyEmailButton email={EMAIL} className="btn" />);
 
         expect(screen.queryByText("E-mail")).not.toBeInTheDocument();
     });

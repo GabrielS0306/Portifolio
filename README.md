@@ -2,182 +2,119 @@
 
 Portfólio pessoal responsivo desenvolvido com **Next.js**, **React** e **TypeScript**, criado para apresentar meu perfil como desenvolvedor, meus projetos, habilidades e formas de contato.
 
-🌐 **Acesse o portfólio:**
-https://portifolio-theta-eight-99.vercel.app/
+🌐 **Acesse o portfólio:** https://portifolio-theta-eight-99.vercel.app/
 
 ## 📌 Sobre o projeto
 
-Este projeto foi desenvolvido para servir como meu portfólio pessoal e apresentar de forma simples e moderna minha trajetória na área de desenvolvimento.
-
 O foco do projeto é proporcionar uma boa experiência tanto em **desktop quanto em dispositivos móveis**, mantendo uma estrutura organizada e fácil de manter.
 
-Entre os principais objetivos estão:
+Principais recursos:
 
-* Apresentar meu perfil profissional;
-* Exibir projetos desenvolvidos;
-* Demonstrar minhas habilidades técnicas;
-* Facilitar o acesso aos meus projetos e repositórios;
-* Disponibilizar formas de contato;
-* Manter uma interface responsiva e moderna.
+- Seções de apresentação, projetos, sobre e contato em uma página única;
+- Tema claro e escuro;
+- Animações de entrada que respeitam a preferência de "reduzir movimento" do sistema;
+- Navegação por teclado (foco visível, menu mobile acessível);
+- Botão para copiar o e-mail com feedback visual;
+- SEO com metadados, imagem de Open Graph, `robots.txt` e `sitemap.xml` gerados pelo Next.js.
 
 ## 🚀 Tecnologias utilizadas
 
-* **Next.js 15** — Framework React para aplicações web;
-* **React 19** — Biblioteca para construção da interface;
-* **TypeScript** — Tipagem estática para JavaScript;
-* **Tailwind CSS** — Estilização e criação da interface;
-* **ESLint** — Padronização e análise do código;
-* **Vercel** — Hospedagem e deploy da aplicação.
+- **Next.js 16** (App Router) — framework React;
+- **React 19** — construção da interface;
+- **TypeScript** — tipagem estática;
+- **CSS Modules** — estilos com escopo por componente;
+- **Framer Motion** — animações;
+- **next-themes** — alternância de tema claro/escuro;
+- **React Icons** — ícones;
+- **ESLint** e **Prettier** — análise e formatação do código;
+- **GitHub Actions** — integração contínua;
+- **Vercel** — hospedagem e deploy.
 
 ## 📂 Estrutura do projeto
 
 ```text
 ./
 ├── app/
-│   ├── globals.css          # Estilos globais
-│   ├── layout.tsx           # Layout principal da aplicação
-│   └── page.tsx             # Página principal
+│   ├── globals.css           # Reset, tokens de tema e estilos base
+│   ├── layout.tsx            # Layout raiz e metadados
+│   ├── page.tsx              # Página principal
+│   ├── opengraph-image.tsx   # Imagem de compartilhamento (gerada no build)
+│   ├── robots.ts             # robots.txt
+│   ├── sitemap.ts            # sitemap.xml
+│   └── icon.svg              # Favicon
 │
 ├── components/
-│   ├── layout/              # Componentes relacionados ao layout
-│   ├── sections/            # Seções do portfólio
-│   └── ui/                  # Componentes de interface reutilizáveis
+│   ├── layout/               # Header, Footer e Container
+│   ├── sections/             # Seções da página (Hero, Projects, About, Contact)
+│   ├── ui/                   # Componentes reutilizáveis (Card, Skills, ThemeToggle...)
+│   └── Providers.tsx         # Providers de tema e animação
+│
+├── data/
+│   └── projects.ts           # Lista de projetos exibidos
+│
+├── hooks/
+│   └── useActiveSection.ts   # Destaca no menu a seção visível
+│
+├── lib/
+│   ├── site.ts               # URL, e-mail, redes sociais e itens do menu
+│   └── techIcons.ts          # Mapa de tecnologia → ícone
 │
 ├── public/
-│   └── images/
-│       └── sistema_barbearia.png
+│   └── images/               # Screenshots dos projetos
 │
-├── .gitignore
-├── AGENTS.md
-├── CLAUDE.md
-├── eslint.config.mjs
-├── next-env.d.ts
-├── next.config.ts
-├── package.json
-├── package-lock.json
-├── postcss.config.mjs
-├── README.md
-└── tsconfig.json
+└── .github/workflows/ci.yml  # Pipeline de CI
 ```
 
-## 🧩 Organização dos componentes
+Cada componente com estilo próprio tem um arquivo `.module.css` ao lado (ex.: `Card.tsx` + `Card.module.css`).
 
-A aplicação utiliza uma estrutura baseada em componentes para facilitar a manutenção e reutilização do código.
+## ✏️ Como atualizar o conteúdo
 
-### `components/layout`
-
-Contém componentes responsáveis pela estrutura visual e organização geral do portfólio.
-
-### `components/sections`
-
-Agrupa as principais seções apresentadas na página, permitindo que cada parte do portfólio seja organizada separadamente.
-
-### `components/ui`
-
-Contém componentes menores e reutilizáveis utilizados na construção da interface.
-
-## 📁 Projetos
-
-O portfólio apresenta projetos desenvolvidos utilizando diferentes tecnologias e abordagens.
-
-Entre eles está um **sistema de gerenciamento para barbearias**, desenvolvido com funcionalidades voltadas para gerenciamento de agendamentos, barbeiros, serviços e informações financeiras.
-
-A imagem utilizada para apresentação do projeto está localizada em:
-
-```text
-public/images/sistema_barbearia.png
-```
-
-## 📱 Responsividade
-
-O portfólio foi desenvolvido pensando em diferentes tamanhos de tela, buscando proporcionar uma experiência consistente em:
-
-* 💻 Desktop;
-* 💻 Notebooks;
-* 📱 Smartphones;
-* 📱 Tablets.
-
-## 🎨 Interface
-
-A interface utiliza **Tailwind CSS** para a estilização dos componentes, permitindo criar um layout moderno, responsivo e consistente.
-
-A estrutura visual também foi organizada em componentes para facilitar futuras alterações e melhorias no design.
+- **Adicionar um projeto:** inclua um objeto no array de [`data/projects.ts`](data/projects.ts). A imagem deve ficar em `public/images/`.
+- **Alterar e-mail, redes sociais ou URL do site:** edite [`lib/site.ts`](lib/site.ts).
+- **Nova tecnologia com ícone:** adicione ao mapa em [`lib/techIcons.ts`](lib/techIcons.ts).
+- **Currículo para download:** coloque o PDF em `public/` e defina `RESUME_PATH` em [`components/sections/Hero.tsx`](components/sections/Hero.tsx).
 
 ## ⚙️ Como executar o projeto
 
 ### Pré-requisitos
 
-Antes de executar o projeto, tenha instalado:
-
-* Node.js
-* npm
+- Node.js 20.9 ou superior
+- npm
 
 ### Instalação
 
-Clone o repositório e entre na pasta do projeto:
-
 ```bash
-git clone <URL_DO_REPOSITORIO>
-cd portfolio
-```
-
-Instale as dependências:
-
-```bash
+git clone https://github.com/GabrielS0306/Portifolio.git
+cd Portifolio
 npm install
-```
-
-Execute o servidor de desenvolvimento:
-
-```bash
 npm run dev
 ```
 
-Depois, acesse:
-
-```text
-http://localhost:3000
-```
+Depois, acesse http://localhost:3000.
 
 ## 📦 Scripts disponíveis
 
-```bash
-npm run dev
-```
+| Comando                | Descrição                                 |
+| ---------------------- | ----------------------------------------- |
+| `npm run dev`          | Inicia o servidor de desenvolvimento      |
+| `npm run build`        | Gera a versão de produção                 |
+| `npm run start`        | Inicia a aplicação em modo de produção    |
+| `npm run lint`         | Executa o ESLint                          |
+| `npm run typecheck`    | Verifica os tipos com o TypeScript        |
+| `npm run format`       | Formata o código com o Prettier           |
+| `npm run format:check` | Verifica se o código está formatado       |
 
-Inicia o servidor de desenvolvimento.
+## ✅ Integração contínua
 
-```bash
-npm run build
-```
-
-Gera a versão de produção da aplicação.
-
-```bash
-npm run start
-```
-
-Inicia a aplicação em modo de produção.
-
-```bash
-npm run lint
-```
-
-Executa a análise do código utilizando ESLint.
+A cada push na `main` e em todo pull request, o GitHub Actions executa `format:check`, `lint`, `typecheck` e `build`.
 
 ## 🌐 Deploy
 
-O projeto está publicado utilizando **Vercel**.
-
-🔗 **Portfólio online:**
-https://portifolio-theta-eight-99.vercel.app/
+O projeto está publicado na **Vercel**.
 
 ## 👨‍💻 Autor
 
-**Gabriel**
+**Gabriel** — desenvolvedor com foco em **Full-Stack**, buscando evoluir constantemente através da criação de projetos e aplicação prática de diferentes tecnologias.
 
-Desenvolvedor com foco em desenvolvimento **Full-Stack**, buscando evoluir constantemente através da criação de projetos e aplicação prática de diferentes tecnologias.
-
----
-
-⭐ Caso tenha interesse em conhecer mais sobre meus projetos, acesse meu portfólio.
+- [LinkedIn](https://www.linkedin.com/in/gabriel-dos-santos-nunes-713a2a312/)
+- [GitHub](https://github.com/GabrielS0306)

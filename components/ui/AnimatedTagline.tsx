@@ -20,7 +20,7 @@ export default function AnimatedTagline({ suffix = "" }: AnimatedTaglineProps) {
     }, []);
 
     return (
-        <span className="tagline-word">
+        <span>
             <AnimatePresence mode="wait">
                 <motion.span
                     key={words[index]}

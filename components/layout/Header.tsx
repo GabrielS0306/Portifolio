@@ -4,13 +4,16 @@ import { useEffect, useRef, useState } from "react";
 import { FaBars, FaXmark } from "react-icons/fa6";
 import ThemeToggle from "../ui/ThemeToggle";
 import { useActiveSection } from "@/hooks/useActiveSection";
+import { navItems } from "@/lib/site";
+import styles from "./Header.module.css";
 
-const sections = ["projetos", "sobre", "contato"];
+const sections = navItems.map((item) => item.id);
 
 export default function Header() {
     const activeSection = useActiveSection(sections);
     const navRef = useRef<HTMLElement>(null);
     const linkRefs = useRef<Record<string, HTMLAnchorElement | null>>({});
+    const menuButtonRef = useRef<HTMLButtonElement>(null);
     const [indicator, setIndicator] = useState({ left: 0, width: 0, opacity: 0 });
     const [menuOpen, setMenuOpen] = useState(false);
 
@@ -39,66 +42,83 @@ export default function Header() {
         };
     }, [menuOpen]);
 
+    useEffect(() => {
+        if (!menuOpen) return;
+
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === "Escape") {
+                setMenuOpen(false);
+                menuButtonRef.current?.focus();
+            }
+        };
+
+        document.addEventListener("keydown", handleKeyDown);
+        return () => document.removeEventListener("keydown", handleKeyDown);
+    }, [menuOpen]);
+
     const closeMenu = () => setMenuOpen(false);
 
     return (
-        <header className="site-header">
-            <div className="container nav">
-                <a href="#top" className="logo">gabriel<span>.</span></a>
+        <header className={styles.siteHeader}>
+            <div className={`container ${styles.nav}`}>
+                <a href="#top" className={styles.logo}>
+                    gabriel<span>.</span>
+                </a>
 
-                <nav ref={navRef} className="nav-desktop">
-                    <a
-                        href="#projetos"
-                        ref={(el) => { linkRefs.current["projetos"] = el; }}
-                        className={activeSection === "projetos" ? "active" : ""}
-                    >
-                        Projetos
-                    </a>
-                    <a
-                        href="#sobre"
-                        ref={(el) => { linkRefs.current["sobre"] = el; }}
-                        className={activeSection === "sobre" ? "active" : ""}
-                    >
-                        Sobre
-                    </a>
-                    <a
-                        href="#contato"
-                        ref={(el) => { linkRefs.current["contato"] = el; }}
-                        className={activeSection === "contato" ? "active" : ""}
-                    >
-                        Contato
-                    </a>
+                <nav ref={navRef} className={styles.navDesktop}>
+                    {navItems.map(({ id, label }) => (
+                        <a
+                            key={id}
+                            href={`#${id}`}
+                            ref={(el) => {
+                                linkRefs.current[id] = el;
+                            }}
+                            className={activeSection === id ? styles.active : ""}
+                        >
+                            {label}
+                        </a>
+                    ))}
                     <span
-                        className="nav-indicator"
+                        className={styles.navIndicator}
                         style={{ left: indicator.left, width: indicator.width, opacity: indicator.opacity }}
                     />
                     <ThemeToggle />
                 </nav>
 
-                <div className="nav-mobile-controls">
+                <div className={styles.navMobileControls}>
                     <ThemeToggle />
                     <button
-                        className="menu-toggle"
+                        ref={menuButtonRef}
+                        type="button"
+                        className={styles.menuToggle}
                         onClick={() => setMenuOpen((prev) => !prev)}
                         aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
                         aria-expanded={menuOpen}
+                        aria-controls="mobile-menu"
                     >
                         {menuOpen ? <FaXmark size={20} /> : <FaBars size={20} />}
                     </button>
                 </div>
             </div>
 
-            <div className={`mobile-menu ${menuOpen ? "open" : ""}`}>
-                <a href="#projetos" onClick={closeMenu} className={activeSection === "projetos" ? "active" : ""}>
-                    Projetos
-                </a>
-                <a href="#sobre" onClick={closeMenu} className={activeSection === "sobre" ? "active" : ""}>
-                    Sobre
-                </a>
-                <a href="#contato" onClick={closeMenu} className={activeSection === "contato" ? "active" : ""}>
-                    Contato
-                </a>
-            </div>
+            {/* inert impede que os links do menu fechado recebam foco pelo teclado */}
+            <nav
+                id="mobile-menu"
+                aria-label="Menu principal"
+                className={`${styles.mobileMenu} ${menuOpen ? styles.open : ""}`}
+                inert={!menuOpen}
+            >
+                {navItems.map(({ id, label }) => (
+                    <a
+                        key={id}
+                        href={`#${id}`}
+                        onClick={closeMenu}
+                        className={activeSection === id ? styles.active : ""}
+                    >
+                        {label}
+                    </a>
+                ))}
+            </nav>
         </header>
-    )
+    );
 }

@@ -101,12 +101,26 @@ Depois, acesse http://localhost:3000.
 | `npm run start`        | Inicia a aplicação em modo de produção    |
 | `npm run lint`         | Executa o ESLint                          |
 | `npm run typecheck`    | Verifica os tipos com o TypeScript        |
+| `npm test`             | Roda os testes de unidade (Vitest)        |
+| `npm run test:watch`   | Roda os testes de unidade em modo watch   |
+| `npm run test:e2e`     | Roda os testes E2E (Playwright)           |
 | `npm run format`       | Formata o código com o Prettier           |
 | `npm run format:check` | Verifica se o código está formatado       |
 
+## 🧪 Testes
+
+- **Unidade** (`tests/unit/`): Vitest + Testing Library. Cobrem os componentes principais e validam os dados de `data/projects.ts` (ícone para cada tecnologia, imagens existentes, links válidos).
+- **E2E** (`tests/e2e/`): Playwright, rodando no build de produção em desktop e mobile. Cobrem navegação, menu mobile, troca de tema e a página 404.
+
+Na primeira vez, instale o navegador do Playwright:
+
+```bash
+npx playwright install chromium
+```
+
 ## ✅ Integração contínua
 
-A cada push na `main` e em todo pull request, o GitHub Actions executa `format:check`, `lint`, `typecheck` e `build`.
+A cada push na `main` e em todo pull request, o GitHub Actions executa `format:check`, `lint`, `typecheck`, testes de unidade, `build` e os testes E2E.
 
 ## 🌐 Deploy
 

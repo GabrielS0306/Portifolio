@@ -12,7 +12,8 @@ export interface Project {
 export const projects: Project[] = [
     {
         title: "Sistema de Barbearia",
-        description: "Sistema completo para barbearias com painel de controle intuitivo, agendamento online, gestão de barbeiros e relatórios financeiros em tempo real, proporcionando mais organização, praticidade e controle para otimizar a rotina do negócio.",
+        description:
+            "Sistema completo para barbearias com painel de controle intuitivo, agendamento online, gestão de barbeiros e relatórios financeiros em tempo real, proporcionando mais organização, praticidade e controle para otimizar a rotina do negócio.",
         tech: ["PHP", "MySQL", "Tailwind CSS"],
         demoUrl: "https://barb-system.rf.gd/barbearia/login",
         codeUrl: "https://github.com/GabrielS0306/sistema_barbearia",
@@ -20,7 +21,8 @@ export const projects: Project[] = [
     },
     {
         title: "SkillFlow",
-        description: "Plataforma pessoal de aprendizado que permite organizar estudos em trilhas, acompanhar o progresso, registrar anotações, salvar recursos e monitorar sessões de estudo.",
+        description:
+            "Plataforma pessoal de aprendizado que permite organizar estudos em trilhas, acompanhar o progresso, registrar anotações, salvar recursos e monitorar sessões de estudo.",
         tech: ["Laravel", "React", "Tailwind CSS"],
         demoUrl: "https://skillflow-8ixd.onrender.com/login",
         codeUrl: "https://github.com/GabrielS0306/skillflow",
@@ -28,7 +30,8 @@ export const projects: Project[] = [
     },
     {
         title: "App de Tarefas Colaborativo",
-        description: "Aplicação completa com controle de permissões por usuário, sincronização em tempo real e armazenamento seguro de dados na nuvem.",
+        description:
+            "Aplicação completa com controle de permissões por usuário, sincronização em tempo real e armazenamento seguro de dados na nuvem.",
         tech: ["TypeScript", "Express", "MongoDB"],
         status: "em-desenvolvimento",
     },

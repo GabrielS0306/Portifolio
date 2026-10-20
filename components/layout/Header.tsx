@@ -61,14 +61,18 @@ export default function Header() {
     return (
         <header className={styles.siteHeader}>
             <div className={`container ${styles.nav}`}>
-                <a href="#top" className={styles.logo}>gabriel<span>.</span></a>
+                <a href="#top" className={styles.logo}>
+                    gabriel<span>.</span>
+                </a>
 
                 <nav ref={navRef} className={styles.navDesktop}>
                     {navItems.map(({ id, label }) => (
                         <a
                             key={id}
                             href={`#${id}`}
-                            ref={(el) => { linkRefs.current[id] = el; }}
+                            ref={(el) => {
+                                linkRefs.current[id] = el;
+                            }}
                             className={activeSection === id ? styles.active : ""}
                         >
                             {label}
@@ -105,11 +109,16 @@ export default function Header() {
                 inert={!menuOpen}
             >
                 {navItems.map(({ id, label }) => (
-                    <a key={id} href={`#${id}`} onClick={closeMenu} className={activeSection === id ? styles.active : ""}>
+                    <a
+                        key={id}
+                        href={`#${id}`}
+                        onClick={closeMenu}
+                        className={activeSection === id ? styles.active : ""}
+                    >
                         {label}
                     </a>
                 ))}
             </nav>
         </header>
-    )
+    );
 }

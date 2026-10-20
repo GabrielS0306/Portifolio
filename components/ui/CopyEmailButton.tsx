@@ -10,7 +10,12 @@ interface CopyEmailButtonProps {
     iconClassName?: string;
 }
 
-export default function CopyEmailButton({ email, className, labelClassName, iconClassName }: CopyEmailButtonProps) {
+export default function CopyEmailButton({
+    email,
+    className,
+    labelClassName,
+    iconClassName,
+}: CopyEmailButtonProps) {
     const [copied, setCopied] = useState(false);
 
     const handleCopy = async () => {
@@ -33,12 +38,8 @@ export default function CopyEmailButton({ email, className, labelClassName, icon
             onClick={handleCopy}
             aria-label={copied ? "E-mail copiado" : "Copiar e-mail"}
         >
-            <span className={iconClassName}>
-                {copied ? <FaCheck size={16} /> : <FaEnvelope size={16} />}
-            </span>
-            {labelClassName && (
-                <span className={labelClassName}>{copied ? "Copiado!" : "E-mail"}</span>
-            )}
+            <span className={iconClassName}>{copied ? <FaCheck size={16} /> : <FaEnvelope size={16} />}</span>
+            {labelClassName && <span className={labelClassName}>{copied ? "Copiado!" : "E-mail"}</span>}
         </button>
     );
 }

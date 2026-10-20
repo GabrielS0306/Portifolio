@@ -8,7 +8,10 @@ export default function Contact() {
         <section id="contato" className={`container ${styles.contact}`}>
             <Reveal>
                 <h2>Vamos trabalhar juntos?</h2>
-                <p>Me chama no LinkedIn, GitHub, Instagram ou por e-mail para conversarmos sobre projetos e oportunidades.</p>
+                <p>
+                    Me chama no LinkedIn, GitHub, Instagram ou por e-mail para conversarmos sobre projetos e
+                    oportunidades.
+                </p>
 
                 <div className={styles.contactLinks}>
                     {socialLinks.map(({ label, href, icon: Icon }) => (
@@ -36,5 +39,5 @@ export default function Contact() {
                 </div>
             </Reveal>
         </section>
-    )
+    );
 }

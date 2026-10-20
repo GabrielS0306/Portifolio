@@ -1,4 +1,4 @@
-import Skills from "../ui/Skills"
+import Skills from "../ui/Skills";
 import styles from "./About.module.css";
 
 const stats = [
@@ -17,8 +17,8 @@ export default function About() {
                     completas com foco em qualidade de código, experiência do usuário e performance.
                 </p>
                 <p>
-                    Atualmente, estudo arquitetura de software, autenticação, integração entre sistemas e
-                    boas práticas para construir produtos escaláveis e de fácil manutenção.
+                    Atualmente, estudo arquitetura de software, autenticação, integração entre sistemas e boas
+                    práticas para construir produtos escaláveis e de fácil manutenção.
                 </p>
 
                 <div className={styles.stats}>
@@ -33,5 +33,5 @@ export default function About() {
 
             <Skills />
         </section>
-    )
+    );
 }

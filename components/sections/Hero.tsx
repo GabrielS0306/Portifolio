@@ -26,8 +26,12 @@ export default function Hero() {
                 </p>
 
                 <div className={styles.heroActions}>
-                    <a className={`${styles.btn} ${styles.primary}`} href="#projetos">Ver projetos</a>
-                    <a className={`${styles.btn} ${styles.ghost}`} href="#contato">Falar comigo</a>
+                    <a className={`${styles.btn} ${styles.primary}`} href="#projetos">
+                        Ver projetos
+                    </a>
+                    <a className={`${styles.btn} ${styles.ghost}`} href="#contato">
+                        Falar comigo
+                    </a>
                     {RESUME_PATH && (
                         <a className={`${styles.btn} ${styles.ghost}`} href={RESUME_PATH} download>
                             <FaDownload size={14} />
@@ -37,5 +41,5 @@ export default function Hero() {
                 </div>
             </Reveal>
         </section>
-    )
+    );
 }

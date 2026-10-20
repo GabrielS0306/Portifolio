@@ -1,13 +1,13 @@
 .backToTop {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  color: var(--brand-soft);
-  font-weight: 600;
-  font-size: 0.85rem;
-  transition: gap 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--brand-soft);
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: gap 0.2s ease;
 }
 
 .backToTop:hover {
-  gap: 0.6rem;
+    gap: 0.6rem;
 }

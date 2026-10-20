@@ -5,51 +5,48 @@ import { siteConfig } from "@/lib/site";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
-  subsets: ["latin"],
+    variable: "--font-space-grotesk",
+    subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteConfig.url),
-  title: {
-    default: "Gabriel — Desenvolvedor Full-Stack",
-    template: `%s | ${siteConfig.name}`,
-  },
-  description: "Portfolio profissional com foco em desenvolvimento full-stack, projetos e contato.",
-  openGraph: {
-    title: "Gabriel — Desenvolvedor Full-Stack",
-    description: "Portfólio com projetos em PHP, Laravel, React e Next.js. Confira meus trabalhos e entre em contato.",
-    url: siteConfig.url,
-    siteName: siteConfig.name,
-    locale: "pt_BR",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Gabriel — Desenvolvedor Full-Stack",
-    description: "Portfólio com projetos em PHP, Laravel, React e Next.js.",
-  },
+    metadataBase: new URL(siteConfig.url),
+    title: {
+        default: "Gabriel — Desenvolvedor Full-Stack",
+        template: `%s | ${siteConfig.name}`,
+    },
+    description: "Portfolio profissional com foco em desenvolvimento full-stack, projetos e contato.",
+    openGraph: {
+        title: "Gabriel — Desenvolvedor Full-Stack",
+        description:
+            "Portfólio com projetos em PHP, Laravel, React e Next.js. Confira meus trabalhos e entre em contato.",
+        url: siteConfig.url,
+        siteName: siteConfig.name,
+        locale: "pt_BR",
+        type: "website",
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "Gabriel — Desenvolvedor Full-Stack",
+        description: "Portfólio com projetos em PHP, Laravel, React e Next.js.",
+    },
 };
 
 export const viewport: Viewport = {
-  width: "device-width",
-  initialScale: 1,
+    width: "device-width",
+    initialScale: 1,
 };
 
 export default function RootLayout({
-  children,
+    children,
 }: Readonly<{
-  children: React.ReactNode;
+    children: React.ReactNode;
 }>) {
-  return (
-    <html
-      lang="pt-BR"
-      className={spaceGrotesk.variable}
-      suppressHydrationWarning
-    >
-      <body id="top">
-        <Providers>{children}</Providers>
-      </body>
-    </html>
-  );
+    return (
+        <html lang="pt-BR" className={spaceGrotesk.variable} suppressHydrationWarning>
+            <body id="top">
+                <Providers>{children}</Providers>
+            </body>
+        </html>
+    );
 }

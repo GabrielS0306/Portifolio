@@ -39,7 +39,7 @@ test.describe("navegacao desktop", () => {
 
         await page.getByRole("navigation").first().getByRole("link", { name: "Contato" }).click();
 
-        await expect(page).toHaveURL(/\/#contato$/);
+        await expect(page).toHaveURL(/\/pt#contato$/);
         await expect(page.locator("section#contato")).toBeInViewport();
     });
 });
@@ -54,7 +54,7 @@ test.describe("menu mobile", () => {
         const menu = page.getByRole("navigation", { name: "Menu principal" });
         await menu.getByRole("link", { name: "Sobre" }).click();
 
-        await expect(page).toHaveURL(/\/#sobre$/);
+        await expect(page).toHaveURL(/\/pt#sobre$/);
         await expect(page.getByRole("button", { name: "Abrir menu" })).toHaveAttribute(
             "aria-expanded",
             "false",

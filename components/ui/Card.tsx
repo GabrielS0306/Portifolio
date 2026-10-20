@@ -6,7 +6,14 @@ import { FaCode } from "react-icons/fa";
 import Image from "next/image";
 import type { Project } from "@/data/projects";
 import { techIcons } from "@/lib/techIcons";
+import { useLocale } from "../LocaleProvider";
 import styles from "./Card.module.css";
+
+// Recebe titulo e descricao ja no idioma da pagina
+type CardProps = Omit<Project, "slug" | "title" | "description"> & {
+    title: string;
+    description: string;
+};
 
 export default function Card({
     title,
@@ -16,8 +23,9 @@ export default function Card({
     codeUrl,
     image,
     status = "concluido",
-}: Project) {
+}: CardProps) {
     const [imageLoaded, setImageLoaded] = useState(false);
+    const t = useLocale().dict.projects;
 
     return (
         <article className={styles.card}>
@@ -27,7 +35,7 @@ export default function Card({
                         {!imageLoaded && <div className={styles.skeleton} />}
                         <Image
                             src={image}
-                            alt={`Imagem do projeto ${title}`}
+                            alt={`${t.imageAlt} ${title}`}
                             width={400}
                             height={350}
                             style={{ objectFit: "cover" }}
@@ -37,12 +45,12 @@ export default function Card({
                     </>
                 ) : (
                     <div className={styles.placeholder}>
-                        <span>Preview em construção</span>
+                        <span>{t.placeholder}</span>
                     </div>
                 )}
 
                 {status === "em-desenvolvimento" && (
-                    <span className={styles.badgeStatus}>Em Desenvolvimento</span>
+                    <span className={styles.badgeStatus}>{t.inProgress}</span>
                 )}
             </div>
 
@@ -50,12 +58,12 @@ export default function Card({
             <p>{description}</p>
 
             <div className={styles.tags}>
-                {tech.map((t) => {
-                    const Icon = techIcons[t];
+                {tech.map((tag) => {
+                    const Icon = techIcons[tag];
                     return (
-                        <span key={t}>
+                        <span key={tag}>
                             {Icon && <Icon size={12} />}
-                            {t}
+                            {tag}
                         </span>
                     );
                 })}
@@ -63,9 +71,14 @@ export default function Card({
 
             <div className={styles.links}>
                 {demoUrl && (
-                    <a href={demoUrl} target="_blank" rel="noopener noreferrer" aria-label={`Demo ${title}`}>
+                    <a
+                        href={demoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`${t.demo} ${title}`}
+                    >
                         <FaArrowUpRightFromSquare size={15} />
-                        Demo
+                        {t.demo}
                     </a>
                 )}
 
@@ -74,10 +87,10 @@ export default function Card({
                         href={codeUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        aria-label={`Código ${title}`}
+                        aria-label={`${t.code} ${title}`}
                     >
                         <FaCode size={18} />
-                        Código
+                        {t.code}
                     </a>
                 )}
             </div>

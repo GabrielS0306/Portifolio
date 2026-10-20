@@ -1,48 +1,51 @@
 import { FaLayerGroup, FaServer, FaDatabase, FaCodeBranch } from "react-icons/fa6";
 import { IconType } from "react-icons";
 import { techIcons } from "@/lib/techIcons";
+import type { Dictionary } from "@/lib/i18n";
 import styles from "./Skills.module.css";
 
+type GroupKey = keyof Dictionary["about"]["skillGroups"];
+
 interface SkillGroup {
-    title: string;
+    key: GroupKey;
     icon: IconType;
     items: string[];
 }
 
 const skillGroups: SkillGroup[] = [
     {
-        title: "Front-End",
+        key: "frontend",
         icon: FaLayerGroup,
         items: ["JavaScript", "TypeScript", "React", "Next.js", "Tailwind CSS"],
     },
     {
-        title: "Back-End",
+        key: "backend",
         icon: FaServer,
         items: ["PHP", "Laravel"],
     },
     {
-        title: "Banco de Dados",
+        key: "database",
         icon: FaDatabase,
         items: ["MySQL", "PostgreSQL"],
     },
     {
-        title: "Ferramentas",
+        key: "tools",
         icon: FaCodeBranch,
         items: ["Git", "GitHub", "Docker"],
     },
 ];
 
-export default function Skills() {
+export default function Skills({ groupTitles }: { groupTitles: Record<GroupKey, string> }) {
     return (
         <div className={styles.skills}>
             {skillGroups.map((group) => {
                 const GroupIcon = group.icon;
 
                 return (
-                    <div key={group.title} className={styles.group}>
+                    <div key={group.key} className={styles.group}>
                         <h4 className={styles.groupTitle}>
                             <GroupIcon size={13} />
-                            {group.title}
+                            {groupTitles[group.key]}
                         </h4>
 
                         <div className={styles.chips}>

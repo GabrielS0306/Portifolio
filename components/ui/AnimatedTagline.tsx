@@ -3,13 +3,12 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
-const words = ["aplicações completas", "APIs escaláveis", "interfaces intuitivas"];
-
 interface AnimatedTaglineProps {
+    words: string[];
     suffix?: string;
 }
 
-export default function AnimatedTagline({ suffix = "" }: AnimatedTaglineProps) {
+export default function AnimatedTagline({ words, suffix = "" }: AnimatedTaglineProps) {
     const [index, setIndex] = useState(0);
 
     useEffect(() => {
@@ -17,7 +16,7 @@ export default function AnimatedTagline({ suffix = "" }: AnimatedTaglineProps) {
             setIndex((i) => (i + 1) % words.length);
         }, 2500);
         return () => clearInterval(id);
-    }, []);
+    }, [words.length]);
 
     return (
         <span>

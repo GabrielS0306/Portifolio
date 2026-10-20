@@ -1,28 +1,20 @@
 import Skills from "../ui/Skills";
+import type { Dictionary } from "@/lib/i18n";
 import styles from "./About.module.css";
 
-const stats = [
-    { value: "3+", label: "Projetos desenvolvidos" },
-    { value: "2+", label: "Anos em formação" },
-    { value: "8+", label: "Tecnologias no dia a dia" },
-];
+export default function About({ dict }: { dict: Dictionary }) {
+    const t = dict.about;
 
-export default function About() {
     return (
         <section id="sobre" className={`container ${styles.about}`}>
             <div className={styles.description}>
-                <h2>Sobre mim</h2>
-                <p>
-                    Estou em formação para atuar como desenvolvedor full-stack, criando aplicações web
-                    completas com foco em qualidade de código, experiência do usuário e performance.
-                </p>
-                <p>
-                    Atualmente, estudo arquitetura de software, autenticação, integração entre sistemas e boas
-                    práticas para construir produtos escaláveis e de fácil manutenção.
-                </p>
+                <h2>{t.title}</h2>
+                {t.paragraphs.map((paragraph) => (
+                    <p key={paragraph}>{paragraph}</p>
+                ))}
 
                 <div className={styles.stats}>
-                    {stats.map((stat) => (
+                    {t.stats.map((stat) => (
                         <div key={stat.label} className={styles.stat}>
                             <span className={styles.statValue}>{stat.value}</span>
                             <span className={styles.statLabel}>{stat.label}</span>
@@ -31,7 +23,7 @@ export default function About() {
                 </div>
             </div>
 
-            <Skills />
+            <Skills groupTitles={t.skillGroups} />
         </section>
     );
 }

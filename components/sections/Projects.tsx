@@ -1,20 +1,30 @@
 import Card from "../ui/Card";
 import Reveal from "../ui/Reveal";
 import { projects } from "@/data/projects";
+import type { Dictionary, Locale } from "@/lib/i18n";
 import styles from "./Projects.module.css";
 
-export default function Projects() {
+interface ProjectsProps {
+    lang: Locale;
+    dict: Dictionary;
+}
+
+export default function Projects({ lang, dict }: ProjectsProps) {
     return (
         <section id="projetos" className={`container ${styles.projects}`}>
             <div className={styles.sectionHead}>
-                <h2>Projetos em destaque</h2>
-                <p>Projetos com foco em arquitetura full-stack, integração e entrega de valor.</p>
+                <h2>{dict.projects.title}</h2>
+                <p>{dict.projects.subtitle}</p>
             </div>
 
             <div className={styles.grid}>
                 {projects.map((project, i) => (
-                    <Reveal key={project.title} delay={i * 0.1}>
-                        <Card {...project} />
+                    <Reveal key={project.slug} delay={i * 0.1}>
+                        <Card
+                            {...project}
+                            title={project.title[lang]}
+                            description={project.description[lang]}
+                        />
                     </Reveal>
                 ))}
             </div>

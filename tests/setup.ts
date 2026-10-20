@@ -6,6 +6,14 @@ afterEach(() => {
     cleanup();
 });
 
+// Fora do App Router nao existe roteador; simula o necessario para o Header e o LanguageToggle
+export const routerPush = vi.fn();
+
+vi.mock("next/navigation", () => ({
+    usePathname: () => "/pt",
+    useRouter: () => ({ push: routerPush }),
+}));
+
 // O jsdom nao implementa IntersectionObserver (usado pelo framer-motion e pelo useActiveSection)
 class IntersectionObserverMock {
     observe = vi.fn();

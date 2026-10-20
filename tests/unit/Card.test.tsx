@@ -1,9 +1,10 @@
+import type { ComponentProps } from "react";
 import { describe, expect, it } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import Card from "@/components/ui/Card";
-import type { Project } from "@/data/projects";
+import { renderWithLocale } from "../utils";
 
-const baseProject: Project = {
+const baseProject: ComponentProps<typeof Card> = {
     title: "Projeto Teste",
     description: "Descricao do projeto teste.",
     tech: ["React", "TypeScript"],
@@ -11,7 +12,7 @@ const baseProject: Project = {
 
 describe("<Card />", () => {
     it("mostra titulo, descricao e tecnologias", () => {
-        render(<Card {...baseProject} />);
+        renderWithLocale(<Card {...baseProject} />);
 
         expect(screen.getByRole("heading", { name: "Projeto Teste" })).toBeInTheDocument();
         expect(screen.getByText("Descricao do projeto teste.")).toBeInTheDocument();
@@ -20,7 +21,7 @@ describe("<Card />", () => {
     });
 
     it("mostra placeholder quando nao ha imagem", () => {
-        const { container } = render(<Card {...baseProject} />);
+        const { container } = renderWithLocale(<Card {...baseProject} />);
 
         expect(screen.getByText("Preview em construção")).toBeInTheDocument();
         // Os icones SVG das tecnologias tambem tem role "img", entao busca a tag <img> diretamente
@@ -28,13 +29,13 @@ describe("<Card />", () => {
     });
 
     it("mostra a imagem quando informada", () => {
-        render(<Card {...baseProject} image="/images/teste.png" />);
+        renderWithLocale(<Card {...baseProject} image="/images/teste.png" />);
 
         expect(screen.getByAltText("Imagem do projeto Projeto Teste")).toBeInTheDocument();
     });
 
     it("so mostra os links que existem", () => {
-        render(<Card {...baseProject} codeUrl="https://github.com/exemplo" />);
+        renderWithLocale(<Card {...baseProject} codeUrl="https://github.com/exemplo" />);
 
         expect(screen.getByRole("link", { name: "Código Projeto Teste" })).toHaveAttribute(
             "href",
@@ -44,7 +45,7 @@ describe("<Card />", () => {
     });
 
     it("abre links externos em nova aba com rel seguro", () => {
-        render(<Card {...baseProject} demoUrl="https://exemplo.com" />);
+        renderWithLocale(<Card {...baseProject} demoUrl="https://exemplo.com" />);
 
         const link = screen.getByRole("link", { name: "Demo Projeto Teste" });
         expect(link).toHaveAttribute("target", "_blank");
@@ -52,8 +53,15 @@ describe("<Card />", () => {
     });
 
     it("mostra o selo de projeto em desenvolvimento", () => {
-        render(<Card {...baseProject} status="em-desenvolvimento" />);
+        renderWithLocale(<Card {...baseProject} status="em-desenvolvimento" />);
 
         expect(screen.getByText("Em Desenvolvimento")).toBeInTheDocument();
+    });
+
+    it("usa os textos em ingles na versao /en", () => {
+        renderWithLocale(<Card {...baseProject} codeUrl="https://github.com/exemplo" />, "en");
+
+        expect(screen.getByText("Preview coming soon")).toBeInTheDocument();
+        expect(screen.getByRole("link", { name: "Code Projeto Teste" })).toBeInTheDocument();
     });
 });

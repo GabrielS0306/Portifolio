@@ -2,13 +2,19 @@ import Link from "next/link";
 import BackToTop from "../ui/BackToTop";
 import CopyEmailButton from "../ui/CopyEmailButton";
 import { siteConfig, socialLinks } from "@/lib/site";
+import type { Dictionary, Locale } from "@/lib/i18n";
 import styles from "./Footer.module.css";
 
-export default function Footer() {
+interface FooterProps {
+    lang: Locale;
+    dict: Dictionary;
+}
+
+export default function Footer({ lang, dict }: FooterProps) {
     return (
         <footer className={styles.siteFooter}>
             <div className={`container ${styles.footerInner}`}>
-                <Link href="/#top" className={styles.footerLogo}>
+                <Link href={`/${lang}#top`} className={styles.footerLogo}>
                     gabriel<span>.</span>
                 </Link>
 
@@ -30,7 +36,9 @@ export default function Footer() {
                 </div>
 
                 <div className={styles.footerBottom}>
-                    <p>&copy; {new Date().getFullYear()} Gabriel. Feito com carinho e código.</p>
+                    <p>
+                        &copy; {new Date().getFullYear()} Gabriel. {dict.footer.madeWith}
+                    </p>
                     <BackToTop />
                 </div>
             </div>

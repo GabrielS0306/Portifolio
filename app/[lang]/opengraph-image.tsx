@@ -1,10 +1,14 @@
 import { ImageResponse } from "next/og";
+import { defaultLocale, getDictionary, hasLocale } from "@/lib/i18n";
 
-export const alt = "Gabriel - Desenvolvedor Full-Stack";
+export const alt = "Gabriel — Full-Stack";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-export default async function OpengraphImage() {
+export default async function OpengraphImage({ params }: { params: Promise<{ lang: string }> }) {
+    const { lang } = await params;
+    const t = getDictionary(hasLocale(lang) ? lang : defaultLocale).hero;
+
     return new ImageResponse(
         <div
             style={{
@@ -33,7 +37,7 @@ export default async function OpengraphImage() {
                     marginBottom: "36px",
                 }}
             >
-                Disponível para novos projetos
+                {t.status}
             </div>
 
             <div
@@ -46,7 +50,7 @@ export default async function OpengraphImage() {
                     marginBottom: "16px",
                 }}
             >
-                Desenvolvedor Full-Stack
+                {t.eyebrow}
             </div>
 
             <div
@@ -58,7 +62,7 @@ export default async function OpengraphImage() {
                     maxWidth: "900px",
                 }}
             >
-                Eu desenvolvo aplicações completas.
+                {`${t.titleStart} ${t.taglineWords[0]}.`}
             </div>
 
             <div

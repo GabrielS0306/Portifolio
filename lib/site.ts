@@ -32,8 +32,9 @@ export const socialLinks: SocialLink[] = [
     },
 ];
 
+// id = ancora da secao; key = chave do rotulo em dictionary.nav
 export const navItems = [
-    { id: "projetos", label: "Projetos" },
-    { id: "sobre", label: "Sobre" },
-    { id: "contato", label: "Contato" },
-];
+    { id: "projetos", key: "projects" },
+    { id: "sobre", key: "about" },
+    { id: "contato", key: "contact" },
+] as const;

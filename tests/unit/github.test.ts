@@ -1,5 +1,11 @@
 import { describe, expect, it } from "vitest";
-import { formatRelativeDate, getLanguageColor, summarizeRepos, type GitHubRepo } from "@/lib/github";
+import {
+    formatRelativeDate,
+    getLanguageColor,
+    getRepoDescription,
+    summarizeRepos,
+    type GitHubRepo,
+} from "@/lib/github";
 
 function repo(overrides: Partial<GitHubRepo>): GitHubRepo {
     return {
@@ -86,6 +92,35 @@ describe("formatRelativeDate", () => {
         ["2026-09-20T12:00:00Z", "mês passado"],
         ["2024-10-20T12:00:00Z", "há 2 anos"],
     ])("%s -> %s", (date, expected) => {
-        expect(formatRelativeDate(date, now)).toBe(expected);
+        expect(formatRelativeDate(date, "pt", now)).toBe(expected);
+    });
+
+    it.each([
+        ["2026-10-20T11:59:30Z", "just now"],
+        ["2026-10-19T12:00:00Z", "yesterday"],
+        ["2026-10-15T12:00:00Z", "5 days ago"],
+    ])("em ingles: %s -> %s", (date, expected) => {
+        expect(formatRelativeDate(date, "en", now)).toBe(expected);
+    });
+});
+
+describe("getRepoDescription", () => {
+    const translations = { traduzido: { en: "English text" } };
+
+    it("usa a traducao do idioma quando existe", () => {
+        expect(getRepoDescription({ name: "traduzido", description: "Texto" }, "en", translations)).toBe(
+            "English text",
+        );
+    });
+
+    it("cai na descricao do GitHub quando nao ha traducao para o idioma", () => {
+        expect(getRepoDescription({ name: "traduzido", description: "Texto" }, "pt", translations)).toBe(
+            "Texto",
+        );
+        expect(getRepoDescription({ name: "outro", description: "Texto" }, "en", translations)).toBe("Texto");
+    });
+
+    it("retorna null quando nao ha descricao nenhuma", () => {
+        expect(getRepoDescription({ name: "outro", description: null }, "en", translations)).toBeNull();
     });
 });

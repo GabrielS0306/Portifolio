@@ -1,4 +1,6 @@
 import { siteConfig } from "@/lib/site";
+import { htmlLang, type Locale } from "@/lib/i18n/config";
+import { repoDescriptions } from "@/data/repoDescriptions";
 
 // Apenas os campos da API do GitHub que o site usa
 export interface GitHubRepo {
@@ -44,6 +46,15 @@ export function getLanguageColor(language: string) {
     return languageColors[language] ?? FALLBACK_COLOR;
 }
 
+// Usa a traducao de data/repoDescriptions.ts quando houver; senao, a descricao do GitHub
+export function getRepoDescription(
+    repo: Pick<GitHubRepo, "name" | "description">,
+    locale: Locale,
+    translations = repoDescriptions,
+): string | null {
+    return translations[repo.name]?.[locale] ?? repo.description;
+}
+
 export function summarizeRepos(repos: GitHubRepo[], login: string, recentCount = 4): GitHubSummary {
     // Ignora forks, arquivados e o repositorio especial de README do perfil
     const own = repos
@@ -72,8 +83,6 @@ export function summarizeRepos(repos: GitHubRepo[], login: string, recentCount =
     };
 }
 
-const relativeTime = new Intl.RelativeTimeFormat("pt-BR", { numeric: "auto" });
-
 const units: [Intl.RelativeTimeFormatUnit, number][] = [
     ["year", 365 * 24 * 60 * 60],
     ["month", 30 * 24 * 60 * 60],
@@ -83,7 +92,10 @@ const units: [Intl.RelativeTimeFormatUnit, number][] = [
     ["minute", 60],
 ];
 
-export function formatRelativeDate(date: string, now = Date.now()) {
+const justNow: Record<Locale, string> = { pt: "agora mesmo", en: "just now" };
+
+export function formatRelativeDate(date: string, locale: Locale = "pt", now = Date.now()) {
+    const relativeTime = new Intl.RelativeTimeFormat(htmlLang[locale], { numeric: "auto" });
     const seconds = Math.round((Date.parse(date) - now) / 1000);
 
     for (const [unit, size] of units) {
@@ -92,7 +104,7 @@ export function formatRelativeDate(date: string, now = Date.now()) {
         }
     }
 
-    return "agora mesmo";
+    return justNow[locale];
 }
 
 export async function getGitHubSummary(): Promise<GitHubSummary | null> {

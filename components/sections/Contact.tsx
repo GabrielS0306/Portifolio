@@ -1,17 +1,15 @@
 import Reveal from "../ui/Reveal";
 import CopyEmailButton from "../ui/CopyEmailButton";
 import { siteConfig, socialLinks } from "@/lib/site";
+import type { Dictionary } from "@/lib/i18n";
 import styles from "./Contact.module.css";
 
-export default function Contact() {
+export default function Contact({ dict }: { dict: Dictionary }) {
     return (
         <section id="contato" className={`container ${styles.contact}`}>
             <Reveal>
-                <h2>Vamos trabalhar juntos?</h2>
-                <p>
-                    Me chama no LinkedIn, GitHub, Instagram ou por e-mail para conversarmos sobre projetos e
-                    oportunidades.
-                </p>
+                <h2>{dict.contact.title}</h2>
+                <p>{dict.contact.text}</p>
 
                 <div className={styles.contactLinks}>
                     {socialLinks.map(({ label, href, icon: Icon }) => (

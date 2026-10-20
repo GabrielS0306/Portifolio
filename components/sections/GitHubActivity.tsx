@@ -2,7 +2,7 @@ import { FaGithub, FaCodeBranch } from "react-icons/fa6";
 import Reveal from "../ui/Reveal";
 import button from "../ui/Button.module.css";
 import styles from "./GitHubActivity.module.css";
-import { formatRelativeDate, getGitHubSummary, getLanguageColor } from "@/lib/github";
+import { formatRelativeDate, getGitHubSummary, getLanguageColor, getRepoDescription } from "@/lib/github";
 import { siteConfig } from "@/lib/site";
 import type { Dictionary, Locale } from "@/lib/i18n";
 
@@ -18,6 +18,8 @@ export default async function GitHubActivity({ lang, dict }: GitHubActivityProps
     if (!summary || summary.recent.length === 0) return null;
 
     const profileUrl = `https://github.com/${siteConfig.githubUser}`;
+    // Descricao no idioma da pagina (traducoes em data/repoDescriptions.ts)
+    const repos = summary.recent.map((repo) => ({ ...repo, description: getRepoDescription(repo, lang) }));
 
     return (
         <section id="github" className={`container ${styles.github}`} aria-labelledby="github-title">
@@ -65,7 +67,7 @@ export default async function GitHubActivity({ lang, dict }: GitHubActivityProps
             </Reveal>
 
             <ul className={styles.repos}>
-                {summary.recent.map((repo, i) => (
+                {repos.map((repo, i) => (
                     <li key={repo.name}>
                         <Reveal delay={i * 0.08} className={styles.revealFill}>
                             <a

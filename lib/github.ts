@@ -1,5 +1,6 @@
 import { siteConfig } from "@/lib/site";
 import { htmlLang, type Locale } from "@/lib/i18n/config";
+import { repoDescriptions } from "@/data/repoDescriptions";
 
 // Apenas os campos da API do GitHub que o site usa
 export interface GitHubRepo {
@@ -43,6 +44,15 @@ const FALLBACK_COLOR = "#8b949e";
 
 export function getLanguageColor(language: string) {
     return languageColors[language] ?? FALLBACK_COLOR;
+}
+
+// Usa a traducao de data/repoDescriptions.ts quando houver; senao, a descricao do GitHub
+export function getRepoDescription(
+    repo: Pick<GitHubRepo, "name" | "description">,
+    locale: Locale,
+    translations = repoDescriptions,
+): string | null {
+    return translations[repo.name]?.[locale] ?? repo.description;
 }
 
 export function summarizeRepos(repos: GitHubRepo[], login: string, recentCount = 4): GitHubSummary {

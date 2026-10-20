@@ -8,7 +8,7 @@ const stats = [
 
 export default function About() {
     return (
-        <div id="sobre" className="container about">
+        <section id="sobre" className="container about">
             <div id="description">
                 <h2>Sobre mim</h2>
                 <p>
@@ -31,6 +31,6 @@ export default function About() {
             </div>
 
             <Skills />
-        </div>
+        </section>
     )
 }

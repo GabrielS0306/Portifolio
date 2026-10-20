@@ -346,6 +346,7 @@ section {
   align-items: flex-start;
   gap: 2rem;
   margin: 1.5rem 0;
+  padding: 0;
 }
 
 .about > #description {

@@ -5,7 +5,7 @@ import Contact from "../sections/Contact"
 
 export default function Container() {
     return(
-        <main className="container">
+        <main>
             <Hero />
             <Projects />
             <About />

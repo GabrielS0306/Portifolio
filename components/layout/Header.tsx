@@ -13,6 +13,7 @@ export default function Header() {
     const activeSection = useActiveSection(sections);
     const navRef = useRef<HTMLElement>(null);
     const linkRefs = useRef<Record<string, HTMLAnchorElement | null>>({});
+    const menuButtonRef = useRef<HTMLButtonElement>(null);
     const [indicator, setIndicator] = useState({ left: 0, width: 0, opacity: 0 });
     const [menuOpen, setMenuOpen] = useState(false);
 
@@ -39,6 +40,20 @@ export default function Header() {
         return () => {
             document.body.style.overflow = "";
         };
+    }, [menuOpen]);
+
+    useEffect(() => {
+        if (!menuOpen) return;
+
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === "Escape") {
+                setMenuOpen(false);
+                menuButtonRef.current?.focus();
+            }
+        };
+
+        document.addEventListener("keydown", handleKeyDown);
+        return () => document.removeEventListener("keydown", handleKeyDown);
     }, [menuOpen]);
 
     const closeMenu = () => setMenuOpen(false);
@@ -69,23 +84,32 @@ export default function Header() {
                 <div className={styles.navMobileControls}>
                     <ThemeToggle />
                     <button
+                        ref={menuButtonRef}
+                        type="button"
                         className={styles.menuToggle}
                         onClick={() => setMenuOpen((prev) => !prev)}
                         aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
                         aria-expanded={menuOpen}
+                        aria-controls="mobile-menu"
                     >
                         {menuOpen ? <FaXmark size={20} /> : <FaBars size={20} />}
                     </button>
                 </div>
             </div>
 
-            <div className={`${styles.mobileMenu} ${menuOpen ? styles.open : ""}`}>
+            {/* inert impede que os links do menu fechado recebam foco pelo teclado */}
+            <nav
+                id="mobile-menu"
+                aria-label="Menu principal"
+                className={`${styles.mobileMenu} ${menuOpen ? styles.open : ""}`}
+                inert={!menuOpen}
+            >
                 {navItems.map(({ id, label }) => (
                     <a key={id} href={`#${id}`} onClick={closeMenu} className={activeSection === id ? styles.active : ""}>
                         {label}
                     </a>
                 ))}
-            </div>
+            </nav>
         </header>
     )
 }

@@ -19,8 +19,9 @@ export default function CopyEmailButton({ email, className, labelClassName, icon
             setCopied(true);
             setTimeout(() => setCopied(false), 2000);
         } catch {
-            // Fallback silencioso: se a API de clipboard falhar (ex: navegador antigo),
-            // nao quebra a pagina, apenas nao mostra o feedback de copiado.
+            // Se a API de clipboard falhar (ex: navegador antigo ou sem HTTPS),
+            // abre o cliente de e-mail como alternativa.
+            window.location.href = `mailto:${email}`;
         }
     };
 

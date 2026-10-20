@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Space_Grotesk } from "next/font/google";
-import { ThemeProvider } from "next-themes";
+import Providers from "@/components/Providers";
 import { siteConfig } from "@/lib/site";
 import "./globals.css";
 
@@ -11,7 +11,10 @@ const spaceGrotesk = Space_Grotesk({
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
-  title: siteConfig.name,
+  title: {
+    default: "Gabriel — Desenvolvedor Full-Stack",
+    template: `%s | ${siteConfig.name}`,
+  },
   description: "Portfolio profissional com foco em desenvolvimento full-stack, projetos e contato.",
   openGraph: {
     title: "Gabriel — Desenvolvedor Full-Stack",
@@ -45,9 +48,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body id="top">
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
-          {children}
-        </ThemeProvider>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

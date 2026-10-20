@@ -63,7 +63,8 @@
   transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.pill:hover .pillIcon {
+.pill:hover .pillIcon,
+.pill:focus-visible .pillIcon {
   transform: scale(1.08);
 }
 
@@ -80,7 +81,8 @@
     margin-left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.pill:hover .pillLabel {
+.pill:hover .pillLabel,
+.pill:focus-visible .pillLabel {
   max-width: 140px;
   opacity: 1;
   margin-left: 0.55rem;

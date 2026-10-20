@@ -41,10 +41,10 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
-      className={`${spaceGrotesk.variable} h-full antialiased`}
+      className={spaceGrotesk.variable}
       suppressHydrationWarning
     >
-      <body id="top" className="min-h-full flex flex-col font-sans">
+      <body id="top">
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
           {children}
         </ThemeProvider>

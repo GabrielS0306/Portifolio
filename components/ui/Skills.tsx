@@ -1,6 +1,7 @@
 import { FaLayerGroup, FaServer, FaDatabase, FaCodeBranch } from "react-icons/fa6";
 import { IconType } from "react-icons";
 import { techIcons } from "@/lib/techIcons";
+import styles from "./Skills.module.css";
 
 interface SkillGroup {
     title: string;
@@ -33,22 +34,22 @@ const skillGroups: SkillGroup[] = [
 
 export default function Skills() {
     return (
-        <div className="skills">
+        <div className={styles.skills}>
             {skillGroups.map((group) => {
                 const GroupIcon = group.icon;
 
                 return (
-                    <div key={group.title} className="skills-group">
-                        <h4 className="skills-group-title">
+                    <div key={group.title} className={styles.group}>
+                        <h4 className={styles.groupTitle}>
                             <GroupIcon size={13} />
                             {group.title}
                         </h4>
 
-                        <div className="skills-chips">
+                        <div className={styles.chips}>
                             {group.items.map((label) => {
                                 const Icon = techIcons[label];
                                 return (
-                                    <span key={label} className="skills-chip">
+                                    <span key={label} className={styles.chip}>
                                         {Icon && <Icon size={14} />}
                                         {label}
                                     </span>

@@ -5,6 +5,7 @@ import { FaBars, FaXmark } from "react-icons/fa6";
 import ThemeToggle from "../ui/ThemeToggle";
 import { useActiveSection } from "@/hooks/useActiveSection";
 import { navItems } from "@/lib/site";
+import styles from "./Header.module.css";
 
 const sections = navItems.map((item) => item.id);
 
@@ -43,32 +44,32 @@ export default function Header() {
     const closeMenu = () => setMenuOpen(false);
 
     return (
-        <header className="site-header">
-            <div className="container nav">
-                <a href="#top" className="logo">gabriel<span>.</span></a>
+        <header className={styles.siteHeader}>
+            <div className={`container ${styles.nav}`}>
+                <a href="#top" className={styles.logo}>gabriel<span>.</span></a>
 
-                <nav ref={navRef} className="nav-desktop">
+                <nav ref={navRef} className={styles.navDesktop}>
                     {navItems.map(({ id, label }) => (
                         <a
                             key={id}
                             href={`#${id}`}
                             ref={(el) => { linkRefs.current[id] = el; }}
-                            className={activeSection === id ? "active" : ""}
+                            className={activeSection === id ? styles.active : ""}
                         >
                             {label}
                         </a>
                     ))}
                     <span
-                        className="nav-indicator"
+                        className={styles.navIndicator}
                         style={{ left: indicator.left, width: indicator.width, opacity: indicator.opacity }}
                     />
                     <ThemeToggle />
                 </nav>
 
-                <div className="nav-mobile-controls">
+                <div className={styles.navMobileControls}>
                     <ThemeToggle />
                     <button
-                        className="menu-toggle"
+                        className={styles.menuToggle}
                         onClick={() => setMenuOpen((prev) => !prev)}
                         aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
                         aria-expanded={menuOpen}
@@ -78,9 +79,9 @@ export default function Header() {
                 </div>
             </div>
 
-            <div className={`mobile-menu ${menuOpen ? "open" : ""}`}>
+            <div className={`${styles.mobileMenu} ${menuOpen ? styles.open : ""}`}>
                 {navItems.map(({ id, label }) => (
-                    <a key={id} href={`#${id}`} onClick={closeMenu} className={activeSection === id ? "active" : ""}>
+                    <a key={id} href={`#${id}`} onClick={closeMenu} className={activeSection === id ? styles.active : ""}>
                         {label}
                     </a>
                 ))}

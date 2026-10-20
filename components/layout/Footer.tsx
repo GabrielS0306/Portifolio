@@ -1,21 +1,22 @@
 import BackToTop from "../ui/BackToTop";
 import CopyEmailButton from "../ui/CopyEmailButton";
 import { siteConfig, socialLinks } from "@/lib/site";
+import styles from "./Footer.module.css";
 
 export default function Footer() {
     return (
-        <footer className="site-footer">
-            <div className="container footer-inner">
-                <a href="#top" className="footer-logo">
+        <footer className={styles.siteFooter}>
+            <div className={`container ${styles.footerInner}`}>
+                <a href="#top" className={styles.footerLogo}>
                     gabriel<span>.</span>
                 </a>
 
-                <div className="footer-links">
+                <div className={styles.footerLinks}>
                     {socialLinks.map(({ label, href, icon: Icon }) => (
                         <a
                             key={label}
                             href={href}
-                            className="footer-icon"
+                            className={styles.footerIcon}
                             target="_blank"
                             rel="noopener noreferrer"
                             aria-label={label}
@@ -24,10 +25,10 @@ export default function Footer() {
                         </a>
                     ))}
 
-                    <CopyEmailButton email={siteConfig.email} className="footer-icon" />
+                    <CopyEmailButton email={siteConfig.email} className={styles.footerIcon} />
                 </div>
 
-                <div className="footer-bottom">
+                <div className={styles.footerBottom}>
                     <p>&copy; {new Date().getFullYear()} Gabriel. Feito com carinho e código.</p>
                     <BackToTop />
                 </div>

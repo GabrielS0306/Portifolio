@@ -1,4 +1,5 @@
 import Skills from "../ui/Skills"
+import styles from "./About.module.css";
 
 const stats = [
     { value: "3+", label: "Projetos desenvolvidos" },
@@ -8,8 +9,8 @@ const stats = [
 
 export default function About() {
     return (
-        <section id="sobre" className="container about">
-            <div id="description">
+        <section id="sobre" className={`container ${styles.about}`}>
+            <div className={styles.description}>
                 <h2>Sobre mim</h2>
                 <p>
                     Estou em formação para atuar como desenvolvedor full-stack, criando aplicações web
@@ -20,11 +21,11 @@ export default function About() {
                     boas práticas para construir produtos escaláveis e de fácil manutenção.
                 </p>
 
-                <div className="about-stats">
+                <div className={styles.stats}>
                     {stats.map((stat) => (
-                        <div key={stat.label} className="about-stat">
-                            <span className="about-stat-value">{stat.value}</span>
-                            <span className="about-stat-label">{stat.label}</span>
+                        <div key={stat.label} className={styles.stat}>
+                            <span className={styles.statValue}>{stat.value}</span>
+                            <span className={styles.statLabel}>{stat.label}</span>
                         </div>
                     ))}
                 </div>

@@ -27,7 +27,8 @@ export default function CopyEmailButton({ email, className, labelClassName, icon
     return (
         <button
             type="button"
-            className={`${className}${copied ? " is-copied" : ""}`}
+            className={className}
+            data-copied={copied}
             onClick={handleCopy}
             aria-label={copied ? "E-mail copiado" : "Copiar e-mail"}
         >

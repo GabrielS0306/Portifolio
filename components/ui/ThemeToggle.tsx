@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import { FaSun, FaMoon } from "react-icons/fa6";
+import styles from "./ThemeToggle.module.css";
 
 export default function ThemeToggle() {
     const { theme, setTheme } = useTheme();
@@ -14,14 +15,14 @@ export default function ThemeToggle() {
     }, []);
 
     if (!mounted) {
-        return <div className="theme-toggle" aria-hidden="true" />;
+        return <div className={styles.themeToggle} aria-hidden="true" />;
     }
 
     const isDark = theme === "dark";
 
     return (
         <button
-            className="theme-toggle"
+            className={styles.themeToggle}
             onClick={() => setTheme(isDark ? "light" : "dark")}
             aria-label={isDark ? "Ativar tema claro" : "Ativar tema escuro"}
         >

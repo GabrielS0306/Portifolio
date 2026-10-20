@@ -6,16 +6,17 @@ import { FaCode } from "react-icons/fa";
 import Image from "next/image";
 import type { Project } from "@/data/projects";
 import { techIcons } from "@/lib/techIcons";
+import styles from "./Card.module.css";
 
 export default function Card({ title, description, tech, demoUrl, codeUrl, image, status = "concluido" }: Project) {
   const [imageLoaded, setImageLoaded] = useState(false);
 
   return (
-    <article className="card">
-      <div className="card-media">
+    <article className={styles.card}>
+      <div className={styles.media}>
         {image ? (
           <>
-            {!imageLoaded && <div className="card-skeleton" />}
+            {!imageLoaded && <div className={styles.skeleton} />}
             <Image
               src={image}
               alt={`Imagem do projeto ${title}`}
@@ -23,24 +24,24 @@ export default function Card({ title, description, tech, demoUrl, codeUrl, image
               height={350}
               style={{ objectFit: "cover" }}
               onLoad={() => setImageLoaded(true)}
-              className={`card-image ${imageLoaded ? "loaded" : ""}`}
+              className={`${styles.image} ${imageLoaded ? styles.loaded : ""}`}
             />
           </>
         ) : (
-          <div className="card-placeholder">
+          <div className={styles.placeholder}>
             <span>Preview em construção</span>
           </div>
         )}
 
         {status === "em-desenvolvimento" && (
-          <span className="badge-status">Em Desenvolvimento</span>
+          <span className={styles.badgeStatus}>Em Desenvolvimento</span>
         )}
       </div>
 
       <h3>{title}</h3>
       <p>{description}</p>
 
-      <div className="tags">
+      <div className={styles.tags}>
         {tech.map((t) => {
           const Icon = techIcons[t];
           return (
@@ -52,7 +53,7 @@ export default function Card({ title, description, tech, demoUrl, codeUrl, image
         })}
       </div>
 
-      <div className="links">
+      <div className={styles.links}>
         {demoUrl && (
           <a href={demoUrl} target="_blank" rel="noopener noreferrer" aria-label={`Demo ${title}`}>
             <FaArrowUpRightFromSquare size={15} />

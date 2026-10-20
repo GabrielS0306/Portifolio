@@ -1,5 +1,5 @@
 import { FaDownload } from "react-icons/fa6";
-import AnimatedTagline from "./AnimatedTagline";
+import AnimatedTagline from "../ui/AnimatedTagline";
 import Reveal from "../ui/Reveal";
 
 // Caminho do currículo em /public. Defina como "/curriculo.pdf" ao adicionar o arquivo.

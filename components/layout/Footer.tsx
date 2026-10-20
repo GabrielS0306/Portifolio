@@ -1,27 +1,6 @@
-import { FaLinkedin, FaGithub, FaInstagram } from "react-icons/fa6";
 import BackToTop from "../ui/BackToTop";
 import CopyEmailButton from "../ui/CopyEmailButton";
-
-const footerLinks = [
-    {
-        label: "LinkedIn",
-        href: "https://www.linkedin.com/in/gabriel-dos-santos-nunes-713a2a312/",
-        icon: FaLinkedin,
-        external: true,
-    },
-    {
-        label: "GitHub",
-        href: "https://github.com/GabrielS0306",
-        icon: FaGithub,
-        external: true,
-    },
-    {
-        label: "Instagram",
-        href: "https://instagram.com/biel_.0834",
-        icon: FaInstagram,
-        external: true,
-    },
-];
+import { siteConfig, socialLinks } from "@/lib/site";
 
 export default function Footer() {
     return (
@@ -32,19 +11,20 @@ export default function Footer() {
                 </a>
 
                 <div className="footer-links">
-                    {footerLinks.map(({ label, href, icon: Icon, external }) => (
+                    {socialLinks.map(({ label, href, icon: Icon }) => (
                         <a
                             key={label}
                             href={href}
                             className="footer-icon"
-                            {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                            target="_blank"
+                            rel="noopener noreferrer"
                             aria-label={label}
                         >
                             <Icon size={16} />
                         </a>
                     ))}
 
-                    <CopyEmailButton email="gabrieldossantosnunes91@gmail.com" className="footer-icon" />
+                    <CopyEmailButton email={siteConfig.email} className="footer-icon" />
                 </div>
 
                 <div className="footer-bottom">

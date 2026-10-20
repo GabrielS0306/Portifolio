@@ -1,27 +1,6 @@
-import { FaLinkedin, FaGithub, FaInstagram } from "react-icons/fa6";
 import Reveal from "../ui/Reveal";
 import CopyEmailButton from "../ui/CopyEmailButton";
-
-const contactLinks = [
-    {
-        label: "LinkedIn",
-        href: "https://www.linkedin.com/in/gabriel-dos-santos-nunes-713a2a312/",
-        icon: FaLinkedin,
-        external: true,
-    },
-    {
-        label: "GitHub",
-        href: "https://github.com/GabrielS0306",
-        icon: FaGithub,
-        external: true,
-    },
-    {
-        label: "Instagram",
-        href: "https://instagram.com/biel_.0834",
-        icon: FaInstagram,
-        external: true,
-    },
-];
+import { siteConfig, socialLinks } from "@/lib/site";
 
 export default function Contact() {
     return (
@@ -31,12 +10,13 @@ export default function Contact() {
                 <p>Me chama no LinkedIn, GitHub, Instagram ou por e-mail para conversarmos sobre projetos e oportunidades.</p>
 
                 <div className="contact-links">
-                    {contactLinks.map(({ label, href, icon: Icon, external }) => (
+                    {socialLinks.map(({ label, href, icon: Icon }) => (
                         <a
                             key={label}
                             href={href}
                             className="contact-pill"
-                            {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                            target="_blank"
+                            rel="noopener noreferrer"
                             aria-label={label}
                         >
                             <span className="contact-pill-icon">
@@ -47,7 +27,7 @@ export default function Contact() {
                     ))}
 
                     <CopyEmailButton
-                        email="gabrieldossantosnunes91@gmail.com"
+                        email={siteConfig.email}
                         className="contact-pill"
                         labelClassName="contact-pill-label"
                         iconClassName="contact-pill-icon"

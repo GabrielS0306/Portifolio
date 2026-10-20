@@ -4,8 +4,9 @@ import { useEffect, useRef, useState } from "react";
 import { FaBars, FaXmark } from "react-icons/fa6";
 import ThemeToggle from "../ui/ThemeToggle";
 import { useActiveSection } from "@/hooks/useActiveSection";
+import { navItems } from "@/lib/site";
 
-const sections = ["projetos", "sobre", "contato"];
+const sections = navItems.map((item) => item.id);
 
 export default function Header() {
     const activeSection = useActiveSection(sections);
@@ -47,27 +48,16 @@ export default function Header() {
                 <a href="#top" className="logo">gabriel<span>.</span></a>
 
                 <nav ref={navRef} className="nav-desktop">
-                    <a
-                        href="#projetos"
-                        ref={(el) => { linkRefs.current["projetos"] = el; }}
-                        className={activeSection === "projetos" ? "active" : ""}
-                    >
-                        Projetos
-                    </a>
-                    <a
-                        href="#sobre"
-                        ref={(el) => { linkRefs.current["sobre"] = el; }}
-                        className={activeSection === "sobre" ? "active" : ""}
-                    >
-                        Sobre
-                    </a>
-                    <a
-                        href="#contato"
-                        ref={(el) => { linkRefs.current["contato"] = el; }}
-                        className={activeSection === "contato" ? "active" : ""}
-                    >
-                        Contato
-                    </a>
+                    {navItems.map(({ id, label }) => (
+                        <a
+                            key={id}
+                            href={`#${id}`}
+                            ref={(el) => { linkRefs.current[id] = el; }}
+                            className={activeSection === id ? "active" : ""}
+                        >
+                            {label}
+                        </a>
+                    ))}
                     <span
                         className="nav-indicator"
                         style={{ left: indicator.left, width: indicator.width, opacity: indicator.opacity }}
@@ -89,15 +79,11 @@ export default function Header() {
             </div>
 
             <div className={`mobile-menu ${menuOpen ? "open" : ""}`}>
-                <a href="#projetos" onClick={closeMenu} className={activeSection === "projetos" ? "active" : ""}>
-                    Projetos
-                </a>
-                <a href="#sobre" onClick={closeMenu} className={activeSection === "sobre" ? "active" : ""}>
-                    Sobre
-                </a>
-                <a href="#contato" onClick={closeMenu} className={activeSection === "contato" ? "active" : ""}>
-                    Contato
-                </a>
+                {navItems.map(({ id, label }) => (
+                    <a key={id} href={`#${id}`} onClick={closeMenu} className={activeSection === id ? "active" : ""}>
+                        {label}
+                    </a>
+                ))}
             </div>
         </header>
     )

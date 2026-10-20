@@ -3,54 +3,22 @@
 import { useState } from "react";
 import { FaArrowUpRightFromSquare } from "react-icons/fa6";
 import { FaCode } from "react-icons/fa";
-import {
-  SiPhp,
-  SiMysql,
-  SiTailwindcss,
-  SiReact,
-  SiTypescript,
-  SiExpress,
-  SiMongodb,
-  SiLaravel,
-} from "react-icons/si";
-import { IconType } from "react-icons";
 import Image from "next/image";
+import type { Project } from "@/data/projects";
+import { techIcons } from "@/lib/techIcons";
 
-interface Cardprops {
-  titulo: string;
-  description: string;
-  tech: string[];
-  linkdemo?: string;
-  linkcode?: string;
-  src?: string;
-  status?: "concluido" | "em-desenvolvimento";
-}
-
-const techIcons: Record<string, IconType> = {
-  PHP: SiPhp,
-  MySQL: SiMysql,
-  TailwindCSS: SiTailwindcss,
-  "Tailwind CSS": SiTailwindcss,
-  React: SiReact,
-  TypeScript: SiTypescript,
-  Express: SiExpress,
-  MongoDB: SiMongodb,
-  Laravel: SiLaravel,
-};
-
-export default function Card({ titulo, description, tech, linkdemo, linkcode, src, status = "concluido" }: Cardprops) {
-  const hasValidImage = Boolean(src && src !== "#" && src.trim() !== "");
+export default function Card({ title, description, tech, demoUrl, codeUrl, image, status = "concluido" }: Project) {
   const [imageLoaded, setImageLoaded] = useState(false);
 
   return (
     <article className="card">
       <div className="card-media">
-        {hasValidImage ? (
+        {image ? (
           <>
             {!imageLoaded && <div className="card-skeleton" />}
             <Image
-              src={src as string}
-              alt={`Imagem do projeto ${titulo}`}
+              src={image}
+              alt={`Imagem do projeto ${title}`}
               width={400}
               height={350}
               style={{ objectFit: "cover" }}
@@ -69,7 +37,7 @@ export default function Card({ titulo, description, tech, linkdemo, linkcode, sr
         )}
       </div>
 
-      <h3>{titulo}</h3>
+      <h3>{title}</h3>
       <p>{description}</p>
 
       <div className="tags">
@@ -85,15 +53,15 @@ export default function Card({ titulo, description, tech, linkdemo, linkcode, sr
       </div>
 
       <div className="links">
-        {linkdemo && linkdemo !== "#" && (
-          <a href={linkdemo} target="_blank" rel="noopener noreferrer" aria-label={`Demo ${titulo}`}>
+        {demoUrl && (
+          <a href={demoUrl} target="_blank" rel="noopener noreferrer" aria-label={`Demo ${title}`}>
             <FaArrowUpRightFromSquare size={15} />
             Demo
           </a>
         )}
 
-        {linkcode && linkcode !== "#" && (
-          <a href={linkcode} target="_blank" rel="noopener noreferrer" aria-label={`Código ${titulo}`}>
+        {codeUrl && (
+          <a href={codeUrl} target="_blank" rel="noopener noreferrer" aria-label={`Código ${title}`}>
             <FaCode size={18} />
             Código
           </a>

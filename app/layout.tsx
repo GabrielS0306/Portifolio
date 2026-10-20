@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Space_Grotesk } from "next/font/google";
 import { ThemeProvider } from "next-themes";
+import { siteConfig } from "@/lib/site";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -9,14 +10,14 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://portifolio-theta-eight-99.vercel.app"),
-  title: "Gabriel dev",
+  metadataBase: new URL(siteConfig.url),
+  title: siteConfig.name,
   description: "Portfolio profissional com foco em desenvolvimento full-stack, projetos e contato.",
   openGraph: {
     title: "Gabriel — Desenvolvedor Full-Stack",
     description: "Portfólio com projetos em PHP, Laravel, React e Next.js. Confira meus trabalhos e entre em contato.",
-    url: "https://portifolio-theta-eight-99.vercel.app",
-    siteName: "Gabriel dev",
+    url: siteConfig.url,
+    siteName: siteConfig.name,
     locale: "pt_BR",
     type: "website",
   },

@@ -1,11 +1,10 @@
 import type { MetadataRoute } from "next";
+import { siteConfig } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    const baseUrl = "https://portifolio-theta-eight-99.vercel.app";
-
     return [
         {
-            url: baseUrl,
+            url: siteConfig.url,
             lastModified: new Date(),
             changeFrequency: "monthly",
             priority: 1,

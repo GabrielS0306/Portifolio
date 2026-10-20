@@ -128,6 +128,11 @@ section[id] {
 }
 
 /* --- LAYOUT --- */
+/* Empurra o footer para o fim da tela em paginas curtas (ex.: 404) */
+main {
+    flex: 1;
+}
+
 .container {
     width: min(1120px, 92vw);
     margin: 0 auto;

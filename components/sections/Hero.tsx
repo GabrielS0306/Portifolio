@@ -2,6 +2,7 @@ import { FaDownload } from "react-icons/fa6";
 import AnimatedTagline from "../ui/AnimatedTagline";
 import Reveal from "../ui/Reveal";
 import styles from "./Hero.module.css";
+import button from "../ui/Button.module.css";
 
 // Caminho do currículo em /public. Defina como "/curriculo.pdf" ao adicionar o arquivo.
 const RESUME_PATH: string | null = null;
@@ -26,14 +27,14 @@ export default function Hero() {
                 </p>
 
                 <div className={styles.heroActions}>
-                    <a className={`${styles.btn} ${styles.primary}`} href="#projetos">
+                    <a className={`${button.btn} ${button.primary}`} href="#projetos">
                         Ver projetos
                     </a>
-                    <a className={`${styles.btn} ${styles.ghost}`} href="#contato">
+                    <a className={`${button.btn} ${button.ghost}`} href="#contato">
                         Falar comigo
                     </a>
                     {RESUME_PATH && (
-                        <a className={`${styles.btn} ${styles.ghost}`} href={RESUME_PATH} download>
+                        <a className={`${button.btn} ${button.ghost}`} href={RESUME_PATH} download>
                             <FaDownload size={14} />
                             Baixar CV
                         </a>

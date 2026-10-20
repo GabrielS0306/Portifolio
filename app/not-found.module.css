@@ -1,0 +1,43 @@
+.notFound {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    min-height: 60vh;
+    padding: 4rem 0;
+}
+
+.code {
+    font-family: "DM Serif Display", serif;
+    font-size: clamp(5rem, 18vw, 9rem);
+    font-weight: 900;
+    line-height: 1;
+    background: linear-gradient(135deg, var(--brand-strong), var(--brand-soft));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 0.5rem;
+}
+
+.lead {
+    max-width: 50ch;
+    color: var(--muted);
+    font-size: 1.05rem;
+}
+
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 2rem;
+}
+
+@media (max-width: 480px) {
+    .notFound {
+        padding: 2.5rem 0;
+    }
+
+    .lead {
+        font-size: 0.95rem;
+    }
+}

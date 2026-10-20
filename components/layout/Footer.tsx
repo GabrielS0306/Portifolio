@@ -1,3 +1,4 @@
+import Link from "next/link";
 import BackToTop from "../ui/BackToTop";
 import CopyEmailButton from "../ui/CopyEmailButton";
 import { siteConfig, socialLinks } from "@/lib/site";
@@ -7,9 +8,9 @@ export default function Footer() {
     return (
         <footer className={styles.siteFooter}>
             <div className={`container ${styles.footerInner}`}>
-                <a href="#top" className={styles.footerLogo}>
+                <Link href="/#top" className={styles.footerLogo}>
                     gabriel<span>.</span>
-                </a>
+                </Link>
 
                 <div className={styles.footerLinks}>
                     {socialLinks.map(({ label, href, icon: Icon }) => (

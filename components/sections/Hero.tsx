@@ -3,12 +3,15 @@ import AnimatedTagline from "../ui/AnimatedTagline";
 import Reveal from "../ui/Reveal";
 import styles from "./Hero.module.css";
 import button from "../ui/Button.module.css";
-import type { Dictionary } from "@/lib/i18n";
+import type { Dictionary, Locale } from "@/lib/i18n";
+import { resumeFiles } from "@/lib/site";
 
-// Caminho do currículo em /public. Defina como "/curriculo.pdf" ao adicionar o arquivo.
-const RESUME_PATH: string | null = null;
+interface HeroProps {
+    lang: Locale;
+    dict: Dictionary;
+}
 
-export default function Hero({ dict }: { dict: Dictionary }) {
+export default function Hero({ lang, dict }: HeroProps) {
     const t = dict.hero;
 
     return (
@@ -33,12 +36,10 @@ export default function Hero({ dict }: { dict: Dictionary }) {
                     <a className={`${button.btn} ${button.ghost}`} href="#contato">
                         {t.contactMe}
                     </a>
-                    {RESUME_PATH && (
-                        <a className={`${button.btn} ${button.ghost}`} href={RESUME_PATH} download>
-                            <FaDownload size={14} />
-                            {t.downloadCv}
-                        </a>
-                    )}
+                    <a className={`${button.btn} ${button.ghost}`} href={resumeFiles[lang]} download>
+                        <FaDownload size={14} />
+                        {t.downloadCv}
+                    </a>
                 </div>
             </Reveal>
         </section>

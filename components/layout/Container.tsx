@@ -13,7 +13,7 @@ interface ContainerProps {
 export default function Container({ lang, dict }: ContainerProps) {
     return (
         <main>
-            <Hero dict={dict} />
+            <Hero lang={lang} dict={dict} />
             <Projects lang={lang} dict={dict} />
             <GitHubActivity lang={lang} dict={dict} />
             <About dict={dict} />

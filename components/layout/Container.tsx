@@ -3,6 +3,7 @@ import Projects from "../sections/Projects";
 import About from "../sections/About";
 import Contact from "../sections/Contact";
 import GitHubActivity from "../sections/GitHubActivity";
+import Timeline from "../sections/Timeline";
 import type { Dictionary, Locale } from "@/lib/i18n";
 
 interface ContainerProps {
@@ -17,6 +18,7 @@ export default function Container({ lang, dict }: ContainerProps) {
             <Projects lang={lang} dict={dict} />
             <GitHubActivity lang={lang} dict={dict} />
             <About dict={dict} />
+            <Timeline dict={dict} />
             <Contact dict={dict} />
         </main>
     );

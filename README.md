@@ -49,7 +49,7 @@ Principais recursos:
 │
 ├── components/
 │   ├── layout/               # Header, Footer e Container
-│   ├── sections/             # Seções da página (Hero, Projects, About, Contact...)
+│   ├── sections/             # Seções da página (Hero, Projects, About, Timeline, Contact...)
 │   ├── ui/                   # Componentes reutilizáveis (Card, ThemeToggle, LanguageToggle...)
 │   ├── LocaleProvider.tsx    # Disponibiliza idioma e traduções aos Client Components
 │   └── Providers.tsx         # Providers de idioma, tema e animação
@@ -80,6 +80,7 @@ Cada componente com estilo próprio tem um arquivo `.module.css` ao lado (ex.: `
 
 - **Textos do site:** ficam em [`lib/i18n/dictionaries/pt.ts`](lib/i18n/dictionaries/pt.ts) e [`en.ts`](lib/i18n/dictionaries/en.ts). O dicionário em inglês é tipado a partir do português, então o TypeScript avisa se faltar alguma tradução.
 - **Adicionar um projeto:** inclua um objeto no array de [`data/projects.ts`](data/projects.ts), com `slug` único e título e descrição em `pt` e `en`. A imagem deve ficar em `public/images/`. Os testes verificam se nenhuma tradução ficou faltando.
+- **Linha do tempo (seção "Trajetória"):** edite `timeline.items` nos dois dicionários, do mais recente para o mais antigo. Marque `current: true` no item atual para destacá-lo.
 - **Alterar e-mail, redes sociais ou URL do site:** edite [`lib/site.ts`](lib/site.ts).
 - **Nova tecnologia com ícone:** adicione ao mapa em [`lib/techIcons.ts`](lib/techIcons.ts).
 - **Seção "Atividade no GitHub":** é gerada automaticamente a partir dos repositórios públicos do usuário definido em `siteConfig.githubUser`, atualizando no máximo a cada hora. Descrições e linguagens vêm do próprio GitHub, então mantenha-as preenchidas por lá. Se a API estiver indisponível, a seção simplesmente não aparece.

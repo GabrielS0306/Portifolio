@@ -59,9 +59,9 @@ export const en: Dictionary = {
             "I'm currently studying software architecture, authentication, system integration and best practices for building scalable, maintainable products.",
         ],
         stats: [
-            { value: "3+", label: "Projects built" },
-            { value: "2+", label: "Years of study" },
-            { value: "8+", label: "Technologies I use daily" },
+            { value: "2024", label: "Coding since" },
+            { value: "3", label: "Apps in production" },
+            { value: "1", label: "Team project with code review" },
         ],
         skillGroups: {
             frontend: "Front-End",

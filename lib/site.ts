@@ -5,7 +5,7 @@ import type { Locale } from "@/lib/i18n/config";
 export const siteConfig = {
     url: "https://portifolio-theta-eight-99.vercel.app",
     name: "Gabriel dev",
-    email: "gabrieldossantosnunes91@gmail.com",
+    email: "devgabrielsantos91@gmail.com",
     githubUser: "GabrielS0306",
 };
 
@@ -24,7 +24,7 @@ interface SocialLink {
 export const socialLinks: SocialLink[] = [
     {
         label: "LinkedIn",
-        href: "https://www.linkedin.com/in/gabriel-dos-santos-nunes-713a2a312/",
+        href: "https://www.linkedin.com/in/gabriel-dos-santos-nunes/",
         icon: FaLinkedin,
     },
     {

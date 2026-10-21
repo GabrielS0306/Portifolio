@@ -1,0 +1,122 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.field label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.field input,
+.field textarea {
+    width: 100%;
+    padding: 0.7rem 0.9rem;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    background: var(--bg);
+    color: var(--text);
+    font: inherit;
+    font-size: 0.95rem;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.field textarea {
+    resize: vertical;
+    min-height: 8rem;
+}
+
+.field input::placeholder,
+.field textarea::placeholder {
+    color: var(--muted);
+    opacity: 0.7;
+}
+
+.field input:focus-visible,
+.field textarea:focus-visible {
+    outline: none;
+    border-color: var(--brand);
+    box-shadow: 0 0 0 3px var(--shadow-brand);
+}
+
+.field [aria-invalid="true"] {
+    border-color: #ef4444;
+}
+
+.fieldError {
+    font-size: 0.82rem;
+    color: #f87171;
+}
+
+:global(.light) .fieldError {
+    color: #b91c1c;
+}
+
+/* Fora da tela, mas ainda no formulario para os bots preencherem */
+.honeypot {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+.footer {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem 1rem;
+}
+
+.footer button:disabled {
+    opacity: 0.7;
+    cursor: wait;
+    transform: none;
+}
+
+.status {
+    font-size: 0.9rem;
+}
+
+.status[data-status="success"] {
+    color: var(--accent-soft);
+}
+
+.status[data-status="error"] {
+    color: #f87171;
+}
+
+:global(.light) .status[data-status="success"] {
+    color: #15803d;
+}
+
+:global(.light) .status[data-status="error"] {
+    color: #b91c1c;
+}
+
+@media (max-width: 480px) {
+    .row {
+        grid-template-columns: 1fr;
+    }
+
+    .footer button {
+        width: 100%;
+        justify-content: center;
+    }
+}

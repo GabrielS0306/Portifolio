@@ -39,13 +39,15 @@ export const projects: Project[] = [
         image: "/images/SkillFlow_dashboard.png",
     },
     {
-        slug: "app-tarefas",
-        title: { pt: "App de Tarefas Colaborativo", en: "Collaborative Task App" },
+        slug: "sistema-escolar",
+        title: { pt: "Sistema de Gestão Escolar", en: "School Management System" },
         description: {
-            pt: "Aplicação completa com controle de permissões por usuário, sincronização em tempo real e armazenamento seguro de dados na nuvem.",
-            en: "Complete application with per-user permission control, real-time sync and secure cloud data storage.",
+            pt: "Sistema full-stack com API em ASP.NET Core e interface em React. Autenticação JWT com vários perfis por usuário, controle de acesso por papel, notas por bimestre com cálculo automático de situação, frequência e ocorrências.",
+            en: "Full-stack system with an ASP.NET Core API and a React interface. JWT authentication with multiple roles per user, role-based access control, term grades with automatic pass/fail calculation, attendance and disciplinary records.",
         },
-        tech: ["TypeScript", "Express", "MongoDB"],
+        tech: ["C# / .NET", "React", "TypeScript", "PostgreSQL"],
+        codeUrl: "https://github.com/GabrielS0306/sistema_escolar",
+        image: "/images/sistema_escolar.png",
         status: "em-desenvolvimento",
     },
 ];

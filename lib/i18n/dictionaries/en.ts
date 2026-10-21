@@ -70,6 +70,36 @@ export const en: Dictionary = {
             tools: "Tools",
         },
     },
+    timeline: {
+        title: "Journey",
+        subtitle: "From school to my first internship.",
+        current: "Current",
+        items: [
+            {
+                period: "2026",
+                title: "IT Internship",
+                place: "Technology company",
+                description:
+                    "My first professional experience, bringing what I've been building in my projects into a team's daily work.",
+                current: true,
+            },
+            {
+                period: "2024 – 2026",
+                title: "Technical Degree in Web Development",
+                place: "Colégio da Polícia Militar da Paraíba (CPM-PMPB)",
+                description: "Technical high school program in web development, expected to finish in 2026.",
+                current: false,
+            },
+            {
+                period: "2024",
+                title: "First projects",
+                place: "Personal projects",
+                description:
+                    "Started building on my own: from framework-free PHP to Laravel, React and Next.js, with apps deployed to production.",
+                current: false,
+            },
+        ],
+    },
     contact: {
         title: "Let's work together?",
         text: "Reach out on LinkedIn, GitHub, Instagram or by email to talk about projects and opportunities.",

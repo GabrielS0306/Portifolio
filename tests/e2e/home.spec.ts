@@ -9,7 +9,7 @@ test.describe("home", () => {
         await expect(page).toHaveTitle("Gabriel — Desenvolvedor Full-Stack");
         await expect(page.getByRole("heading", { level: 1 })).toContainText("Eu desenvolvo");
 
-        for (const id of ["projetos", "sobre", "contato"]) {
+        for (const id of ["projetos", "sobre", "trajetoria", "contato"]) {
             await expect(page.locator(`section#${id}`)).toBeAttached();
         }
     });

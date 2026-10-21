@@ -69,6 +69,36 @@ export const pt = {
             tools: "Ferramentas",
         },
     },
+    timeline: {
+        title: "Trajetória",
+        subtitle: "Da escola ao primeiro estágio.",
+        current: "Atual",
+        items: [
+            {
+                period: "2026",
+                title: "Estágio em TI",
+                place: "Empresa de tecnologia",
+                description:
+                    "Primeira experiência profissional, aplicando no dia a dia de uma equipe o que venho construindo nos meus projetos.",
+                current: true,
+            },
+            {
+                period: "2024 – 2026",
+                title: "Técnico em Informática para Internet",
+                place: "Colégio da Polícia Militar da Paraíba (CPM-PMPB)",
+                description: "Formação técnica em desenvolvimento web, com conclusão prevista para 2026.",
+                current: false,
+            },
+            {
+                period: "2024",
+                title: "Primeiros projetos",
+                place: "Projetos pessoais",
+                description:
+                    "Comecei a desenvolver por conta própria: de PHP sem framework a Laravel, React e Next.js, com aplicações publicadas em produção.",
+                current: false,
+            },
+        ],
+    },
     contact: {
         title: "Vamos trabalhar juntos?",
         text: "Me chama no LinkedIn, GitHub, Instagram ou por e-mail para conversarmos sobre projetos e oportunidades.",

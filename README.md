@@ -15,6 +15,7 @@ Principais recursos:
 - Tema claro e escuro;
 - Animações de entrada que respeitam a preferência de "reduzir movimento" do sistema;
 - Navegação por teclado (foco visível, menu mobile acessível);
+- Formulário de contato que envia a mensagem direto para o meu e-mail (Server Action + Zod + Resend), com validação traduzida e proteção contra bots;
 - Botão para copiar o e-mail com feedback visual;
 - SEO com metadados, imagem de Open Graph, `robots.txt` e `sitemap.xml` gerados pelo Next.js.
 
@@ -25,6 +26,7 @@ Principais recursos:
 - **TypeScript** — tipagem estática;
 - **CSS Modules** — estilos com escopo por componente;
 - **Framer Motion** — animações;
+- **Zod** e **Resend** — validação e envio do formulário de contato;
 - **next-themes** — alternância de tema claro/escuro;
 - **React Icons** — ícones;
 - **ESLint** e **Prettier** — análise e formatação do código;
@@ -36,6 +38,7 @@ Principais recursos:
 ```text
 ./
 ├── app/
+│   ├── actions/contact.ts    # Server Action do formulário de contato
 │   ├── [lang]/               # Tudo que é página fica dentro do idioma (/pt, /en)
 │   │   ├── layout.tsx        # Layout raiz e metadados (por idioma)
 │   │   ├── page.tsx          # Página principal
@@ -62,6 +65,7 @@ Principais recursos:
 │
 ├── lib/
 │   ├── i18n/                 # Idiomas: configuração, dicionários (pt/en) e detecção
+│   ├── contact.ts            # Regras de validação do formulário de contato
 │   ├── github.ts             # Busca e resume os repositórios da API do GitHub
 │   ├── site.ts               # URL, e-mail, usuário do GitHub, redes sociais e menu
 │   └── techIcons.ts          # Mapa de tecnologia → ícone
@@ -104,9 +108,12 @@ npm run dev
 
 Depois, acesse http://localhost:3000.
 
-### Variáveis de ambiente (opcional)
+### Variáveis de ambiente
 
-Copie `.env.example` para `.env.local`. O `GITHUB_TOKEN` é opcional: sem ele a API do GitHub permite 60 requisições por hora, o que já basta para o site.
+Copie `.env.example` para `.env.local` e preencha:
+
+- `RESEND_API_KEY`: chave do [Resend](https://resend.com/api-keys), necessária para o formulário de contato. Sem ela o site funciona, mas o formulário mostra uma mensagem de erro ao enviar. Enquanto não houver domínio verificado no Resend, as mensagens só chegam ao e-mail da conta do Resend, que deve ser o mesmo de `siteConfig.email`. Na Vercel, cadastre a mesma variável em Production e Preview.
+- `GITHUB_TOKEN` (opcional): sem ele a API do GitHub permite 60 requisições por hora, o que já basta para o site.
 
 ## 📦 Scripts disponíveis
 
@@ -126,7 +133,7 @@ Copie `.env.example` para `.env.local`. O `GITHUB_TOKEN` é opcional: sem ele a 
 ## 🧪 Testes
 
 - **Unidade** (`tests/unit/`): Vitest + Testing Library. Cobrem os componentes principais e validam os dados de `data/projects.ts` (ícone para cada tecnologia, imagens existentes, links válidos).
-- **E2E** (`tests/e2e/`): Playwright, rodando no build de produção em desktop e mobile. Cobrem navegação, menu mobile, troca de tema e a página 404.
+- **E2E** (`tests/e2e/`): Playwright, rodando no build de produção em desktop e mobile. Cobrem navegação, menu mobile, troca de tema, idiomas, a página 404 e a validação do formulário de contato (sem enviar e-mails de verdade).
 
 Na primeira vez, instale o navegador do Playwright:
 

@@ -6,13 +6,20 @@
     margin-block: 1rem 4rem;
 }
 
-.contact h2 {
+.layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+    gap: 2.5rem;
+    align-items: start;
+}
+
+.intro h2 {
     font-size: 1.5rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
 }
 
-.contact p {
+.intro p {
     color: var(--muted);
     font-size: 0.97rem;
     max-width: 50ch;
@@ -86,6 +93,13 @@
     max-width: 140px;
     opacity: 1;
     margin-left: 0.55rem;
+}
+
+@media (max-width: 900px) {
+    .layout {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
 }
 
 @media (max-width: 768px) {

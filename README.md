@@ -83,7 +83,7 @@ Cada componente com estilo próprio tem um arquivo `.module.css` ao lado (ex.: `
 - **Alterar e-mail, redes sociais ou URL do site:** edite [`lib/site.ts`](lib/site.ts).
 - **Nova tecnologia com ícone:** adicione ao mapa em [`lib/techIcons.ts`](lib/techIcons.ts).
 - **Seção "Atividade no GitHub":** é gerada automaticamente a partir dos repositórios públicos do usuário definido em `siteConfig.githubUser`, atualizando no máximo a cada hora. Descrições e linguagens vêm do próprio GitHub, então mantenha-as preenchidas por lá. Se a API estiver indisponível, a seção simplesmente não aparece.
-- **Currículo para download:** coloque o PDF em `public/` e defina `RESUME_PATH` em [`components/sections/Hero.tsx`](components/sections/Hero.tsx).
+- **Currículo para download:** substitua os PDFs em `public/resume/` mantendo os nomes, ou altere os caminhos em `resumeFiles` ([`lib/site.ts`](lib/site.ts)). Cada idioma do site baixa o seu arquivo.
 
 ## ⚙️ Como executar o projeto
 
@@ -145,5 +145,5 @@ O projeto está publicado na **Vercel**.
 
 **Gabriel** — desenvolvedor com foco em **Full-Stack**, buscando evoluir constantemente através da criação de projetos e aplicação prática de diferentes tecnologias.
 
-- [LinkedIn](https://www.linkedin.com/in/gabriel-dos-santos-nunes-713a2a312/)
+- [LinkedIn](https://www.linkedin.com/in/gabriel-dos-santos-nunes/)
 - [GitHub](https://github.com/GabrielS0306)

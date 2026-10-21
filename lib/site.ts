@@ -1,11 +1,18 @@
 import type { IconType } from "react-icons";
 import { FaLinkedin, FaGithub, FaInstagram } from "react-icons/fa6";
+import type { Locale } from "@/lib/i18n/config";
 
 export const siteConfig = {
     url: "https://portifolio-theta-eight-99.vercel.app",
     name: "Gabriel dev",
-    email: "gabrieldossantosnunes91@gmail.com",
+    email: "devgabrielsantos91@gmail.com",
     githubUser: "GabrielS0306",
+};
+
+// Curriculo em /public para cada idioma do site
+export const resumeFiles: Record<Locale, string> = {
+    pt: "/resume/Curriculo_Gabriel_Nunes_PT.pdf",
+    en: "/resume/Resume_Gabriel_Nunes_EN.pdf",
 };
 
 interface SocialLink {
@@ -17,7 +24,7 @@ interface SocialLink {
 export const socialLinks: SocialLink[] = [
     {
         label: "LinkedIn",
-        href: "https://www.linkedin.com/in/gabriel-dos-santos-nunes-713a2a312/",
+        href: "https://www.linkedin.com/in/gabriel-dos-santos-nunes/",
         icon: FaLinkedin,
     },
     {

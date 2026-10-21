@@ -58,9 +58,9 @@ export const pt = {
             "Atualmente, estudo arquitetura de software, autenticação, integração entre sistemas e boas práticas para construir produtos escaláveis e de fácil manutenção.",
         ],
         stats: [
-            { value: "3+", label: "Projetos desenvolvidos" },
-            { value: "2+", label: "Anos em formação" },
-            { value: "8+", label: "Tecnologias no dia a dia" },
+            { value: "2024", label: "Programando desde" },
+            { value: "3", label: "Aplicações em produção" },
+            { value: "1", label: "Projeto em equipe com code review" },
         ],
         skillGroups: {
             frontend: "Front-End",

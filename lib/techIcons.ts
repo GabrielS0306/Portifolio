@@ -14,6 +14,7 @@ import {
     SiGit,
     SiGithub,
     SiDocker,
+    SiDotnet,
 } from "react-icons/si";
 
 export const techIcons: Record<string, IconType> = {
@@ -31,4 +32,6 @@ export const techIcons: Record<string, IconType> = {
     Git: SiGit,
     GitHub: SiGithub,
     Docker: SiDocker,
+    // O react-icons nao tem icone de C#; usa o do .NET
+    "C# / .NET": SiDotnet,
 };

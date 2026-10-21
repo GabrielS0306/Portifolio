@@ -11,6 +11,7 @@ O foco do projeto é proporcionar uma boa experiência tanto em **desktop quanto
 Principais recursos:
 
 - Seções de apresentação, projetos, sobre e contato em uma página única;
+- Página de estudo de caso para cada projeto (`/pt/projetos/[slug]`), com contexto, funcionalidades, decisões técnicas, telas e aprendizados;
 - Versões em português (`/pt`) e inglês (`/en`), com detecção do idioma do navegador e botão para alternar;
 - Tema claro e escuro;
 - Animações de entrada que respeitam a preferência de "reduzir movimento" do sistema;
@@ -44,6 +45,7 @@ Principais recursos:
 │   │   ├── page.tsx          # Página principal
 │   │   ├── not-found.tsx     # Página 404 traduzida
 │   │   ├── opengraph-image.tsx # Imagem de compartilhamento por idioma
+│   │   ├── projetos/[slug]/  # Estudo de caso de cada projeto
 │   │   └── [...rest]/        # Captura caminhos inexistentes e mostra a 404
 │   ├── globals.css           # Reset, tokens de tema e estilos base
 │   ├── robots.ts             # robots.txt
@@ -58,7 +60,8 @@ Principais recursos:
 │   └── Providers.tsx         # Providers de idioma, tema e animação
 │
 ├── data/
-│   └── projects.ts           # Lista de projetos exibidos
+│   ├── projects.ts           # Lista de projetos exibidos
+│   └── caseStudies.ts        # Conteúdo dos estudos de caso (pt/en)
 │
 ├── hooks/
 │   └── useActiveSection.ts   # Destaca no menu a seção visível
@@ -71,7 +74,7 @@ Principais recursos:
 │   └── techIcons.ts          # Mapa de tecnologia → ícone
 │
 ├── public/
-│   └── images/               # Screenshots dos projetos
+│   └── images/               # Screenshots dos projetos (galerias em images/projects/<slug>/)
 │
 ├── proxy.ts                  # Redireciona "/" para /pt ou /en conforme o idioma
 │
@@ -85,6 +88,7 @@ Cada componente com estilo próprio tem um arquivo `.module.css` ao lado (ex.: `
 - **Textos do site:** ficam em [`lib/i18n/dictionaries/pt.ts`](lib/i18n/dictionaries/pt.ts) e [`en.ts`](lib/i18n/dictionaries/en.ts). O dicionário em inglês é tipado a partir do português, então o TypeScript avisa se faltar alguma tradução.
 - **Adicionar um projeto:** inclua um objeto no array de [`data/projects.ts`](data/projects.ts), com `slug` único e título e descrição em `pt` e `en`. A imagem deve ficar em `public/images/`. Os testes verificam se nenhuma tradução ficou faltando.
 - **Linha do tempo (seção "Trajetória"):** edite `timeline.items` nos dois dicionários, do mais recente para o mais antigo. Marque `current: true` no item atual para destacá-lo.
+- **Estudo de caso de um projeto:** adicione uma entrada em [`data/caseStudies.ts`](data/caseStudies.ts) com o mesmo `slug` do projeto. A página e o link "Detalhes" no card aparecem automaticamente, e o sitemap passa a incluí-la. Imagens da galeria ficam em `public/images/projects/<slug>/`.
 - **Alterar e-mail, redes sociais ou URL do site:** edite [`lib/site.ts`](lib/site.ts).
 - **Nova tecnologia com ícone:** adicione ao mapa em [`lib/techIcons.ts`](lib/techIcons.ts).
 - **Seção "Atividade no GitHub":** é gerada automaticamente a partir dos repositórios públicos do usuário definido em `siteConfig.githubUser`, atualizando no máximo a cada hora. Descrições e linguagens vêm do próprio GitHub, então mantenha-as preenchidas por lá. Se a API estiver indisponível, a seção simplesmente não aparece.

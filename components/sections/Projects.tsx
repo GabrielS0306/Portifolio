@@ -1,6 +1,7 @@
 import Card from "../ui/Card";
 import Reveal from "../ui/Reveal";
 import { projects } from "@/data/projects";
+import { caseStudies } from "@/data/caseStudies";
 import type { Dictionary, Locale } from "@/lib/i18n";
 import styles from "./Projects.module.css";
 
@@ -24,6 +25,7 @@ export default function Projects({ lang, dict }: ProjectsProps) {
                             {...project}
                             title={project.title[lang]}
                             description={project.description[lang]}
+                            href={caseStudies[project.slug] && `/${lang}/projetos/${project.slug}`}
                         />
                     </Reveal>
                 ))}

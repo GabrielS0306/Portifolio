@@ -1,16 +1,29 @@
+import Link from "next/link";
+import { FaArrowRight } from "react-icons/fa6";
 import Reveal from "../ui/Reveal";
 import CopyEmailButton from "../ui/CopyEmailButton";
 import ContactForm from "../ui/ContactForm";
 import { siteConfig, socialLinks } from "@/lib/site";
-import type { Dictionary } from "@/lib/i18n";
+import type { Dictionary, Locale } from "@/lib/i18n";
+import button from "../ui/Button.module.css";
 import styles from "./Contact.module.css";
 
-export default function Contact({ dict }: { dict: Dictionary }) {
+interface ContactProps {
+    lang: Locale;
+    dict: Dictionary;
+    // "cta": convite na home, com botao para a pagina; "page": pagina /contato com o formulario
+    variant?: "cta" | "page";
+}
+
+export default function Contact({ lang, dict, variant = "page" }: ContactProps) {
+    const cta = variant === "cta";
+    const Title = cta ? "h2" : "h1";
+
     return (
         <section id="contato" className={`container ${styles.contact}`}>
-            <Reveal className={styles.layout}>
+            <Reveal className={cta ? styles.ctaLayout : styles.layout}>
                 <div className={styles.intro}>
-                    <h2>{dict.contact.title}</h2>
+                    <Title>{dict.contact.title}</Title>
                     <p>{dict.contact.text}</p>
 
                     <div className={styles.contactLinks}>
@@ -39,7 +52,14 @@ export default function Contact({ dict }: { dict: Dictionary }) {
                     </div>
                 </div>
 
-                <ContactForm />
+                {cta ? (
+                    <Link href={`/${lang}/contato`} className={`${button.btn} ${button.primary}`}>
+                        {dict.hero.contactMe}
+                        <FaArrowRight size={13} aria-hidden="true" />
+                    </Link>
+                ) : (
+                    <ContactForm />
+                )}
             </Reveal>
         </section>
     );

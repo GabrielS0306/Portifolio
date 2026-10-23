@@ -14,7 +14,7 @@ vi.mock("next/navigation", () => ({
     useRouter: () => ({ push: routerPush }),
 }));
 
-// O jsdom nao implementa IntersectionObserver (usado pelo framer-motion e pelo useActiveSection)
+// O jsdom nao implementa IntersectionObserver (usado pelo framer-motion)
 class IntersectionObserverMock {
     observe = vi.fn();
     unobserve = vi.fn();

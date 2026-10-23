@@ -1,0 +1,10 @@
+/* Respiro no topo das paginas que reaproveitam as secoes da home (/projetos, /sobre, /contato) */
+.page {
+    padding-top: 1.5rem;
+}
+
+@media (max-width: 480px) {
+    .page {
+        padding-top: 0.5rem;
+    }
+}

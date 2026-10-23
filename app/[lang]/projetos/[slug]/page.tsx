@@ -72,7 +72,7 @@ export default async function ProjectPage({ params }: PageProps<"/[lang]/projeto
 
     return (
         <main className={`container ${styles.page}`}>
-            <Link href={`/${lang}#projetos`} className={styles.back}>
+            <Link href={`/${lang}/projetos`} className={styles.back}>
                 <FaArrowLeft size={12} aria-hidden="true" />
                 {t.back}
             </Link>

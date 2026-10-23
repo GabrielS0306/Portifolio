@@ -41,5 +41,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
                   })),
               ];
 
-    return [...entries("", 1), ...projectPages, ...blogPages];
+    const sectionPages = [
+        ...entries("/projetos", 0.9),
+        ...entries("/sobre", 0.8),
+        ...entries("/contato", 0.7),
+    ];
+
+    return [...entries("", 1), ...sectionPages, ...projectPages, ...blogPages];
 }

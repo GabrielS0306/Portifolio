@@ -10,7 +10,7 @@ O foco do projeto é proporcionar uma boa experiência tanto em **desktop quanto
 
 Principais recursos:
 
-- Seções de apresentação, projetos, sobre e contato em uma página única;
+- Home com um resumo de tudo (apresentação, projetos em destaque, últimos posts e convite para contato) e páginas próprias para Projetos (`/pt/projetos`), Sobre (`/pt/sobre`) e Contato (`/pt/contato`);
 - Página de estudo de caso para cada projeto (`/pt/projetos/[slug]`), com contexto, funcionalidades, decisões técnicas, telas e aprendizados;
 - Versões em português (`/pt`) e inglês (`/en`), com detecção do idioma do navegador e botão para alternar;
 - Tema claro e escuro;
@@ -44,10 +44,13 @@ Principais recursos:
 │   ├── actions/contact.ts    # Server Action do formulário de contato
 │   ├── [lang]/               # Tudo que é página fica dentro do idioma (/pt, /en)
 │   │   ├── layout.tsx        # Layout raiz e metadados (por idioma)
-│   │   ├── page.tsx          # Página principal
+│   │   ├── page.tsx          # Home (resumo de todas as seções)
 │   │   ├── not-found.tsx     # Página 404 traduzida
 │   │   ├── opengraph-image.tsx # Imagem de compartilhamento por idioma
-│   │   ├── projetos/[slug]/  # Estudo de caso de cada projeto
+│   │   ├── projetos/         # Lista de projetos + atividade no GitHub
+│   │   │   └── [slug]/       # Estudo de caso de cada projeto
+│   │   ├── sobre/            # Sobre mim, skills e trajetória
+│   │   ├── contato/          # Formulário de contato
 │   │   ├── blog/             # Lista de posts e página de cada post
 │   │   └── [...rest]/        # Captura caminhos inexistentes e mostra a 404
 │   ├── globals.css           # Reset, tokens de tema e estilos base
@@ -57,7 +60,7 @@ Principais recursos:
 │
 ├── components/
 │   ├── layout/               # Header, Footer e Container
-│   ├── sections/             # Seções da página (Hero, Projects, About, Timeline, Contact...)
+│   ├── sections/             # Seções das páginas (Hero, Projects, About, Timeline, Contact...)
 │   ├── ui/                   # Componentes reutilizáveis (Card, ThemeToggle, LanguageToggle...)
 │   ├── LocaleProvider.tsx    # Disponibiliza idioma e traduções aos Client Components
 │   └── Providers.tsx         # Providers de idioma, tema e animação
@@ -68,9 +71,6 @@ Principais recursos:
 ├── data/
 │   ├── projects.ts           # Lista de projetos exibidos
 │   └── caseStudies.ts        # Conteúdo dos estudos de caso (pt/en)
-│
-├── hooks/
-│   └── useActiveSection.ts   # Destaca no menu a seção visível
 │
 ├── lib/
 │   ├── i18n/                 # Idiomas: configuração, dicionários (pt/en) e detecção

@@ -1,18 +1,20 @@
 "use client";
 
 import { useState } from "react";
-import { FaArrowUpRightFromSquare } from "react-icons/fa6";
+import { FaArrowRight, FaArrowUpRightFromSquare } from "react-icons/fa6";
 import { FaCode } from "react-icons/fa";
 import Image from "next/image";
+import Link from "next/link";
 import type { Project } from "@/data/projects";
-import { techIcons } from "@/lib/techIcons";
 import { useLocale } from "../LocaleProvider";
+import TechTags from "./TechTags";
 import styles from "./Card.module.css";
 
-// Recebe titulo e descricao ja no idioma da pagina
+// Recebe titulo e descricao ja no idioma da pagina; href leva ao estudo de caso, quando existe
 type CardProps = Omit<Project, "slug" | "title" | "description"> & {
     title: string;
     description: string;
+    href?: string;
 };
 
 export default function Card({
@@ -23,6 +25,7 @@ export default function Card({
     codeUrl,
     image,
     status = "concluido",
+    href,
 }: CardProps) {
     const [imageLoaded, setImageLoaded] = useState(false);
     const t = useLocale().dict.projects;
@@ -54,22 +57,19 @@ export default function Card({
                 )}
             </div>
 
-            <h3>{title}</h3>
+            <h3>{href ? <Link href={href}>{title}</Link> : title}</h3>
             <p>{description}</p>
 
-            <div className={styles.tags}>
-                {tech.map((tag) => {
-                    const Icon = techIcons[tag];
-                    return (
-                        <span key={tag}>
-                            {Icon && <Icon size={12} />}
-                            {tag}
-                        </span>
-                    );
-                })}
-            </div>
+            <TechTags tech={tech} />
 
             <div className={styles.links}>
+                {href && (
+                    <Link href={href} aria-label={`${t.detailsOf} ${title}`}>
+                        <FaArrowRight size={14} />
+                        {t.details}
+                    </Link>
+                )}
+
                 {demoUrl && (
                     <a
                         href={demoUrl}

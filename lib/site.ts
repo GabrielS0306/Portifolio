@@ -39,9 +39,12 @@ export const socialLinks: SocialLink[] = [
     },
 ];
 
-// id = ancora da secao; key = chave do rotulo em dictionary.nav
+// path = pagina dentro do idioma (/pt/projetos); key = chave do rotulo em dictionary.nav
 export const navItems = [
-    { id: "projetos", key: "projects" },
-    { id: "sobre", key: "about" },
-    { id: "contato", key: "contact" },
+    { path: "projetos", key: "projects" },
+    { path: "sobre", key: "about" },
+    { path: "contato", key: "contact" },
 ] as const;
+
+// Secoes que eram ancoras da home (/pt#projetos) e viraram paginas; links antigos sao redirecionados
+export const legacySectionPaths = ["projetos", "sobre", "contato"] as const;

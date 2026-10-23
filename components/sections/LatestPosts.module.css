@@ -16,20 +16,6 @@
     color: var(--text);
 }
 
-.viewAll {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--brand);
-    transition: color 0.2s;
-}
-
-.viewAll:hover {
-    color: var(--brand-soft);
-}
-
 @media (max-width: 480px) {
     .head h2 {
         font-size: 1.4rem;

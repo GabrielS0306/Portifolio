@@ -7,19 +7,21 @@ import { FaBars, FaXmark } from "react-icons/fa6";
 import ThemeToggle from "../ui/ThemeToggle";
 import LanguageToggle from "../ui/LanguageToggle";
 import { useLocale } from "../LocaleProvider";
-import { useActiveSection } from "@/hooks/useActiveSection";
 import { navItems } from "@/lib/site";
 import styles from "./Header.module.css";
-
-const sections = navItems.map((item) => item.id);
 
 // showBlog: o link do blog so aparece quando existe algum post publicado
 export default function Header({ showBlog = false }: { showBlog?: boolean }) {
     const { lang, dict } = useLocale();
     const pathname = usePathname() ?? "";
-    const blogHref = `/${lang}/blog`;
-    const onBlog = pathname === blogHref || pathname.startsWith(`${blogHref}/`);
-    const activeSection = useActiveSection(sections);
+    // Itens do menu como paginas; o blog entra no fim quando ha post publicado
+    const links = [
+        ...navItems.map(({ path, key }) => ({ href: `/${lang}/${path}`, label: dict.nav[key] })),
+        ...(showBlog ? [{ href: `/${lang}/blog`, label: dict.nav.blog }] : []),
+    ];
+    // Ativo na propria pagina e nas internas (ex.: /pt/projetos/skillflow marca "Projetos")
+    const activeHref =
+        links.find(({ href }) => pathname === href || pathname.startsWith(`${href}/`))?.href ?? "";
     const navRef = useRef<HTMLElement>(null);
     const linkRefs = useRef<Record<string, HTMLAnchorElement | null>>({});
     const menuButtonRef = useRef<HTMLButtonElement>(null);
@@ -27,7 +29,7 @@ export default function Header({ showBlog = false }: { showBlog?: boolean }) {
     const [menuOpen, setMenuOpen] = useState(false);
 
     useEffect(() => {
-        const activeLink = linkRefs.current[activeSection];
+        const activeLink = linkRefs.current[activeHref];
         const nav = navRef.current;
 
         if (activeLink && nav) {
@@ -42,7 +44,7 @@ export default function Header({ showBlog = false }: { showBlog?: boolean }) {
         } else {
             setIndicator((prev) => ({ ...prev, opacity: 0 }));
         }
-    }, [activeSection]);
+    }, [activeHref]);
 
     useEffect(() => {
         document.body.style.overflow = menuOpen ? "hidden" : "";
@@ -70,32 +72,24 @@ export default function Header({ showBlog = false }: { showBlog?: boolean }) {
     return (
         <header className={styles.siteHeader}>
             <div className={`container ${styles.nav}`}>
-                <Link href={`/${lang}#top`} className={styles.logo}>
+                <Link href={`/${lang}`} className={styles.logo}>
                     gabriel<span>.</span>
                 </Link>
 
                 <nav ref={navRef} className={styles.navDesktop}>
-                    {navItems.map(({ id, key }) => (
+                    {links.map(({ href, label }) => (
                         <Link
-                            key={id}
-                            href={`/${lang}#${id}`}
+                            key={href}
+                            href={href}
                             ref={(el) => {
-                                linkRefs.current[id] = el;
+                                linkRefs.current[href] = el;
                             }}
-                            className={activeSection === id ? styles.active : ""}
+                            className={activeHref === href ? styles.active : ""}
+                            aria-current={activeHref === href ? "page" : undefined}
                         >
-                            {dict.nav[key]}
+                            {label}
                         </Link>
                     ))}
-                    {showBlog && (
-                        <Link
-                            href={blogHref}
-                            className={onBlog ? styles.active : ""}
-                            aria-current={onBlog ? "page" : undefined}
-                        >
-                            {dict.nav.blog}
-                        </Link>
-                    )}
                     <span
                         className={styles.navIndicator}
                         style={{ left: indicator.left, width: indicator.width, opacity: indicator.opacity }}
@@ -130,26 +124,17 @@ export default function Header({ showBlog = false }: { showBlog?: boolean }) {
                 className={`${styles.mobileMenu} ${menuOpen ? styles.open : ""}`}
                 inert={!menuOpen}
             >
-                {navItems.map(({ id, key }) => (
+                {links.map(({ href, label }) => (
                     <Link
-                        key={id}
-                        href={`/${lang}#${id}`}
+                        key={href}
+                        href={href}
                         onClick={closeMenu}
-                        className={activeSection === id ? styles.active : ""}
+                        className={activeHref === href ? styles.active : ""}
+                        aria-current={activeHref === href ? "page" : undefined}
                     >
-                        {dict.nav[key]}
+                        {label}
                     </Link>
                 ))}
-                {showBlog && (
-                    <Link
-                        href={blogHref}
-                        onClick={closeMenu}
-                        className={onBlog ? styles.active : ""}
-                        aria-current={onBlog ? "page" : undefined}
-                    >
-                        {dict.nav.blog}
-                    </Link>
-                )}
             </nav>
         </header>
     );

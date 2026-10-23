@@ -32,12 +32,12 @@ test.describe("pagina 404", () => {
         await expect(page.getByRole("heading", { level: 1 })).toContainText("Eu desenvolvo");
     });
 
-    test("leva ate a secao de projetos", async ({ page }) => {
+    test("leva ate a pagina de projetos", async ({ page }) => {
         await page.goto("/pt/pagina-que-nao-existe");
 
         await page.getByRole("link", { name: "Ver projetos" }).click();
 
-        await expect(page).toHaveURL(/\/pt#projetos$/);
-        await expect(page.locator("section#projetos")).toBeInViewport();
+        await expect(page).toHaveURL(/\/pt\/projetos$/);
+        await expect(page.getByRole("heading", { level: 1 })).toHaveText("Projetos");
     });
 });

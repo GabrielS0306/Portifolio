@@ -46,11 +46,12 @@ test.describe("idiomas", () => {
         await expect(page).toHaveURL(/\/en$/);
     });
 
-    test("mantem a secao atual ao trocar de idioma", async ({ page }) => {
-        await page.goto("/pt#contato");
+    test("mantem a pagina atual ao trocar de idioma", async ({ page }) => {
+        await page.goto("/pt/contato");
 
         await page.getByRole("button", { name: "Switch to English" }).filter({ visible: true }).click();
 
-        await expect(page).toHaveURL(/\/en#contato$/);
+        await expect(page).toHaveURL(/\/en\/contato$/);
+        await expect(page.getByRole("heading", { level: 1 })).toHaveText("Let's work together?");
     });
 });

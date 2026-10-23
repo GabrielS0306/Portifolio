@@ -45,9 +45,9 @@
 }
 
 .stat dd {
-    font-family: "DM Serif Display", serif;
+    font-family: var(--font-dm-serif), Georgia, serif;
     font-size: 1.75rem;
-    font-weight: 700;
+    font-weight: 400;
     color: var(--brand-soft);
     line-height: 1.1;
 }

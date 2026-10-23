@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
-import { Space_Grotesk } from "next/font/google";
+import { DM_Serif_Display, Space_Grotesk } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import Providers from "@/components/Providers";
@@ -14,6 +14,13 @@ import "../globals.css";
 const spaceGrotesk = Space_Grotesk({
     variable: "--font-space-grotesk",
     subsets: ["latin"],
+});
+
+// Fonte dos titulos principais e dos numeros em destaque; so existe no peso 400
+const dmSerifDisplay = DM_Serif_Display({
+    variable: "--font-dm-serif",
+    subsets: ["latin"],
+    weight: "400",
 });
 
 // Gera /pt e /en no build; qualquer outro valor de [lang] vira 404
@@ -75,7 +82,7 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
     return (
         <html
             lang={htmlLang[lang]}
-            className={spaceGrotesk.variable}
+            className={`${spaceGrotesk.variable} ${dmSerifDisplay.variable}`}
             data-scroll-behavior="smooth"
             suppressHydrationWarning
         >

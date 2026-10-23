@@ -69,9 +69,10 @@ h4 {
 }
 
 h1 {
-    font-family: "DM Serif Display", serif;
+    font-family: var(--font-dm-serif), Georgia, serif;
     font-size: clamp(2.4rem, 7vw, 4.8rem);
-    font-weight: 900;
+    font-weight: 400;
+    letter-spacing: -0.01em;
     max-width: 20ch;
     margin-bottom: 1rem;
 }

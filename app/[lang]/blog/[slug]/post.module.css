@@ -1,0 +1,405 @@
+.page {
+    max-width: 1040px;
+    padding-block: 2rem 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    align-self: flex-start;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--muted);
+    transition: color 0.2s;
+}
+
+.back:hover {
+    color: var(--brand-soft);
+}
+
+/* --- CABECALHO --- */
+.header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    max-width: 760px;
+}
+
+.meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.85rem;
+    color: var(--muted);
+}
+
+.draft {
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 0.05rem 0.5rem;
+    border-radius: 999px;
+    color: #fbbf24;
+    border: 1px solid color-mix(in srgb, #f59e0b 40%, transparent);
+    background: color-mix(in srgb, #f59e0b 12%, transparent);
+}
+
+:global(.light) .draft {
+    color: #b45309;
+}
+
+.header h1 {
+    font-size: clamp(1.9rem, 5vw, 2.75rem);
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--text);
+}
+
+.summary {
+    font-size: 1.08rem;
+    line-height: 1.65;
+    color: var(--muted);
+}
+
+.tags {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+}
+
+.tags li {
+    font-size: 0.75rem;
+    padding: 0.15rem 0.6rem;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    color: var(--muted);
+}
+
+.notice {
+    align-self: flex-start;
+    padding: 0.4rem 0.8rem;
+    border-radius: 10px;
+    border: 1px solid color-mix(in srgb, var(--brand) 35%, transparent);
+    background: color-mix(in srgb, var(--brand) 8%, transparent);
+    font-size: 0.88rem;
+    color: var(--text);
+}
+
+/* --- CONTEUDO + INDICE --- */
+.layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 220px;
+    grid-template-areas: "content toc";
+    gap: 3rem;
+    align-items: start;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+}
+
+.prose {
+    grid-area: content;
+    max-width: 720px;
+}
+
+.toc {
+    grid-area: toc;
+    position: sticky;
+    top: 6rem;
+    font-size: 0.85rem;
+}
+
+.tocTitle {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    margin-bottom: 0.6rem;
+}
+
+.toc ol {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    border-left: 1px solid var(--line);
+}
+
+.toc li {
+    padding-left: 0.85rem;
+}
+
+.toc li[data-depth="3"] {
+    padding-left: 1.6rem;
+}
+
+.toc a {
+    color: var(--muted);
+    line-height: 1.4;
+    transition: color 0.2s;
+}
+
+.toc a:hover {
+    color: var(--brand-soft);
+}
+
+/* --- TIPOGRAFIA DO POST (elementos gerados pelo MDX) --- */
+.prose {
+    color: var(--text);
+    font-size: 1.02rem;
+    line-height: 1.8;
+}
+
+.prose > * + * {
+    margin-top: 1.15rem;
+}
+
+.prose h2,
+.prose h3 {
+    color: var(--text);
+    line-height: 1.3;
+    /* Compensa o cabecalho fixo ao pular para um titulo pelo indice */
+    scroll-margin-top: 6rem;
+}
+
+.prose h2 {
+    font-size: 1.5rem;
+    margin-top: 2.5rem;
+}
+
+.prose h3 {
+    font-size: 1.2rem;
+    margin-top: 2rem;
+}
+
+.prose p,
+.prose li {
+    color: color-mix(in srgb, var(--text) 85%, var(--muted));
+}
+
+.prose a {
+    color: var(--brand-soft);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: color-mix(in srgb, var(--brand-soft) 45%, transparent);
+}
+
+.prose a:hover {
+    text-decoration-color: currentColor;
+}
+
+:global(.light) .prose a {
+    color: var(--brand-strong);
+}
+
+.prose strong {
+    color: var(--text);
+    font-weight: 700;
+}
+
+/* O reset global tira os marcadores; no texto do post eles voltam */
+.prose ul,
+.prose ol {
+    padding-left: 1.4rem;
+}
+
+.prose ul {
+    list-style: disc;
+}
+
+.prose ol {
+    list-style: decimal;
+}
+
+.prose li + li {
+    margin-top: 0.35rem;
+}
+
+.prose li::marker {
+    color: var(--brand-soft);
+}
+
+.prose blockquote {
+    padding-left: 1rem;
+    border-left: 3px solid var(--brand);
+    color: var(--muted);
+    font-style: italic;
+}
+
+.prose hr {
+    border: 0;
+    border-top: 1px solid var(--line);
+    margin-block: 2.5rem;
+}
+
+.prose img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+}
+
+/* Codigo no meio do texto */
+.prose :not(pre) > code {
+    font-size: 0.88em;
+    padding: 0.12em 0.4em;
+    border-radius: 6px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--line);
+}
+
+/* --- BLOCOS DE CODIGO (rehype-pretty-code) --- */
+.prose figure[data-rehype-pretty-code-figure] {
+    margin-inline: 0;
+}
+
+.prose figcaption[data-rehype-pretty-code-title] {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.8rem;
+    color: var(--muted);
+    padding: 0.55rem 1rem;
+    border: 1px solid var(--line);
+    border-bottom: 0;
+    border-radius: 12px 12px 0 0;
+    background: var(--bg-secondary);
+}
+
+.prose figcaption[data-rehype-pretty-code-title] + div pre {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.prose pre {
+    overflow-x: auto;
+    padding: 1rem 0;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    background: var(--bg-secondary);
+    font-size: 0.86rem;
+    line-height: 1.7;
+}
+
+.prose pre code {
+    display: grid;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.prose pre [data-line] {
+    padding-inline: 1rem;
+}
+
+.prose pre [data-highlighted-line] {
+    background: color-mix(in srgb, var(--brand) 14%, transparent);
+    box-shadow: inset 2px 0 0 var(--brand);
+}
+
+/* O shiki gera as duas paletas; o tema do site escolhe qual aparece */
+.prose pre code span {
+    color: var(--shiki-light);
+}
+
+:global(.dark) .prose pre code span {
+    color: var(--shiki-dark);
+}
+
+/* --- TABELAS --- */
+.prose table {
+    display: block;
+    overflow-x: auto;
+    border-collapse: collapse;
+    font-size: 0.92rem;
+}
+
+.prose th,
+.prose td {
+    padding: 0.55rem 0.9rem;
+    border: 1px solid var(--line);
+    text-align: left;
+}
+
+.prose th {
+    background: var(--bg-secondary);
+    font-weight: 600;
+}
+
+/* --- NAVEGACAO ENTRE POSTS --- */
+.pager {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--line);
+}
+
+.pager a {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    padding: 1rem 1.25rem;
+    border-radius: 14px;
+    border: 1px solid var(--line);
+    background: var(--card);
+    transition:
+        border-color 0.2s,
+        transform 0.2s;
+}
+
+.pager a:hover {
+    border-color: var(--brand);
+    transform: translateY(-2px);
+}
+
+.pager span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.8rem;
+    color: var(--muted);
+}
+
+.pager strong {
+    color: var(--text);
+}
+
+.pagerNext {
+    grid-column: 2;
+    text-align: right;
+    align-items: flex-end;
+}
+
+@media (max-width: 900px) {
+    .layout {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-areas:
+            "toc"
+            "content";
+        gap: 2rem;
+    }
+
+    .toc {
+        position: static;
+        padding: 1rem 1.15rem;
+        border-radius: 12px;
+        border: 1px solid var(--line);
+        background: var(--card);
+    }
+}
+
+@media (max-width: 480px) {
+    .pager {
+        grid-template-columns: 1fr;
+    }
+
+    .pagerNext {
+        grid-column: auto;
+        text-align: left;
+        align-items: flex-start;
+    }
+}

@@ -23,6 +23,17 @@ describe("<Header />", () => {
         }
     });
 
+    it("so mostra o link do blog quando existe post publicado", () => {
+        const { unmount } = renderWithLocale(<Header />);
+        expect(screen.queryByRole("link", { name: "Blog", hidden: true })).toBeNull();
+        unmount();
+
+        renderWithLocale(<Header showBlog />);
+        const links = screen.getAllByRole("link", { name: "Blog", hidden: true });
+        expect(links).toHaveLength(2);
+        expect(links.every((link) => link.getAttribute("href") === "/pt/blog")).toBe(true);
+    });
+
     it("menu mobile comeca fechado e inerte", () => {
         renderWithLocale(<Header />);
 

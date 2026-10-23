@@ -8,6 +8,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { getDictionary, hasLocale, htmlLang, locales, ogLocale, otherLocale } from "@/lib/i18n";
 import { siteConfig } from "@/lib/site";
+import { getAllPosts } from "@/lib/blog";
 import "../globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -80,7 +81,7 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
         >
             <body id="top">
                 <Providers lang={lang} dict={dict}>
-                    <Header />
+                    <Header showBlog={getAllPosts().length > 0} />
                     {children}
                     <Footer lang={lang} dict={dict} />
                 </Providers>

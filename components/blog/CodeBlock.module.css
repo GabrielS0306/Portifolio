@@ -1,0 +1,46 @@
+.wrapper {
+    position: relative;
+}
+
+.copy {
+    position: absolute;
+    top: 0.6rem;
+    right: 0.6rem;
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    background: var(--card);
+    color: var(--muted);
+    cursor: pointer;
+    opacity: 0;
+    transition:
+        opacity 0.2s,
+        color 0.2s,
+        border-color 0.2s;
+}
+
+/* Sempre visivel em telas de toque, onde nao existe hover */
+.wrapper:hover .copy,
+.copy:focus-visible,
+.copy[data-copied="true"] {
+    opacity: 1;
+}
+
+@media (hover: none) {
+    .copy {
+        opacity: 1;
+    }
+}
+
+.copy:hover {
+    color: var(--text);
+    border-color: var(--muted);
+}
+
+.copy[data-copied="true"] {
+    color: var(--accent-soft);
+    border-color: var(--accent);
+}

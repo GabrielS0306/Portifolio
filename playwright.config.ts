@@ -24,5 +24,7 @@ export default defineConfig({
         url: `http://localhost:${PORT}`,
         reuseExistingServer: !process.env.CI,
         timeout: 180_000,
+        // Inclui os rascunhos do blog no build, para os testes terem um post para abrir
+        env: { SHOW_DRAFTS: "true" },
     },
 });

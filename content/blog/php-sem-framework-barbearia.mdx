@@ -1,0 +1,195 @@
+---
+title: "PHP sem framework: o que aprendi construindo um sistema de barbearia"
+summary: "Roteador próprio, proteção de rotas, CSRF e regras de negócio quebradas em problemas menores: o que um framework faz por você, visto de dentro."
+date: "2026-10-23"
+tags: ["PHP", "MVC", "Back-end"]
+draft: true
+---
+
+{/* Rascunho montado a partir das suas respostas e do código do repositório. Os comentários entre chaves não aparecem no site: são lembretes do que você pode completar com detalhes seus. */}
+
+Construí o [Sistema de Barbearia](/pt/projetos/sistema-barbearia) para **me aprofundar nos conceitos de desenvolvimento web e na linguagem PHP**. Por isso decidi não usar framework nenhum: nada de Laravel, nada de Symfony. Roteamento, autenticação, proteção de formulários e acesso ao banco foram escritos à mão.
+
+Este post é para quem está começando e quer entender o que acontece por baixo dos panos, mas também para quem já usa framework todo dia e talvez nunca tenha parado para pensar no que ele resolve. Independente do nível, todo mundo está aprendendo alguma coisa.
+
+{/* Se quiser, conte aqui em uma ou duas frases como surgiu a ideia de fazer um sistema para barbearia. */}
+
+## O que o sistema faz
+
+É uma aplicação de agendamento com três perfis:
+
+- **Cliente:** agenda um horário, paga (dinheiro, cartão ou PIX com QR Code) e acompanha os próprios agendamentos.
+- **Barbeiro:** vê a agenda do dia e atualiza o status de cada atendimento.
+- **Administrador:** cadastra serviços e barbeiros, define os horários de funcionamento e acompanha as métricas da barbearia.
+
+Por trás disso está uma arquitetura MVC (Model, View, Controller) montada do zero.
+
+## O que um framework faz por você
+
+### Rotas
+
+Em um framework, você declara uma rota e pronto. Sem framework, alguém precisa olhar a URL da requisição e decidir qual código executar. No meu caso, esse alguém é uma classe `Router` com pouco mais de 50 linhas:
+
+```php title="core/Router.php"
+class Router {
+    private array $routes = [];
+    private array $protectedRoutes = [];
+
+    public function get(string $path, string $handler, array $roles = []): void {
+        $this->routes['GET'][$path] = $handler;
+        if (!empty($roles)) {
+            $this->protectedRoutes[$path] = $roles;
+        }
+    }
+
+    public function dispatch(string $method, string $uri): void {
+        $handler = $this->routes[$method][$uri] ?? null;
+
+        if (!$handler) {
+            http_response_code(404);
+            echo '404 - Página não encontrada';
+            return;
+        }
+
+        $this->protect($uri);
+
+        [$class, $action] = explode('::', $handler);
+        (new $class())->$action();
+    }
+}
+```
+
+A ideia é simples: um array guarda qual controller atende cada método e caminho. O `dispatch` procura a rota, verifica a permissão e chama o método do controller. As rotas ficam declaradas em um único arquivo:
+
+```php title="public/index.php"
+$router->get('/login', 'AuthController::login');
+$router->get('/agendamento/novo', 'AgendamentoController::novo', ['cliente', 'admin']);
+$router->get('/agendamento/meus', 'AgendamentoController::meus', ['cliente', 'admin']);
+```
+
+### Quem pode acessar o quê
+
+O terceiro parâmetro das rotas acima é a lista de papéis que podem acessá-las. Antes de chamar o controller, o roteador confere a sessão:
+
+```php title="core/Router.php" {11-15}
+private function protect(string $path): void {
+    if (!isset($this->protectedRoutes[$path])) {
+        return; // rota pública, deixa passar
+    }
+
+    if (!isset($_SESSION['user_id'])) {
+        header('Location: /barbearia/login');
+        exit;
+    }
+
+    if (!in_array($_SESSION['user_role'], $this->protectedRoutes[$path])) {
+        http_response_code(403);
+        echo 'Acesso negado.';
+        exit;
+    }
+}
+```
+
+Quem não está logado vai para o login; quem está logado, mas não tem o papel certo, recebe um 403. É exatamente o que um _middleware_ de autenticação faz em frameworks como o Laravel.
+
+### Formulários protegidos contra CSRF
+
+Um ataque CSRF engana o navegador de alguém logado para enviar um formulário que a pessoa não pretendia enviar. A defesa é colocar em cada formulário um token aleatório que só o servidor conhece e conferir esse token a cada envio:
+
+```php title="core/Csrf.php"
+public static function gerar(): string {
+    if (empty($_SESSION['csrf_token'])) {
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+    }
+
+    return (string) ($_SESSION['csrf_token']);
+}
+
+public static function validar(string $token): bool {
+    if (empty($_SESSION['csrf_token'])) {
+        return false;
+    }
+
+    return hash_equals($_SESSION['csrf_token'], trim($token));
+}
+```
+
+<Callout>
+    O `hash_equals` compara as duas strings sempre no mesmo tempo, independente de onde elas diferem. Uma
+    comparação comum com `===` para no primeiro caractere diferente, e essa diferença de tempo pode ser usada
+    para adivinhar o token aos poucos.
+</Callout>
+
+No Laravel, tudo isso se resume a escrever `@csrf` dentro do formulário. Ter feito à mão me fez entender por que essa linha existe.
+
+{/* Alguma dessas partes deu mais trabalho do que você esperava? Um bug ou uma descoberta que vale contar? */}
+
+## Quebrando um problema grande em problemas menores
+
+O que eu mais levo desse projeto é a prática de **transformar regras de negócio em código**. Uma frase como "o cliente escolhe um barbeiro, um dia e vê os horários livres" parece uma tarefa só, mas na verdade são várias:
+
+1. **Em quais horários a barbearia funciona nesse dia da semana?** O administrador configura isso, e domingo pode simplesmente não ter expediente.
+2. **Desses horários, quais o barbeiro já tem ocupados?** Agendamentos cancelados não contam.
+3. **Como mostrar isso sem recarregar a página?** O formulário pergunta à API sempre que o cliente troca o barbeiro ou a data.
+
+Cada pergunta virou um pedaço de código. A primeira ficou no model de horários de funcionamento:
+
+```php title="app/models/HorarioFuncionamento.php"
+public function horariosDisponiveis(string $data): array {
+    $diaSemana = (int) date('w', strtotime($data));
+    $horario   = $this->buscarPorDia($diaSemana);
+
+    if (!$horario) return [];
+
+    $todos = ['08:00', '08:30', '09:00', /* ... */ '17:00', '17:30'];
+
+    $inicio = substr($horario['hora_inicio'], 0, 5);
+    $fim    = substr($horario['hora_fim'], 0, 5);
+
+    return array_filter($todos, fn($h) => $h >= $inicio && $h <= $fim);
+}
+```
+
+A segunda, no model de agendamentos, com uma consulta preparada para evitar SQL injection:
+
+```php title="app/models/Agendamento.php"
+public function horarioDisponivel(int $bareiroId, string $data, string $hora): bool {
+    $sql = "SELECT id FROM agendamentos
+            WHERE barbeiro_id = :bid
+            AND data = :data
+            AND hora = :hora
+            AND status NOT IN ('cancelado')";
+
+    $stmt = $this->db->prepare($sql);
+    $stmt->execute([':bid' => $bareiroId, ':data' => $data, ':hora' => $hora]);
+
+    return $stmt->rowCount() === 0;
+}
+```
+
+E a terceira junta as duas em um endpoint da API, que o JavaScript do formulário consome:
+
+```php title="app/controllers/ApiController.php"
+$horariosDisponiveis = $modelFuncionamento->horariosDisponiveis($data);
+
+$dados = array_map(fn($h) => [
+    'hora'       => $h,
+    'disponivel' => $modelAgendamento->horarioDisponivel($barbeiroId, $data, $h),
+], $horariosDisponiveis);
+
+$this->json(array_values($dados));
+```
+
+Separadas assim, cada parte é pequena, fácil de entender e de testar sozinha. Quando algo precisa mudar, como trocar os intervalos de 30 minutos, sei exatamente onde mexer.
+
+## O que eu faria diferente
+
+Se começasse hoje, eu **estruturaria melhor a ideia do projeto antes de programar**: quais funcionalidades o sistema teria, como cada uma deveria se comportar e como elas se conectam.
+
+{/* Vale dar um exemplo concreto: alguma funcionalidade que surgiu depois e te obrigou a refazer algo? (por exemplo, o histórico de alterações dos agendamentos ou o reembolso no cancelamento) */}
+
+## Conclusão
+
+Usar um framework continua sendo a escolha certa para a maioria dos projetos. Mas construir sem um, pelo menos uma vez, mudou a forma como eu uso os frameworks: hoje, quando escrevo uma rota ou um `@csrf` no Laravel, sei o que está acontecendo por trás.
+
+O código completo está no [GitHub](https://github.com/GabrielS0306/sistema_barbearia), e dá para testar o sistema na [demo](https://barb-system.rf.gd/barbearia/login).

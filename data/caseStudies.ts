@@ -73,9 +73,9 @@ export const caseStudies: Record<string, CaseStudy> = {
                     },
                 ],
                 learnings: [
-                    "Como funcionam por dentro o roteamento, os middlewares e a sessão de um framework web.",
-                    "Transformar regras reais em código: disponibilidade de horários, cancelamento com reembolso e bloqueio de alterações em agendamentos finalizados.",
-                    "Integrar serviços externos (SMTP, cron e push) sem que uma falha neles derrube o fluxo principal.",
+                    "Como funcionam por baixo dos panos o roteamento, a proteção de rotas e a segurança de formulários, que os frameworks entregam prontos.",
+                    "Transformar regras de negócio em código, quebrando um problema grande em problemas menores, como calcular os horários livres de cada barbeiro.",
+                    "Planejar antes de programar: hoje eu definiria melhor as funcionalidades e o comportamento do sistema antes de escrever a primeira linha.",
                 ],
             },
             en: {
@@ -111,9 +111,9 @@ export const caseStudies: Record<string, CaseStudy> = {
                     },
                 ],
                 learnings: [
-                    "How routing, middleware and sessions work inside a web framework.",
-                    "Turning real rules into code: time-slot availability, cancellation with refunds and locking finished appointments.",
-                    "Integrating external services (SMTP, cron and push) so that a failure in them doesn't break the main flow.",
+                    "How routing, route protection and form security work under the hood, the things frameworks give you out of the box.",
+                    "Turning business rules into code by breaking a big problem into smaller ones, such as working out each barber's free time slots.",
+                    "Planning before coding: today I would define the features and the system's behavior more clearly before writing the first line.",
                 ],
             },
         },

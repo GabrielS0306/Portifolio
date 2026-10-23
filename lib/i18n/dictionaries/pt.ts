@@ -153,7 +153,7 @@ export const pt = {
             honeypot: "Deixe este campo em branco",
             submit: "Enviar mensagem",
             sending: "Enviando...",
-            success: "Mensagem enviada! Vou responder no seu e-mail assim que possível.",
+            success: "Mensagem enviada! Vou responder o seu e-mail assim que possível.",
             error: "Não foi possível enviar agora. Tente de novo em instantes ou me chame por e-mail.",
             errors: {
                 nameRequired: "Informe seu nome.",

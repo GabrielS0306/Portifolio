@@ -1,0 +1,80 @@
+---
+title: "Como escrever um post neste blog"
+summary: "Guia rápido do formato dos posts: cabeçalho, títulos, código, tabelas e destaques."
+date: "2026-10-23"
+tags: ["Guia", "MDX"]
+draft: true
+---
+
+Este post é um **rascunho de exemplo**: aparece só em desenvolvimento e nunca no site publicado. Ele mostra tudo o que dá para usar em um post. Quando o primeiro post de verdade estiver pronto, este arquivo pode ser apagado ou continuar como referência.
+
+## Criando um post
+
+Cada post é um arquivo `.mdx` dentro de `content/blog/`. O nome do arquivo vira o endereço do post: `content/blog/meu-post.mdx` fica em `/pt/blog/meu-post`.
+
+O arquivo começa com um cabeçalho entre `---`:
+
+```yaml
+title: "Título do post"
+summary: "Uma ou duas frases que aparecem na lista de posts e no Google."
+date: "2026-11-05"
+tags: ["Laravel", "Docker"]
+draft: true # tire esta linha (ou use false) para publicar
+```
+
+<Callout>
+    Enquanto `draft` for `true`, o post só aparece no `npm run dev`. Assim dá para escrever com calma e
+    publicar só quando estiver pronto.
+</Callout>
+
+## Escrevendo o texto
+
+O texto é Markdown comum: **negrito**, _itálico_, `código no meio da frase` e [links](https://nextjs.org/docs).
+
+### Títulos
+
+Use `##` para seções e `###` para subseções. Eles aparecem no índice ao lado do post. O título principal vem do cabeçalho, então não use `#` no texto.
+
+### Listas
+
+- Itens com hífen viram lista com marcadores
+- Dá para combinar com **destaques** e `código`
+
+1. Listas numeradas também funcionam
+2. A numeração é automática
+
+## Blocos de código
+
+Indique a linguagem depois das três crases para ter destaque de sintaxe. Todo bloco ganha um botão de copiar.
+
+```ts
+export function formatarPreco(valor: number) {
+    return valor.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+}
+```
+
+Também dá para dar um título ao bloco e destacar linhas:
+
+```php title="app/controllers/AgendamentoController.php" {3}
+public function store(): void
+{
+    $this->validarCsrf();
+    $agendamento = Agendamento::criar($_POST);
+}
+```
+
+## Tabelas
+
+| Recurso | Sintaxe        |
+| ------- | -------------- |
+| Negrito | `**texto**`    |
+| Código  | `` `código` `` |
+| Link    | `[texto](url)` |
+
+## Destaques
+
+O componente `Callout` serve para dicas e avisos:
+
+<Callout type="warning">
+    Use com moderação: um ou dois destaques por post chamam atenção, mais do que isso cansa.
+</Callout>

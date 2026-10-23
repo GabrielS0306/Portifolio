@@ -1,0 +1,37 @@
+.latest {
+    margin-block: 1.5rem;
+}
+
+.head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem 1rem;
+}
+
+.head h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.viewAll {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--brand);
+    transition: color 0.2s;
+}
+
+.viewAll:hover {
+    color: var(--brand-soft);
+}
+
+@media (max-width: 480px) {
+    .head h2 {
+        font-size: 1.4rem;
+    }
+}

@@ -16,6 +16,7 @@ Principais recursos:
 - Tema claro e escuro;
 - Animações de entrada que respeitam a preferência de "reduzir movimento" do sistema;
 - Navegação por teclado (foco visível, menu mobile acessível);
+- Blog em MDX (`/pt/blog`), com destaque de sintaxe, índice por post e rascunhos que só aparecem em desenvolvimento;
 - Formulário de contato que envia a mensagem direto para o meu e-mail (Server Action + Zod + Resend), com validação traduzida e proteção contra bots;
 - Botão para copiar o e-mail com feedback visual;
 - SEO com metadados, imagem de Open Graph, `robots.txt` e `sitemap.xml` gerados pelo Next.js.
@@ -28,6 +29,7 @@ Principais recursos:
 - **CSS Modules** — estilos com escopo por componente;
 - **Framer Motion** — animações;
 - **Zod** e **Resend** — validação e envio do formulário de contato;
+- **MDX** (`@next/mdx`) e **Shiki** (`rehype-pretty-code`) — posts do blog com destaque de sintaxe;
 - **next-themes** — alternância de tema claro/escuro;
 - **React Icons** — ícones;
 - **ESLint** e **Prettier** — análise e formatação do código;
@@ -46,6 +48,7 @@ Principais recursos:
 │   │   ├── not-found.tsx     # Página 404 traduzida
 │   │   ├── opengraph-image.tsx # Imagem de compartilhamento por idioma
 │   │   ├── projetos/[slug]/  # Estudo de caso de cada projeto
+│   │   ├── blog/             # Lista de posts e página de cada post
 │   │   └── [...rest]/        # Captura caminhos inexistentes e mostra a 404
 │   ├── globals.css           # Reset, tokens de tema e estilos base
 │   ├── robots.ts             # robots.txt
@@ -59,6 +62,9 @@ Principais recursos:
 │   ├── LocaleProvider.tsx    # Disponibiliza idioma e traduções aos Client Components
 │   └── Providers.tsx         # Providers de idioma, tema e animação
 │
+├── content/
+│   └── blog/                 # Posts do blog (.mdx)
+│
 ├── data/
 │   ├── projects.ts           # Lista de projetos exibidos
 │   └── caseStudies.ts        # Conteúdo dos estudos de caso (pt/en)
@@ -68,6 +74,7 @@ Principais recursos:
 │
 ├── lib/
 │   ├── i18n/                 # Idiomas: configuração, dicionários (pt/en) e detecção
+│   ├── blog.ts               # Leitura dos posts: frontmatter, índice e tempo de leitura
 │   ├── contact.ts            # Regras de validação do formulário de contato
 │   ├── github.ts             # Busca e resume os repositórios da API do GitHub
 │   ├── site.ts               # URL, e-mail, usuário do GitHub, redes sociais e menu
@@ -76,6 +83,7 @@ Principais recursos:
 ├── public/
 │   └── images/               # Screenshots dos projetos (galerias em images/projects/<slug>/)
 │
+├── mdx-components.tsx        # Componentes disponíveis nos posts (Callout, blocos de código)
 ├── proxy.ts                  # Redireciona "/" para /pt ou /en conforme o idioma
 │
 └── .github/workflows/ci.yml  # Pipeline de CI
@@ -89,6 +97,18 @@ Cada componente com estilo próprio tem um arquivo `.module.css` ao lado (ex.: `
 - **Adicionar um projeto:** inclua um objeto no array de [`data/projects.ts`](data/projects.ts), com `slug` único e título e descrição em `pt` e `en`. A imagem deve ficar em `public/images/`. Os testes verificam se nenhuma tradução ficou faltando.
 - **Linha do tempo (seção "Trajetória"):** edite `timeline.items` nos dois dicionários, do mais recente para o mais antigo. Marque `current: true` no item atual para destacá-lo.
 - **Estudo de caso de um projeto:** adicione uma entrada em [`data/caseStudies.ts`](data/caseStudies.ts) com o mesmo `slug` do projeto. A página e o link "Detalhes" no card aparecem automaticamente, e o sitemap passa a incluí-la. Imagens da galeria ficam em `public/images/projects/<slug>/`.
+- **Escrever um post:** crie `content/blog/<slug>.mdx` começando com o cabeçalho abaixo. Com `draft: true` o post só aparece no `npm run dev`; para publicar, remova a linha ou use `false`. O post de exemplo [`como-escrever-um-post.mdx`](content/blog/como-escrever-um-post.mdx) mostra tudo o que dá para usar. O link "Blog" no menu e a seção "Últimos posts" na home só aparecem quando há pelo menos um post publicado.
+
+    ```yaml
+    ---
+    title: "Título do post"
+    summary: "Resumo que aparece na lista e no Google"
+    date: "2026-11-05"
+    tags: ["Laravel", "Docker"]
+    draft: true
+    ---
+    ```
+
 - **Alterar e-mail, redes sociais ou URL do site:** edite [`lib/site.ts`](lib/site.ts).
 - **Nova tecnologia com ícone:** adicione ao mapa em [`lib/techIcons.ts`](lib/techIcons.ts).
 - **Seção "Atividade no GitHub":** é gerada automaticamente a partir dos repositórios públicos do usuário definido em `siteConfig.githubUser`, atualizando no máximo a cada hora. Descrições e linguagens vêm do próprio GitHub, então mantenha-as preenchidas por lá. Se a API estiver indisponível, a seção simplesmente não aparece.
@@ -137,7 +157,7 @@ Copie `.env.example` para `.env.local` e preencha:
 ## 🧪 Testes
 
 - **Unidade** (`tests/unit/`): Vitest + Testing Library. Cobrem os componentes principais e validam os dados de `data/projects.ts` (ícone para cada tecnologia, imagens existentes, links válidos).
-- **E2E** (`tests/e2e/`): Playwright, rodando no build de produção em desktop e mobile. Cobrem navegação, menu mobile, troca de tema, idiomas, a página 404 e a validação do formulário de contato (sem enviar e-mails de verdade).
+- **E2E** (`tests/e2e/`): Playwright, rodando no build de produção em desktop e mobile. Cobrem navegação, menu mobile, troca de tema, idiomas, a página 404, o blog (usando os rascunhos, com `SHOW_DRAFTS=true`) e a validação do formulário de contato (sem enviar e-mails de verdade).
 
 Na primeira vez, instale o navegador do Playwright:
 

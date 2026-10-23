@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { FaBars, FaXmark } from "react-icons/fa6";
 import ThemeToggle from "../ui/ThemeToggle";
 import LanguageToggle from "../ui/LanguageToggle";
@@ -12,8 +13,12 @@ import styles from "./Header.module.css";
 
 const sections = navItems.map((item) => item.id);
 
-export default function Header() {
+// showBlog: o link do blog so aparece quando existe algum post publicado
+export default function Header({ showBlog = false }: { showBlog?: boolean }) {
     const { lang, dict } = useLocale();
+    const pathname = usePathname() ?? "";
+    const blogHref = `/${lang}/blog`;
+    const onBlog = pathname === blogHref || pathname.startsWith(`${blogHref}/`);
     const activeSection = useActiveSection(sections);
     const navRef = useRef<HTMLElement>(null);
     const linkRefs = useRef<Record<string, HTMLAnchorElement | null>>({});
@@ -82,6 +87,15 @@ export default function Header() {
                             {dict.nav[key]}
                         </Link>
                     ))}
+                    {showBlog && (
+                        <Link
+                            href={blogHref}
+                            className={onBlog ? styles.active : ""}
+                            aria-current={onBlog ? "page" : undefined}
+                        >
+                            {dict.nav.blog}
+                        </Link>
+                    )}
                     <span
                         className={styles.navIndicator}
                         style={{ left: indicator.left, width: indicator.width, opacity: indicator.opacity }}
@@ -126,6 +140,16 @@ export default function Header() {
                         {dict.nav[key]}
                     </Link>
                 ))}
+                {showBlog && (
+                    <Link
+                        href={blogHref}
+                        onClick={closeMenu}
+                        className={onBlog ? styles.active : ""}
+                        aria-current={onBlog ? "page" : undefined}
+                    >
+                        {dict.nav.blog}
+                    </Link>
+                )}
             </nav>
         </header>
     );

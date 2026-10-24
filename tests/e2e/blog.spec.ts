@@ -22,7 +22,10 @@ test.describe("blog", () => {
         await page.locator("header").first().getByRole("link", { name: "Blog" }).first().click();
         await expect(page).toHaveURL(/\/pt\/blog$/);
         await expect(nav).not.toHaveClass(/active/);
-        await expect(page.getByRole("link", { name: "Blog" }).first()).toHaveAttribute("aria-current", "page");
+        await expect(page.getByRole("link", { name: "Blog" }).first()).toHaveAttribute(
+            "aria-current",
+            "page",
+        );
     });
 
     test("indice leva ate a secao do post", async ({ page }) => {

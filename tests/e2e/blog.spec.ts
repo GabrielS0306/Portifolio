@@ -13,6 +13,18 @@ test.describe("blog", () => {
         await expect(page.getByRole("heading", { level: 1 })).toHaveText("Como escrever um post neste blog");
     });
 
+    test("menu marca so o blog ao sair de uma secao da home", async ({ page, isMobile }) => {
+        test.skip(isMobile, "menu desktop");
+        await page.goto("/pt#projetos");
+        const nav = page.locator("header").first().getByRole("link", { name: "Projetos" }).first();
+        await expect(nav).toHaveClass(/active/);
+
+        await page.locator("header").first().getByRole("link", { name: "Blog" }).first().click();
+        await expect(page).toHaveURL(/\/pt\/blog$/);
+        await expect(nav).not.toHaveClass(/active/);
+        await expect(page.getByRole("link", { name: "Blog" }).first()).toHaveAttribute("aria-current", "page");
+    });
+
     test("indice leva ate a secao do post", async ({ page }) => {
         await page.goto(POST);
 

@@ -20,6 +20,8 @@ export default function Header({ showBlog = false }: { showBlog?: boolean }) {
     const blogHref = `/${lang}/blog`;
     const onBlog = pathname === blogHref || pathname.startsWith(`${blogHref}/`);
     const activeSection = useActiveSection(sections);
+    // Chave do link que recebe o sublinhado: a secao visivel na home ou o blog
+    const activeKey = onBlog ? "blog" : activeSection;
     const navRef = useRef<HTMLElement>(null);
     const linkRefs = useRef<Record<string, HTMLAnchorElement | null>>({});
     const menuButtonRef = useRef<HTMLButtonElement>(null);
@@ -27,7 +29,7 @@ export default function Header({ showBlog = false }: { showBlog?: boolean }) {
     const [menuOpen, setMenuOpen] = useState(false);
 
     useEffect(() => {
-        const activeLink = linkRefs.current[activeSection];
+        const activeLink = linkRefs.current[activeKey];
         const nav = navRef.current;
 
         if (activeLink && nav) {
@@ -42,7 +44,7 @@ export default function Header({ showBlog = false }: { showBlog?: boolean }) {
         } else {
             setIndicator((prev) => ({ ...prev, opacity: 0 }));
         }
-    }, [activeSection]);
+    }, [activeKey]);
 
     useEffect(() => {
         document.body.style.overflow = menuOpen ? "hidden" : "";
@@ -90,6 +92,9 @@ export default function Header({ showBlog = false }: { showBlog?: boolean }) {
                     {showBlog && (
                         <Link
                             href={blogHref}
+                            ref={(el) => {
+                                linkRefs.current.blog = el;
+                            }}
                             className={onBlog ? styles.active : ""}
                             aria-current={onBlog ? "page" : undefined}
                         >

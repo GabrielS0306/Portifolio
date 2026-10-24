@@ -1,18 +1,13 @@
 ---
 title: "PHP sem framework: o que aprendi construindo um sistema de barbearia"
 summary: "Roteador próprio, proteção de rotas, CSRF e regras de negócio quebradas em problemas menores: o que um framework faz por você, visto de dentro."
-date: "2026-10-23"
+date: "2026-10-24"
 tags: ["PHP", "MVC", "Back-end"]
-draft: true
 ---
-
-{/* Rascunho montado a partir das suas respostas e do código do repositório. Os comentários entre chaves não aparecem no site: são lembretes do que você pode completar com detalhes seus. */}
 
 Construí o [Sistema de Barbearia](/pt/projetos/sistema-barbearia) para **me aprofundar nos conceitos de desenvolvimento web e na linguagem PHP**. Por isso decidi não usar framework nenhum: nada de Laravel, nada de Symfony. Roteamento, autenticação, proteção de formulários e acesso ao banco foram escritos à mão.
 
-Este post é para quem está começando e quer entender o que acontece por baixo dos panos, mas também para quem já usa framework todo dia e talvez nunca tenha parado para pensar no que ele resolve. Independente do nível, todo mundo está aprendendo alguma coisa.
-
-{/* Se quiser, conte aqui em uma ou duas frases como surgiu a ideia de fazer um sistema para barbearia. */}
+Este post é para quem está começando e quer entender o que acontece por baixo dos panos, mas também para quem já usa framework todo dia e talvez nunca tenha parado para pensar no que ele resolve. Independentemente do nível, todo mundo está aprendendo alguma coisa.
 
 ## O que o sistema faz
 
@@ -115,14 +110,12 @@ public static function validar(string $token): bool {
 ```
 
 <Callout>
-    O `hash_equals` compara as duas strings sempre no mesmo tempo, independente de onde elas diferem. Uma
+    O `hash_equals` compara as duas strings sempre no mesmo tempo, independentemente de onde elas diferem. Uma
     comparação comum com `===` para no primeiro caractere diferente, e essa diferença de tempo pode ser usada
     para adivinhar o token aos poucos.
 </Callout>
 
 No Laravel, tudo isso se resume a escrever `@csrf` dentro do formulário. Ter feito à mão me fez entender por que essa linha existe.
-
-{/* Alguma dessas partes deu mais trabalho do que você esperava? Um bug ou uma descoberta que vale contar? */}
 
 ## Quebrando um problema grande em problemas menores
 
@@ -153,7 +146,7 @@ public function horariosDisponiveis(string $data): array {
 A segunda, no model de agendamentos, com uma consulta preparada para evitar SQL injection:
 
 ```php title="app/models/Agendamento.php"
-public function horarioDisponivel(int $bareiroId, string $data, string $hora): bool {
+public function horarioDisponivel(int $barbeiroId, string $data, string $hora): bool {
     $sql = "SELECT id FROM agendamentos
             WHERE barbeiro_id = :bid
             AND data = :data
@@ -161,7 +154,7 @@ public function horarioDisponivel(int $bareiroId, string $data, string $hora): b
             AND status NOT IN ('cancelado')";
 
     $stmt = $this->db->prepare($sql);
-    $stmt->execute([':bid' => $bareiroId, ':data' => $data, ':hora' => $hora]);
+    $stmt->execute([':bid' => $barbeiroId, ':data' => $data, ':hora' => $hora]);
 
     return $stmt->rowCount() === 0;
 }
@@ -185,8 +178,6 @@ Separadas assim, cada parte é pequena, fácil de entender e de testar sozinha. 
 ## O que eu faria diferente
 
 Se começasse hoje, eu **estruturaria melhor a ideia do projeto antes de programar**: quais funcionalidades o sistema teria, como cada uma deveria se comportar e como elas se conectam.
-
-{/* Vale dar um exemplo concreto: alguma funcionalidade que surgiu depois e te obrigou a refazer algo? (por exemplo, o histórico de alterações dos agendamentos ou o reembolso no cancelamento) */}
 
 ## Conclusão
 

@@ -23,7 +23,7 @@ export default function NotFoundContent() {
                 <Link className={`${button.btn} ${button.primary}`} href={`/${lang}`}>
                     {dict.notFound.home}
                 </Link>
-                <Link className={`${button.btn} ${button.ghost}`} href={`/${lang}/projetos`}>
+                <Link className={`${button.btn} ${button.ghost}`} href={`/${lang}#projetos`}>
                     {dict.notFound.projects}
                 </Link>
             </div>

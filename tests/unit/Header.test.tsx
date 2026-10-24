@@ -14,12 +14,12 @@ function getMobileMenu() {
 }
 
 describe("<Header />", () => {
-    it("tem um link para a pagina de cada item do menu", () => {
+    it("tem um link para cada secao do menu", () => {
         renderWithLocale(<Header />);
 
-        for (const { path, key } of navItems) {
+        for (const { id, key } of navItems) {
             const links = screen.getAllByRole("link", { name: dict.nav[key], hidden: true });
-            expect(links.every((link) => link.getAttribute("href") === `/pt/${path}`)).toBe(true);
+            expect(links.every((link) => link.getAttribute("href") === `/pt#${id}`)).toBe(true);
         }
     });
 

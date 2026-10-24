@@ -14,7 +14,7 @@ export default function Footer({ lang, dict }: FooterProps) {
     return (
         <footer className={styles.siteFooter}>
             <div className={`container ${styles.footerInner}`}>
-                <Link href={`/${lang}`} className={styles.footerLogo}>
+                <Link href={`/${lang}#top`} className={styles.footerLogo}>
                     gabriel<span>.</span>
                 </Link>
 

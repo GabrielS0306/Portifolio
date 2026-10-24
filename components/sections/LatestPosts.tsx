@@ -1,5 +1,6 @@
+import Link from "next/link";
+import { FaArrowRight } from "react-icons/fa6";
 import PostList from "../blog/PostList";
-import ViewAllLink from "../ui/ViewAllLink";
 import { getAllPosts } from "@/lib/blog";
 import type { Dictionary, Locale } from "@/lib/i18n";
 import styles from "./LatestPosts.module.css";
@@ -16,7 +17,10 @@ export default function LatestPosts({ lang, dict }: { lang: Locale; dict: Dictio
         <section id="blog" className={`container ${styles.latest}`}>
             <div className={styles.head}>
                 <h2>{t.latest}</h2>
-                <ViewAllLink href={`/${lang}/blog`}>{t.viewAll}</ViewAllLink>
+                <Link href={`/${lang}/blog`} className={styles.viewAll}>
+                    {t.viewAll}
+                    <FaArrowRight size={12} aria-hidden="true" />
+                </Link>
             </div>
             <PostList posts={posts} lang={lang} dict={dict} headingLevel="h3" />
         </section>

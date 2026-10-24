@@ -35,8 +35,6 @@ export const pt = {
     },
     projects: {
         title: "Projetos em destaque",
-        pageTitle: "Projetos",
-        viewAll: "Ver todos os projetos",
         subtitle: "Projetos com foco em arquitetura full-stack, integração e entrega de valor.",
         imageAlt: "Imagem do projeto",
         placeholder: "Preview em construção",

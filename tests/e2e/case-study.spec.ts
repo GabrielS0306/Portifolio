@@ -11,7 +11,7 @@ test.describe("estudo de caso", () => {
         await expect(page.getByRole("heading", { name: "Decisões técnicas" })).toBeVisible();
 
         await page.getByRole("link", { name: "Voltar aos projetos" }).click();
-        await expect(page).toHaveURL(/\/pt\/projetos$/);
+        await expect(page).toHaveURL(/\/pt#projetos$/);
     });
 
     test("navega entre projetos", async ({ page }) => {

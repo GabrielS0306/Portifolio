@@ -36,8 +36,6 @@ export const en: Dictionary = {
     },
     projects: {
         title: "Featured projects",
-        pageTitle: "Projects",
-        viewAll: "See all projects",
         subtitle: "Projects focused on full-stack architecture, integration and delivering value.",
         imageAlt: "Screenshot of",
         placeholder: "Preview coming soon",

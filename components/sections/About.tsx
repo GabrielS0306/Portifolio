@@ -8,7 +8,7 @@ export default function About({ dict }: { dict: Dictionary }) {
     return (
         <section id="sobre" className={`container ${styles.about}`}>
             <div className={styles.description}>
-                <h1>{t.title}</h1>
+                <h2>{t.title}</h2>
                 {t.paragraphs.map((paragraph) => (
                     <p key={paragraph}>{paragraph}</p>
                 ))}

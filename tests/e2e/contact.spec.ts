@@ -3,7 +3,7 @@ import { expect, test } from "@playwright/test";
 // Nenhum teste aqui chega a enviar e-mail: so os caminhos de validacao e do campo anti-spam
 test.describe("formulario de contato", () => {
     test.beforeEach(async ({ page }) => {
-        await page.goto("/pt/contato");
+        await page.goto("/pt#contato");
     });
 
     test("valida no servidor e mostra os erros em portugues", async ({ page }) => {
@@ -32,7 +32,7 @@ test.describe("formulario de contato", () => {
     });
 
     test("em ingles as mensagens saem em ingles", async ({ page }) => {
-        await page.goto("/en/contato");
+        await page.goto("/en#contato");
         const form = page.getByRole("form", { name: "Contact form" });
         await form.getByRole("button", { name: "Send message" }).click();
 

@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { FaDownload } from "react-icons/fa6";
 import AnimatedTagline from "../ui/AnimatedTagline";
 import Reveal from "../ui/Reveal";
@@ -31,12 +30,12 @@ export default function Hero({ lang, dict }: HeroProps) {
                 <p className={styles.lead}>{t.lead}</p>
 
                 <div className={styles.heroActions}>
-                    <Link className={`${button.btn} ${button.primary}`} href={`/${lang}/projetos`}>
+                    <a className={`${button.btn} ${button.primary}`} href="#projetos">
                         {t.viewProjects}
-                    </Link>
-                    <Link className={`${button.btn} ${button.ghost}`} href={`/${lang}/contato`}>
+                    </a>
+                    <a className={`${button.btn} ${button.ghost}`} href="#contato">
                         {t.contactMe}
-                    </Link>
+                    </a>
                     <a className={`${button.btn} ${button.ghost}`} href={resumeFiles[lang]} download>
                         <FaDownload size={14} />
                         {t.downloadCv}
